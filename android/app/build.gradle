@@ -51,6 +51,22 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+
+    flavorDimensions "default"
+    productFlavors {
+        development {
+            dimension "default"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "DocQuiz DEV"
+            resValue "string", "base_url", "http://localhost:3000"
+        }
+        production {
+            dimension "default"
+            resValue "string", "app_name", "DocQuiz"
+            resValue "string", "base_url", "https://api.docquizz.top"
+        }
+    }
 }
 
 flutter {
