@@ -1,4 +1,5 @@
 import 'package:app/core/network/api.constants.dart';
+import 'package:app/core/router/router_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,5 +16,5 @@ void main() async {
   // dependency injection
   await setupLocator(baseUrl: ApiConstiants.DEV_BASE_URL);
 
-  runApp(const DocQuizAPP());
+  runApp(const DocQuizAPP(AppRouter()));
 }
