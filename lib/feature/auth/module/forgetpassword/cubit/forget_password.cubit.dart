@@ -15,6 +15,8 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
+  String get email => emailController.text;
+
   Future<void> forgetPassword() async {
     if (formKey.currentState!.validate()) {
       emit(const ForgetPasswordState.loading());
