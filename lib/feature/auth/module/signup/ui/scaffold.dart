@@ -22,6 +22,7 @@ class _Scaffold extends StatelessWidget {
             cancelText: 'Retry',
             onCancel: (back) => back(),
           ),
+          success: () => locator<AuthCubit>().onAuthinit(),
         );
       },
       child: Scaffold(

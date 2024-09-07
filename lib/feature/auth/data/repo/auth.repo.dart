@@ -108,16 +108,6 @@ class AuthRepo {
     apiCall() async {
       final googleUser = await googleSignIn.signIn();
 
-      //    googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
-
-      //     _currentUser = account;
-
-      //   if (_currentUser != null) {
-      //     _handleSignIn(_currentUser!);
-      //   }
-      // });
-      // googleSignIn.signInSilently();
-
       if (googleUser == null) {
         throw 'User cancelled';
       }
@@ -134,4 +124,10 @@ class AuthRepo {
 
     return TryCallApi.call(apiCall);
   }
+
+  Future<void> logout() async {
+    await _authCache.clearTokens();
+  }
+
+  
 }
