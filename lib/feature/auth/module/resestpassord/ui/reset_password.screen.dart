@@ -1,27 +1,30 @@
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/snackbar.extension.dart';
+import 'package:app/core/extension/validator.extension.dart';
+import 'package:app/core/shared/widgets/form_field.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
 import 'package:app/core/theme/colors.dart';
 import 'package:app/core/theme/fonts.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
-import 'package:app/feature/auth/module/otp/logic/otp_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
-class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+import '../logic/reset_password.cubit.dart';
+
+class ResetPasswordScreen extends StatelessWidget {
+  const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OtpCubit, OtpState>(
+    return BlocListener<ResetPasswordCubit, ResetPasswordState>(
       listener: (context, state) {
         state.whenOrNull(
-          success: (email, otp) {
-            context.showSuccessSnackBar('Code vérifié avec succès');
-            context.to(AuthRoute.resetPassword(email, otp));
+          success: () {
+            context.showSuccessSnackBar(
+                'Mot de passe réinitialisé avec succès');
+            context.to(AuthRoute.login());
           },
           error: (message) => context.showErrorSnackBar(message),
         );
@@ -50,9 +53,9 @@ class OtpScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 height(10),
-                AppText.h2('Saisissez le code reçu par Email'),
+                AppText.h2('Entrez votre nouveau mot de passe'),
                 height(20),
-                const _OtpField(),
+                const _Form(),
                 height(35),
                 const _SubmitButton(),
               ],
@@ -64,19 +67,41 @@ class OtpScreen extends StatelessWidget {
   }
 }
 
-class _OtpField extends StatelessWidget {
-  const _OtpField({super.key});
+class _Form extends StatelessWidget {
+  const _Form({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final otpController = context.read<OtpCubit>().otpController;
-    return OtpTextField(
-      numberOfFields: 5,
-      borderColor: AppColors.primary,
-      showFieldAsBox: true,
-      onSubmit: (String code) {
-        otpController.text = code;
-      }, // end onSubmit
+    final cubit = context.read<ResetPasswordCubit>();
+    return Form(
+      key: cubit.formKey,
+      child: Column(
+        children: [
+          AppText.label('Nouveau mot de passe'),
+          height(5),
+          AppInputeField(
+            hint: 'Entrez votre nouveau mot de passe',
+            controller: cubit.passwordController,
+            obscureText: true,
+            keyboardType: TextInputType.visiblePassword,
+            validator: (value) => value.isStrongPassword,
+          ),
+          height(20),
+          AppText.label('Confirmer le mot de passe'),
+          height(5),
+          AppInputeField(
+              hint: 'Confirmez votre mot de passe',
+              controller: cubit.confirmPasswordController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+              validator: (value) {
+                if (value != cubit.passwordController.text) {
+                  return 'Les mots de passe ne correspondent pas';
+                }
+                return null;
+              }),
+        ],
+      ),
     );
   }
 }
@@ -88,7 +113,7 @@ class _SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SubmitButton(
       title: 'Valider',
-      onPressed: context.read<OtpCubit>().submitOtp,
+      onPressed: context.read<ResetPasswordCubit>().resetPassword,
     );
   }
 }
