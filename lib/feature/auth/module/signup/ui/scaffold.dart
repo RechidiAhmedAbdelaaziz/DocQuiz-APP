@@ -13,38 +13,50 @@ class _Scaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 22.w),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.r),
-            color: AppColors.white,
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.dark.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
+    return BlocListener<SignupCubit, SignupState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          error: (message) => context.showDialogBox(
+            title: 'Error',
+            body: message,
+            cancelText: 'Retry',
+            onCancel: (back) => back(),
           ),
-          padding:
-              EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              height(10),
-              AppText.h2('Inscrivez-vous sur DocQuizz'),
-              height(20),
-              form,
-              height(35),
-              signUpButton,
-              height(15),
-              haveAccountButton,
-            ],
+        );
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.background,
+        resizeToAvoidBottomInset: false,
+        body: Center(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 22.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.r),
+              color: AppColors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.dark.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
+            padding: EdgeInsets.symmetric(
+                horizontal: 20.w, vertical: 30.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                height(10),
+                AppText.h2('Inscrivez-vous sur DocQuizz'),
+                height(20),
+                form,
+                height(35),
+                signUpButton,
+                height(15),
+                haveAccountButton,
+              ],
+            ),
           ),
         ),
       ),

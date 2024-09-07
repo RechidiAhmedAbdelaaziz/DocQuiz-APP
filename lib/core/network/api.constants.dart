@@ -8,7 +8,7 @@ class ApiConstiants {
   static const LOGIN = 'auth/login';
   static const REGISTER = 'auth/register';
   static const REFRESH_TOKEN = 'auth/refresh-token';
-  static const FORGOT_PASSWORD = 'auth/forgot-password';
+  static const FORGOT_PASSWORD = 'auth/forget-password';
   static const VERIFY_OTP = 'auth/verify-otp';
   static const RESET_PASSWORD = 'auth/reset-password';
   static const GOOGLE_CALLBACK = 'o-auth/google/callback';

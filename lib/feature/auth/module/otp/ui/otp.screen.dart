@@ -71,7 +71,7 @@ class _OtpField extends StatelessWidget {
   Widget build(BuildContext context) {
     final otpController = context.read<OtpCubit>().otpController;
     return OtpTextField(
-      numberOfFields: 5,
+      numberOfFields: 6,
       borderColor: AppColors.primary,
       showFieldAsBox: true,
       onSubmit: (String code) {
