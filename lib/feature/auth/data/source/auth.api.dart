@@ -30,4 +30,7 @@ abstract class AuthApi {
   @POST(ApiConstiants.RESET_PASSWORD)
   Future<MessageResponse> resetPassword(
       @Body() Map<String, dynamic> body);
+
+  @GET(ApiConstiants.GOOGLE_CALLBACK)
+  Future<TokensResponse> googleCallback(@Query('code') String code);
 }

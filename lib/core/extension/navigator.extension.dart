@@ -6,6 +6,7 @@ extension NavigatorExtension on BuildContext {
   /// Navigate to a named route with the provided AbstractRoute
   Future<T?> to<T>(AbstractRoute route, {bool canPop = true}) async {
     if (!canPop) route.navigator = NoPopNavigator<T>();
+    
 
     return await _tryNavigate<T>(() => Navigator.of(this)
         .pushNamed<T>(route.path, arguments: route));

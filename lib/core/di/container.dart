@@ -8,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final locator = GetIt.instance;
 
 Future<void> setupLocator({required String baseUrl}) async {
-  locator.registerLazySingletonAsync(
-      () async => await SharedPreferences.getInstance());
+  final sharedPref = await SharedPreferences.getInstance();
+  locator.registerLazySingleton(() => sharedPref);
 
   locator.registerLazySingleton(() => const FlutterSecureStorage());
 

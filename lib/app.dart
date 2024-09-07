@@ -1,3 +1,4 @@
+import 'package:app/feature/auth/module/login/ui/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,10 +12,11 @@ class DocQuizAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(430, 932),
+      designSize: const Size(414, 896),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
+        home: LoginScreen(),
         onGenerateRoute: _router.generateRoute,
       ),
     );

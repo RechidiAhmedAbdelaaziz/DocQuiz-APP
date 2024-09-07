@@ -4,6 +4,7 @@ import 'package:app/core/network/try_call_api.dart';
 import 'package:app/core/types/repo_functions.type.dart';
 import 'package:app/feature/auth/data/source/auth.api.dart';
 import 'package:app/feature/auth/data/source/auth.cache.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepo {
   final _authApi = locator<AuthApi>();
@@ -98,6 +99,37 @@ class AuthRepo {
         'otp': otp,
       });
       return result.message!;
+    }
+
+    return TryCallApi.call(apiCall);
+  }
+
+  RepoResult<AuthTokens> googleAuth(GoogleSignIn googleSignIn) {
+    apiCall() async {
+      final googleUser = await googleSignIn.signIn();
+
+      //    googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+
+      //     _currentUser = account;
+
+      //   if (_currentUser != null) {
+      //     _handleSignIn(_currentUser!);
+      //   }
+      // });
+      // googleSignIn.signInSilently();
+
+      if (googleUser == null) {
+        throw 'User cancelled';
+      }
+
+      final code = (await googleUser.authentication).idToken!;
+
+      final result = await _authApi.googleCallback(code);
+      final tokens = result.tokens!;
+
+      await _authCache.setTokens(tokens);
+
+      return tokens;
     }
 
     return TryCallApi.call(apiCall);
