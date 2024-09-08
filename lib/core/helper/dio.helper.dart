@@ -1,3 +1,7 @@
+import 'package:app/core/di/container.dart';
+import 'package:app/core/extension/validator.extension.dart';
+import 'package:app/feature/auth/data/source/auth.cache.dart';
+import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -39,30 +43,30 @@ class DioHelper {
         responseBody: true,
       );
 
-  static InterceptorsWrapper get _tokensInterceptor {//TODO add your auth logic
-    // final authCacheHelper = locator<AuthCacheHelper>();
-    // final authCubit = locator<AuthCubit>();
+  static InterceptorsWrapper get _tokensInterceptor {
+    final authCacheHelper = locator<AuthCache>();
 
     return InterceptorsWrapper(
       onRequest: (options, handler) async {
-        // final accessToken = await authCacheHelper.accessToken;
+        final accessToken = await authCacheHelper.accessToken;
 
-        // options.headers['Authorization'] = 'Bearer $accessToken';
+        options.headers['Authorization'] = 'Bearer $accessToken';
         return handler.next(options);
       },
 
       // refresh token logic
       onError: (error, handler) async {
         if (error.response?.statusCode == 401) {
-          // final refreshToken = await authCacheHelper.refreshToken;
+          final authCubit = locator<AuthCubit>();
 
-          // if (refreshToken.isNotEmptyOrNull) {
-          // await authCubit.onRefreshToken(refreshToken!);
+          final refreshToken = await authCacheHelper.refreshToken;
 
-          // retry request
-          return handler
-              .resolve(await _dio!.fetch(error.requestOptions));
-          // }
+          if (refreshToken.isNotEmptyOrNull) {
+            await authCubit.refreshToken(refreshToken!);
+
+            return handler
+                .resolve(await _dio!.fetch(error.requestOptions));
+          }
         }
 
         return handler.next(error);
