@@ -10,7 +10,7 @@ import 'package:app/feature/auth/module/resestpassord/ui/reset_password.screen.d
 import 'package:app/feature/auth/module/signup/ui/signup.screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class AuthRoute extends AbstractRoute {
+class AuthRoute extends RouteBase {
   static const String LOGIN_PATH = '/login';
   static const String FORGOT_PASSWORD_PATH = '/forgot-password';
   static const String SIGN_UP_PATH = '/sign-up';

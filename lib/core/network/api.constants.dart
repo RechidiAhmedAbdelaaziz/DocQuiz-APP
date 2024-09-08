@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-class ApiConstants {
+abstract class ApiConstants {
   static const DEV_BASE_URL = 'http://192.168.1.12:3000/';
   static const PROD_BASE_URL = 'https://api.docquizz.top/';
 
@@ -15,4 +15,9 @@ class ApiConstants {
 
   // * DASHBOARD
   static const DASHBOARD = 'statistic';
+
+  // * QUIZ
+  static const QUIZ = 'quiz';
+  static const QUIZ_ID = 'quiz/{id}';
+  static const QUESTION_NUMBER = 'quiz/number';
 }

@@ -12,11 +12,11 @@ class AppText extends Text {
           ),
         );
 
-  AppText.h3(super.data, {super.key, Color? color})
+  AppText.h4(super.data, {super.key, Color? color})
       : super(
           style: TextStyle(
             fontSize: 20.sp,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.w600,
             color: color ?? AppColors.dark,
           ),
         );

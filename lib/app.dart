@@ -1,3 +1,4 @@
+import 'package:app/core/theme/colors.dart';
 import 'package:app/feature/firstpage/ui/first.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,9 @@ class DocQuizAPP extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) => MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: AppColors.background,
+        ),
         home: const FirstScreen(),
         onGenerateRoute: _router.generateRoute,
       ),

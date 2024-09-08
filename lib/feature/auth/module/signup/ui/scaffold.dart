@@ -26,7 +26,6 @@ class _Scaffold extends StatelessWidget {
         );
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(

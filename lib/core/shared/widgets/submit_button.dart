@@ -41,7 +41,7 @@ class _SubmitButtonState extends State<SubmitButton> {
         child: Center(
           child: isLoading
               ? CircularProgressIndicator(color: AppColors.white)
-              : AppText.h3(widget.title, color: AppColors.white),
+              : AppText.h4(widget.title, color: AppColors.white),
         ),
       ),
     );

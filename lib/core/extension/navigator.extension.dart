@@ -3,17 +3,17 @@ import 'package:app/core/router/navigator.dart';
 import 'package:flutter/material.dart';
 
 extension NavigatorExtension on BuildContext {
+
   /// Navigate to a named route with the provided AbstractRoute
-  Future<T?> to<T>(AbstractRoute route, {bool canPop = true}) async {
+  Future<T?> to<T>(RouteBase route, {bool canPop = true}) async {
     if (!canPop) route.navigator = NoPopNavigator<T>();
-    
 
     return await _tryNavigate<T>(() => Navigator.of(this)
         .pushNamed<T>(route.path, arguments: route));
   }
 
   /// Navigate to a named route and replace the current route
-  Future<T?> off<T, TO>(AbstractRoute route, {TO? result}) {
+  Future<T?> off<T, TO>(RouteBase route, {TO? result}) {
     return _tryNavigate(() {
       return Navigator.of(this).pushReplacementNamed<T, TO>(
         route.path,
@@ -23,8 +23,8 @@ extension NavigatorExtension on BuildContext {
     });
   }
 
-  /// Navigate to a named route and remove all previous routes until a condition is met
-  Future<T?> offAll<T>(AbstractRoute route,
+  /// Navigate to a named route and remove all previous routes until a condition is met 
+  Future<T?> offAll<T>(RouteBase route,
       {bool Function(Route<dynamic>)? predicate}) {
     return _tryNavigate(() {
       return Navigator.of(this).pushNamedAndRemoveUntil<T>(
@@ -35,7 +35,7 @@ extension NavigatorExtension on BuildContext {
     });
   }
 
-  /// Pop the current route off the navigator stack
+  /// Pop the current route off the navigator stack 
   void back<T>([T? result]) {
     if (!Navigator.of(this).canPop()) return;
     Navigator.of(this).pop(result);
