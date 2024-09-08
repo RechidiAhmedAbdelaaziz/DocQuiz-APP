@@ -17,7 +17,6 @@ class FirstScreen extends StatelessWidget {
         state.whenOrNull(
           authenticated: () {
             context.backToRoot();
-            print("Authenticated");
             // context.to(, canPop: false); //TODO  Add your home route
           },
           unauthenticated: () {

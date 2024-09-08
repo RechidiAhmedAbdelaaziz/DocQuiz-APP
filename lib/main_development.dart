@@ -14,7 +14,7 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
 
   // dependency injection
-  await setupLocator(baseUrl: ApiConstiants.DEV_BASE_URL);
+  await setupLocator(baseUrl: ApiConstants.DEV_BASE_URL);
 
   runApp(const DocQuizAPP(AppRouter()));
 }

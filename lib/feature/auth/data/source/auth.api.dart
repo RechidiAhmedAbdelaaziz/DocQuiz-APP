@@ -9,28 +9,28 @@ part 'auth.api.g.dart';
 abstract class AuthApi {
   factory AuthApi(Dio dio, {String baseUrl}) = _AuthApi;
 
-  @POST(ApiConstiants.LOGIN)
+  @POST(ApiConstants.LOGIN)
   Future<TokensResponse> login(@Body() Map<String, dynamic> body);
 
-  @POST(ApiConstiants.REGISTER)
+  @POST(ApiConstants.REGISTER)
   Future<TokensResponse> register(@Body() Map<String, dynamic> body);
 
-  @GET(ApiConstiants.REFRESH_TOKEN)
+  @GET(ApiConstants.REFRESH_TOKEN)
   Future<TokensResponse> refreshToken(
       @Query('refreshToken') String refreshToken);
 
-  @POST(ApiConstiants.FORGOT_PASSWORD)
+  @POST(ApiConstants.FORGOT_PASSWORD)
   Future<MessageResponse> forgotPassword(
       @Body() Map<String, dynamic> body);
 
-  @POST(ApiConstiants.VERIFY_OTP)
+  @POST(ApiConstants.VERIFY_OTP)
   Future<MessageResponse> verifyOtp(
       @Body() Map<String, dynamic> body);
 
-  @POST(ApiConstiants.RESET_PASSWORD)
+  @POST(ApiConstants.RESET_PASSWORD)
   Future<MessageResponse> resetPassword(
       @Body() Map<String, dynamic> body);
 
-  @GET(ApiConstiants.GOOGLE_CALLBACK)
+  @GET(ApiConstants.GOOGLE_CALLBACK)
   Future<TokensResponse> googleCallback(@Query('code') String code);
 }
