@@ -1,0 +1,22 @@
+part of 'themes.cubit.dart';
+
+abstract class ThemesState {
+  final ThemeData theme;
+  ThemesState({required this.theme});
+}
+
+class _DarkTheme extends ThemesState {
+  _DarkTheme()
+      : super(
+            theme: ThemeData(
+          scaffoldBackgroundColor: locator<AppColors>().background,
+        ));
+}
+
+class _LightTheme extends ThemesState {
+  _LightTheme()
+      : super(
+            theme: ThemeData(
+          scaffoldBackgroundColor: locator<AppColors>().background,
+        ));
+}

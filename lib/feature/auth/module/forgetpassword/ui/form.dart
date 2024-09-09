@@ -1,7 +1,7 @@
 part of 'forget_password.screen.dart';
 
 class _From extends StatelessWidget {
-  const _From({super.key});
+  const _From();
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class _From extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText.label('Email'),
+          Text('Email', style: context.theme.textStyles.body1),
           height(10),
           AppInputeField(
             controller: cubit.emailController,

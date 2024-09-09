@@ -1,11 +1,10 @@
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/colors.dart';
-import 'package:app/core/theme/fonts.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
 import 'package:app/feature/auth/module/otp/logic/otp_cubit.dart';
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,17 +26,17 @@ class OtpScreen extends StatelessWidget {
         );
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 22.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: AppColors.white,
+              color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.dark.withOpacity(0.1),
+                  color:
+                      context.theme.colors.primary.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -50,7 +49,10 @@ class OtpScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 height(10),
-                AppText.h2('Saisissez le code reçu par Email'),
+                Text(
+                  'Saisissez le code reçu par Email',
+                  style: context.theme.textStyles.h2,
+                ),
                 height(20),
                 const _OtpField(),
                 height(35),
@@ -65,14 +67,14 @@ class OtpScreen extends StatelessWidget {
 }
 
 class _OtpField extends StatelessWidget {
-  const _OtpField({super.key});
+  const _OtpField();
 
   @override
   Widget build(BuildContext context) {
     final otpController = context.read<OtpCubit>().otpController;
     return OtpTextField(
       numberOfFields: 6,
-      borderColor: AppColors.primary,
+      borderColor: context.theme.colors.primary,
       showFieldAsBox: true,
       onSubmit: (String code) {
         otpController.text = code;
@@ -82,7 +84,7 @@ class _OtpField extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({super.key});
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {

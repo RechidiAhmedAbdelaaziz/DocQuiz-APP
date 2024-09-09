@@ -3,10 +3,9 @@ import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/extension/validator.extension.dart';
 import 'package:app/core/shared/widgets/form_field.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/colors.dart';
-import 'package:app/core/theme/fonts.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,17 +29,17 @@ class ResetPasswordScreen extends StatelessWidget {
         );
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 22.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: AppColors.white,
+              color: Colors.white,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.dark.withOpacity(0.1),
+                  color:
+                      context.theme.colors.primary.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -53,7 +52,10 @@ class ResetPasswordScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 height(10),
-                AppText.h2('Entrez votre nouveau mot de passe'),
+                Text(
+                  'Réinitialiser votre mot de passe',
+                  style: context.theme.textStyles.h2,
+                ),
                 height(20),
                 const _Form(),
                 height(35),
@@ -68,7 +70,7 @@ class ResetPasswordScreen extends StatelessWidget {
 }
 
 class _Form extends StatelessWidget {
-  const _Form({super.key});
+  const _Form();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,10 @@ class _Form extends StatelessWidget {
       key: cubit.formKey,
       child: Column(
         children: [
-          AppText.label('Nouveau mot de passe'),
+          Text(
+            'Nouveau mot de passe',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
             hint: 'Entrez votre nouveau mot de passe',
@@ -87,7 +92,10 @@ class _Form extends StatelessWidget {
             validator: (value) => value.isStrongPassword,
           ),
           height(20),
-          AppText.label('Confirmer le mot de passe'),
+          Text(
+            'Confirmez votre mot de passe',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
               hint: 'Confirmez votre mot de passe',
@@ -107,7 +115,7 @@ class _Form extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({super.key});
+  const _SubmitButton();
 
   @override
   Widget build(BuildContext context) {

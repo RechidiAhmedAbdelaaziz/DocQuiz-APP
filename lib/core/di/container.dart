@@ -1,5 +1,7 @@
 import 'package:app/core/helper/cache.helper.dart';
 import 'package:app/core/helper/dio.helper.dart';
+import 'package:app/core/theme/colors.dart';
+import 'package:app/core/theme/fonts.dart';
 import 'package:app/feature/auth/helper/auth.dependency.dart';
 import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -17,6 +19,11 @@ Future<void> setupLocator({required String baseUrl}) async {
   locator.registerLazySingleton(() => DioHelper.getDio(baseUrl));
   locator.registerLazySingleton(() => CacheHelper());
 
+  locator.registerSingleton<AppColors>(LightColors());
+  locator.registerSingleton(AppFontStyles());
+
   await setupAuthDependency(locator);
   await setupDashboardDependency(locator);
+
+  locator.allowReassignment = true;
 }
