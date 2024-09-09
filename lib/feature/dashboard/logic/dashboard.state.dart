@@ -27,7 +27,7 @@ class DashboardState {
     );
   }
 
-  void onError({required Function(ApiErrorModel) onError}) {
-    if (_error != null) onError(_error);
+  void onError({required Function(String message) onError}) {
+    if (_error != null) onError(_error.message);
   }
 }
