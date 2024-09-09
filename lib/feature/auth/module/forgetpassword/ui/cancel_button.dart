@@ -7,7 +7,7 @@ class _CancelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.1),
+        color: context.theme.colors.background,
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
@@ -20,7 +20,10 @@ class _CancelButton extends StatelessWidget {
       // width: double.infinity,
       child: IconButton(
           onPressed: () => context.back(),
-          icon: const Icon(Icons.arrow_back)),
+          icon: Icon(
+            Icons.arrow_back,
+            color: context.theme.colors.primaryText,
+          )),
     );
   }
 }

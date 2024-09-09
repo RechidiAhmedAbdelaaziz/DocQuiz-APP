@@ -35,7 +35,7 @@ class ResetPasswordScreen extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 22.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: Colors.white,
+              color: context.theme.colors.primary,
               boxShadow: [
                 BoxShadow(
                   color:

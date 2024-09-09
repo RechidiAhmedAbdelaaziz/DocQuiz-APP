@@ -17,15 +17,15 @@ abstract class AppColors {
 }
 
 class LightColors implements AppColors {
-  final Color background = const Color(0xFFf1f5f9);
-  final Color primary = const Color(0xFF3f72af);
-  final Color primaryText = const Color(0xFF1a1a1a);
+  final Color background = const Color(0xFFeff4fb);
+  final Color primary = const Color(0xFFFFFFFF);
+  final Color primaryText = const Color(0xFF1c2447);
   final Color secondaryText = const Color(0xFFa1a1a1);
 }
 
 class DarkColors implements AppColors {
-  final Color background = const Color(0xFF1a1a1a);
-  final Color primary = const Color(0xFF3f72af);
+  final Color background = const Color(0xFF1d2a39);
+  final Color primary = const Color(0xFF313d4a);
   final Color primaryText = const Color(0xFFf1f5f9);
   final Color secondaryText = const Color(0xFFa1a1a1);
 }

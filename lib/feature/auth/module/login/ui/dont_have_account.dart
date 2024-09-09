@@ -15,11 +15,12 @@ class _DontHaveAccount extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(padding: EdgeInsets.zero),
-          onPressed: () => context.off(AuthRoute.signUp(), canPop: false),
+          onPressed: () =>
+              context.off(AuthRoute.signUp(), canPop: false),
           child: Text(
             'Inscrivez-vous',
             style: context.theme.textStyles.body1.copyWith(
-              color: context.theme.colors.primary,
+              color: Colors.blue,
             ),
           ),
         ),

@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -41,10 +42,13 @@ class _AppInputeFieldState extends State<AppInputeField> {
       obscureText: widget._obscureText && !_showContent,
       onChanged: widget._onChanged,
       validator: widget._validator,
+      style: context.theme.textStyles.body1,
       decoration: InputDecoration(
         hintText: widget._hint,
+        hintStyle: context.theme.textStyles.body2,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.r),
+          borderSide: BorderSide(color: context.theme.colors.primary),
         ),
         isDense: true,
         isCollapsed: true,
@@ -56,6 +60,7 @@ class _AppInputeFieldState extends State<AppInputeField> {
                   _showContent
                       ? Icons.visibility
                       : Icons.visibility_off,
+                  color: context.theme.colors.primaryText,
                 ),
                 onPressed: () {
                   setState(() {
