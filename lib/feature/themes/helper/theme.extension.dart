@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 extension AppTheme on BuildContext {
   ThemeData get theme => Theme.of(this);
+  AppColors get colors => theme.colors;
+  AppFontStyles get textStyles => theme.textStyles;
 }
 
 extension ThemeManager on ThemeData {

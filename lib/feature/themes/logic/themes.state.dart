@@ -8,15 +8,19 @@ abstract class ThemesState {
 class _DarkTheme extends ThemesState {
   _DarkTheme()
       : super(
-            theme: ThemeData(
-          scaffoldBackgroundColor: locator<AppColors>().background,
-        ));
+          theme: ThemeData(
+            primaryColor: locator<AppColors>().primary,
+            scaffoldBackgroundColor: locator<AppColors>().background,
+          ),
+        );
 }
 
 class _LightTheme extends ThemesState {
   _LightTheme()
       : super(
-            theme: ThemeData(
-          scaffoldBackgroundColor: locator<AppColors>().background,
-        ));
+          theme: ThemeData(
+            primaryColor: locator<AppColors>().primary,
+            scaffoldBackgroundColor: locator<AppColors>().background,
+          ),
+        );
 }
