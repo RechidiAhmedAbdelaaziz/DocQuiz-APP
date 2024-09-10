@@ -3,7 +3,7 @@ import 'package:app/core/extension/alertdialog.extenstion.dart';
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
 import 'package:app/feature/auth/logic/auth.cubit.dart';
-import 'package:app/feature/home/ui/helper/home.route.dart';
+import 'package:app/feature/home/helper/home.route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
