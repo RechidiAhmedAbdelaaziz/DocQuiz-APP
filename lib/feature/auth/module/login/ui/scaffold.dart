@@ -34,17 +34,17 @@ class _Scaffold extends StatelessWidget {
         );
       },
       child: Scaffold(
-        backgroundColor: AppColors.background,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 22.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: AppColors.white,
+              color: context.theme.colors.primary,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.dark.withOpacity(0.1),
+                  color:
+                      context.theme.colors.primary.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -56,8 +56,12 @@ class _Scaffold extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SwitchThemesButton(),
                 height(10),
-                AppText.h2('Connectez-vous à DocQuizz'),
+                Text(
+                  'Connectez-vous à DocQuizz',
+                  style: context.theme.textStyles.h2,
+                ),
                 height(20),
                 _googleButton,
                 height(10),

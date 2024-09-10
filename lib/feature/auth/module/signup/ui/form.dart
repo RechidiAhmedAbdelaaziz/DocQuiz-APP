@@ -11,7 +11,10 @@ class _Form extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText.label('Nom'),
+          Text(
+            'Nom',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
             controller: cubit.nameController,
@@ -20,7 +23,10 @@ class _Form extends StatelessWidget {
             validator: (value) => value.isValidString,
           ),
           height(20),
-          AppText.label('Email'),
+          Text(
+            'Email',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
             controller: cubit.emailController,
@@ -29,7 +35,10 @@ class _Form extends StatelessWidget {
             validator: (value) => value.isValidEmail,
           ),
           height(20),
-          AppText.label('Mot de passe'),
+          Text(
+            'Mot de passe',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
             controller: cubit.passwordController,
@@ -38,7 +47,10 @@ class _Form extends StatelessWidget {
             validator: (value) => value.isStrongPassword,
           ),
           height(20),
-          AppText.label('Confirmer le mot de passe'),
+          Text(
+            'Confirmer le mot de passe',
+            style: context.theme.textStyles.body1,
+          ),
           height(5),
           AppInputeField(
               controller: cubit.confirmPasswordController,

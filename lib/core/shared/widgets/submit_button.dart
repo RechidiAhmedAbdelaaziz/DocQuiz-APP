@@ -1,5 +1,4 @@
-import 'package:app/core/theme/colors.dart';
-import 'package:app/core/theme/fonts.dart';
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -35,13 +34,16 @@ class _SubmitButtonState extends State<SubmitButton> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
-          color: AppColors.blue,
+          color: Colors.blue,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Center(
           child: isLoading
-              ? CircularProgressIndicator(color: AppColors.white)
-              : AppText.h4(widget.title, color: AppColors.white),
+              ? const CircularProgressIndicator(color: Colors.white)
+              : Text(
+                  widget.title,
+                  style: context.theme.textStyles.h4,
+                ),
         ),
       ),
     );

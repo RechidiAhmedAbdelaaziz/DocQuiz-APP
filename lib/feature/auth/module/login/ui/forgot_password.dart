@@ -1,16 +1,17 @@
 part of 'login.screen.dart';
 
 class _ForgotPasswordButton extends StatelessWidget {
-  const _ForgotPasswordButton({Key? key});
+  const _ForgotPasswordButton();
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(padding: EdgeInsets.zero),
       onPressed: () => context.to(AuthRoute.forgotPassword()),
-      child: AppText.body(
+      child: Text(
         'Mot de passe oublié ?',
-        color: AppColors.blue,
+        style: context.theme.textStyles.body1
+            .copyWith(color: Colors.blue),
       ),
     );
   }

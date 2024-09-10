@@ -32,10 +32,11 @@ class _Scaffold extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 22.w),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.r),
-              color: AppColors.white,
+              color: context.theme.colors.primary,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.dark.withOpacity(0.1),
+                  color:
+                      context.theme.colors.primary.withOpacity(0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 5),
                 ),
@@ -48,7 +49,10 @@ class _Scaffold extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 height(10),
-                AppText.h2('Inscrivez-vous sur DocQuizz'),
+                Text(
+                  'Créer un compte',
+                  style: context.theme.textStyles.h2,
+                ),
                 height(20),
                 form,
                 height(35),

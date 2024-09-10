@@ -1,4 +1,3 @@
-import 'package:app/core/theme/colors.dart';
 import 'package:app/feature/dashboard/widget/dashboard.widget.dart';
 import 'package:flutter/material.dart';
 

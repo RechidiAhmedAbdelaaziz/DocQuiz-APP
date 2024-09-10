@@ -1,7 +1,7 @@
 part of 'signup.screen.dart';
 
 class _SignUpButton extends StatelessWidget {
-  const _SignUpButton({super.key});
+  const _SignUpButton();
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
-import 'package:app/core/theme/fonts.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/dashboard/logic/dashboard.cubit.dart';
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,9 +86,17 @@ class _StatisticItem extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          AppText.h2(title, color: Colors.white),
+          Text(
+            'title',
+            style: context.theme.textStyles.h2
+                .copyWith(color: Colors.white),
+          ),
           height(5),
-          AppText.h2(value, color: Colors.white),
+          Text(
+            'value',
+            style: context.theme.textStyles.h2
+                .copyWith(color: Colors.white),
+          ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 part of 'login.screen.dart';
 
 class _Form extends StatelessWidget {
-  const _Form({super.key});
+  const _Form();
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class _Form extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AppText.label('Email'),
+          Text('Email', style: context.theme.textStyles.body1),
           height(5),
           AppInputeField(
             controller: cubit.emailController,
@@ -20,7 +20,7 @@ class _Form extends StatelessWidget {
             validator: (value) => value.isValidEmail,
           ),
           height(20),
-          AppText.label('Mot de passe'),
+          Text('Mot de passe', style: context.theme.textStyles.body1),
           height(5),
           AppInputeField(
             controller: cubit.passwordController,
