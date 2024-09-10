@@ -13,6 +13,18 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => DashboardCubit(),
+      child: const _Dashboard(),
+    );
+  }
+}
+
+class _Dashboard extends StatelessWidget {
+  const _Dashboard();
+
+  @override
+  Widget build(BuildContext context) {
     final statistics = context
         .select((DashboardCubit cubit) => cubit.state.statistics);
 
@@ -34,6 +46,7 @@ class _Statistics extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        height(20),
         _StatisticItem(
           title: 'MODULES',
           color: Colors.blue,
@@ -87,13 +100,13 @@ class _StatisticItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            'title',
+            title,
             style: context.theme.textStyles.h2
                 .copyWith(color: Colors.white),
           ),
           height(5),
           Text(
-            'value',
+            value,
             style: context.theme.textStyles.h2
                 .copyWith(color: Colors.white),
           ),
