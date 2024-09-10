@@ -3,6 +3,8 @@ part of 'themes.cubit.dart';
 abstract class ThemesState {
   final ThemeData theme;
   ThemesState({required this.theme});
+
+  bool get isDark => this is _DarkTheme;
 }
 
 class _DarkTheme extends ThemesState {

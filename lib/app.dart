@@ -1,3 +1,4 @@
+import 'package:app/core/di/container.dart';
 import 'package:app/feature/firstpage/ui/first.screen.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +18,16 @@ class DocQuizAPP extends StatelessWidget {
       designSize: const Size(414, 896),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (context, child) => BlocProvider(
-        create: (context) => ThemesCubit(),
-        child: BlocBuilder<ThemesCubit, ThemesState>(
-          builder: (context, state) {
-            return MaterialApp(
-              theme: state.theme,
-              home: const FirstScreen(),
-              onGenerateRoute: _router.generateRoute,
-            );
-          },
-        ),
+      builder: (context, child) =>
+          BlocBuilder<ThemesCubit, ThemesState>(
+        bloc: locator<ThemesCubit>(),
+        builder: (context, state) {
+          return MaterialApp(
+            theme: state.theme,
+            home: const FirstScreen(),
+            onGenerateRoute: _router.generateRoute,
+          );
+        },
       ),
     );
   }
