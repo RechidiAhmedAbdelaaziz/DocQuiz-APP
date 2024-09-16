@@ -41,7 +41,10 @@ class AuthCubit extends Cubit<AuthState> {
         DioHelper.addTokenInterceptor();
         emit(const AuthState.authenticated());
       },
-      error: (error) => emit(const AuthState.sessionExpired()),
+      error: (error) async {
+        await onLogOut();
+        emit(const AuthState.sessionExpired());
+      },
     );
   }
 }

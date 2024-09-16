@@ -1,5 +1,6 @@
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/dashboard/logic/dashboard.cubit.dart';
+import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,9 @@ class _Dashboard extends StatelessWidget {
 
     return ConditionalBuilder(
       condition: statistics != null,
-      builder: (context) => _Statistics(statistics!),
+      builder: (context) => Column(
+        children: [_Statistics(statistics!), QuizListWidget()],
+      ),
       fallback: (context) =>
           const Center(child: CircularProgressIndicator()),
     );

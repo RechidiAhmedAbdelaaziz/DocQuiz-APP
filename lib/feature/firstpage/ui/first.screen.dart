@@ -26,14 +26,10 @@ class FirstScreen extends StatelessWidget {
           },
           sessionExpired: () {
             context.showDialogBox(
-              canPop: false,
               title: 'Session Expired',
               body: 'Please login again',
-              cancelText: 'Logout',
-              onCancel: (back) {
-                context.read<AuthCubit>().onLogOut();
-                back();
-              },
+              confirmText: 'Login',
+              onConfirm: (back) => back(),
             );
           },
         );
