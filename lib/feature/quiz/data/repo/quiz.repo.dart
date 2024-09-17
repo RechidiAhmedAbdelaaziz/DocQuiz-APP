@@ -24,10 +24,12 @@ class QuizRepo {
   }
 
   RepoResult<QuizModel> createQuiz({
+    required String title,
     required QuestionFilter filters,
   }) async {
     apiCall() async {
-      final response = await _quizApi.createQuiz(filters.toJson());
+      final response = await _quizApi
+          .createQuiz({'title': title, ...filters.toJson()});
       return QuizModel.fromJson(response.data!);
     }
 
@@ -55,12 +57,10 @@ class QuizRepo {
     return await TryCallApi.call(apiCall);
   }
 
-  RepoResult<int> getQuestionNumber({
-    required QuestionFilter filters,
-  }) async {
+  RepoResult<int> getQuestionNumber(QuestionFilter filters) async {
     apiCall() async {
       final response =
-          await _quizApi.getQuestionNumber(filters.toJson());
+          await _quizApi.getQuestionNumber(filters.toQuery());
       return response.data!['questions'] as int;
     }
 

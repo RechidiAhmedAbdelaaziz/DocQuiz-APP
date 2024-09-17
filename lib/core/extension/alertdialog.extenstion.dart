@@ -54,12 +54,7 @@ extension AlertDialogExtension on BuildContext {
     return showDialog<T>(
       context: this,
       builder: (context) {
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            content,
-          ],
-        );
+        return content;
       },
     );
   }

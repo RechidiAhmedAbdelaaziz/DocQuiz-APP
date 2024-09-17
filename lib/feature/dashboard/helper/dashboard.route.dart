@@ -13,7 +13,7 @@ class DashboardRoute extends DrawerRoute {
                 value: DashboardCubit()..getDashboard(),
               ),
               BlocProvider.value(
-                value: QuizListCubit()..fetchQuizes(),
+                value: QuizListCubit()..fetchQuizes(limit: 4),
               ),
             ],
             child: const Dashboard(),

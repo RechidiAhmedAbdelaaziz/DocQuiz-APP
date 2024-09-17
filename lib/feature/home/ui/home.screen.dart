@@ -18,10 +18,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final body = context.watch<HomeCubit>().state.child;
-    return Scaffold(
-      appBar: const _AppBar(),
-      body: body,
-      drawer: const _Drawer(),
+    return PopScope(
+      onPopInvokedWithResult: (_, __) => {
+        context.read<HomeCubit>().back(),
+      },
+      child: Scaffold(
+        appBar: const _AppBar(),
+        body: body,
+        drawer: const _Drawer(),
+      ),
     );
   }
 }
@@ -54,7 +59,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize =>
       const Size.fromHeight(kToolbarHeight); // standard AppBar height
 }

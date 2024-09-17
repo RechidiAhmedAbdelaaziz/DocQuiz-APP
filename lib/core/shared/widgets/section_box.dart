@@ -19,12 +19,11 @@ class SectionBox extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: context.theme.colors.dark.withOpacity(0.2),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+            blurRadius: 3,
           ),
         ],
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       child: child,
     );
   }

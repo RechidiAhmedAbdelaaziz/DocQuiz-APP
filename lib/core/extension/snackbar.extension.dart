@@ -37,4 +37,25 @@ extension Snackbar on BuildContext {
       ),
     );
   }
+
+  void showWarningSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.warning, color: Colors.white),
+            const SizedBox(width: 10),
+            Text(
+              message,
+              maxLines: 4,
+            ),
+          ],
+        ),
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.orange,
+      ),
+    );
+  }
+
+
 }

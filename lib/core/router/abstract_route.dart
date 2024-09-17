@@ -20,25 +20,3 @@ abstract class RouteBase<T> {
       _navigator.buildRoute(_path, _child);
 }
 
-// //Example TestScreen
-// class TestWidget extends StatelessWidget {
-//   static const route = '/test';
-//   const TestWidget({super.key, required this.title});
-
-//   final String title;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     context.to(TestRoute(title: "RECHIDI Ahmed"));
-//     return const Placeholder();
-//   }
-// }
-
-// //Example TestRoute
-// class TestRoute extends AbstractRoute<TestWidget> {
-//   TestRoute({required String title})
-//       : super(
-//           TestWidget.route,
-//           child: TestWidget(title: title),
-//         );
-// }

@@ -4,6 +4,7 @@ import 'package:app/core/theme/colors.dart';
 import 'package:app/core/theme/fonts.dart';
 import 'package:app/feature/auth/helper/auth.dependency.dart';
 import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
+import 'package:app/feature/quiz/helper/quiz.dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -26,6 +27,7 @@ Future<void> setupLocator({required String baseUrl}) async {
 
   await setupAuthDependency(locator);
   await setupDashboardDependency(locator);
+  await setupQuizDependency(locator);
 
   locator.allowReassignment = true;
 }

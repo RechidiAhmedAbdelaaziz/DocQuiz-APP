@@ -9,8 +9,12 @@ extension UniqList<T> on List<T> {
     }
   }
 
-  void update(T value) {
-    final index = indexWhere((element) => element == value);
-    if (index != -1) this[index] = value;
+  void addOrRemove(T value) =>
+      contains(value) ? remove(value) : add(value);
+
+  void addOrRemoveAll(List<T> values) {
+    for (var value in values) {
+      addOrRemove(value);
+    }
   }
 }

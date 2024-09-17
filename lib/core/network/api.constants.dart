@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class ApiConstants {
-  static const DEV_BASE_URL = 'http://192.168.1.12:3000/';
+  static const DEV_BASE_URL = 'http://192.168.1.2:3000/';
   static const PROD_BASE_URL = 'https://api.docquizz.top/';
 
   // * AUTH

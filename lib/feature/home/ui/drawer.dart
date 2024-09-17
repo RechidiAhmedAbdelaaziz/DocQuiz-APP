@@ -26,7 +26,7 @@ class _Drawer extends StatelessWidget {
               _DrawerItemModel(
                 title: 'Paramètres',
                 icon: Icons.settings,
-                onTap: cubit.showSettings,
+                onTap: cubit.showMyQuiz,
                 isSelected: context.select(
                     (HomeCubit cubit) => cubit.state.isSetting),
               ),
