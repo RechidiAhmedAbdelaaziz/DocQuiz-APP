@@ -1,4 +1,3 @@
-import 'package:app/core/router/abstract_route.dart';
 import 'package:app/core/router/routebase.dart';
 import 'package:app/feature/quiz/module/createquiz/logic/create_quiz.cubit.dart';
 import 'package:app/feature/quiz/module/createquiz/ui/create_quiz.screen.dart';

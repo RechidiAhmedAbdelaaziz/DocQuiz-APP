@@ -6,7 +6,6 @@ import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/quiz/data/models/quiz.model.dart';
-import 'package:app/feature/quiz/helper/quiz.route.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz_list.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
