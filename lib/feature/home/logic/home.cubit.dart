@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   void showDashboard() => _goTo(_Dashboard());
   void showMyQuiz() => _goTo(_MyQuiz());
+  void showCreateQuiz() => _goTo(_CreateQuiz());
 
   void back() {
     final last = state.previous;

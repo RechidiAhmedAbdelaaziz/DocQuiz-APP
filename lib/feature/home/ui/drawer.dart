@@ -24,11 +24,18 @@ class _Drawer extends StatelessWidget {
                 ),
               ),
               _DrawerItemModel(
-                title: 'Paramètres',
-                icon: Icons.settings,
+                title: 'Mes Quiz',
+                icon: Icons.quiz,
                 onTap: cubit.showMyQuiz,
                 isSelected: context.select(
-                    (HomeCubit cubit) => cubit.state.isSetting),
+                    (HomeCubit cubit) => cubit.state.isMyQuiz),
+              ),
+              _DrawerItemModel(
+                title: 'Créer un Quiz',
+                icon: Icons.create,
+                onTap: cubit.showCreateQuiz,
+                isSelected: context.select(
+                    (HomeCubit cubit) => cubit.state.isCreateQuiz),
               ),
             ].map((item) => _DrawerItem(item)),
           ],

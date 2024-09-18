@@ -16,12 +16,11 @@ class MyQuizRoute extends DrawerRoute {
         );
 }
 
-class CreateQuizRoute extends RouteBase {
-  static const route = '/create-quiz';
+class CreateQuizRoute extends DrawerRoute {
   CreateQuizRoute()
-      : super(route,
+      : super(
             child: BlocProvider(
-              create: (context) => CreateQuizCubit(),
-              child: const CreateQuizScreen(),
-            ));
+          create: (context) => CreateQuizCubit(),
+          child: const CreateQuizScreen(),
+        ));
 }

@@ -80,7 +80,7 @@ class _Statistics extends StatelessWidget {
         height(20),
         _StatisticItem(
           title: 'MODULES',
-          color: Colors.blue,
+          color: Colors.teal,
           value: statistics.totalMajor.toString(),
         ),
         _StatisticItem(
@@ -91,7 +91,7 @@ class _Statistics extends StatelessWidget {
         _StatisticItem(
           title: 'FAITS AUJOURD\'HUI',
           color: Colors.orange,
-          value: statistics.doneToday.toString(),
+          value: statistics.quizDoneToday.toString(),
         ),
       ],
     );

@@ -4,6 +4,7 @@ import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
+import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/quiz/data/models/quiz.model.dart';
 import 'package:app/feature/quiz/helper/quiz.route.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz.cubit.dart';
@@ -23,39 +24,42 @@ class QuizListScreen extends StatelessWidget {
         state.onError(context.showWarningSnackBar);
       },
       child: SingleChildScrollView(
-        child: SectionBox(
-          child: Column(
-            children: [
-              height(10),
-              Row(
-                children: [
-                  const LinedText('Mes Quiz'),
-                  const Spacer(),
-                  InkWell(
-                    onTap: () {
-                      context.to(CreateQuizRoute());
-                    },
-                    child: CircleAvatar(
-                      radius: 25.r,
-                      backgroundColor: Colors.blue,
-                      child: Icon(
-                        Icons.add,
-                        color: context.colors.primary,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20.h),
+          child: SectionBox(
+            child: Column(
+              children: [
+                height(10),
+                Row(
+                  children: [
+                    const LinedText('Mes Quiz'),
+                    const Spacer(),
+                    InkWell(
+                      onTap: () {
+                        context.read<HomeCubit>().showCreateQuiz();
+                      },
+                      child: CircleAvatar(
+                        radius: 25.r,
+                        backgroundColor: Colors.teal,
+                        child: Icon(
+                          Icons.add,
+                          color: context.colors.primary,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              height(20),
-              _SearchBar(
-                onSearch: (value) {
-                  context.read<QuizListCubit>().keyword = value;
-                },
-              ),
-              height(45),
-              const QuizListWidget(),
-              _PageIndicator(),
-            ],
+                  ],
+                ),
+                height(20),
+                _SearchBar(
+                  onSearch: (value) {
+                    context.read<QuizListCubit>().keyword = value;
+                  },
+                ),
+                height(45),
+                const QuizListWidget(),
+                _PageIndicator(),
+              ],
+            ),
           ),
         ),
       ),
@@ -128,7 +132,7 @@ class _QuizItem extends StatelessWidget {
                   onTap: () {},
                 ),
                 _buildActionButton(
-                  color: Colors.blue,
+                  color: Colors.teal,
                   icon: Icons.edit,
                   onTap: () {
                     context.showPopUp(
@@ -392,12 +396,14 @@ class _PageIndicator extends StatelessWidget {
             onPressed: context.read<QuizListCubit>().prePage,
             icon: Icon(
               Icons.arrow_back_ios,
-              color: page == 1 ? Colors.grey[400] : Colors.black,
+              color: page == 1
+                  ? context.colors.background
+                  : context.colors.dark,
             ),
           ),
           width(23),
           CircleAvatar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.teal,
             child: Text(
               '$page',
               style: context.textStyles.h5.copyWith(
@@ -408,8 +414,10 @@ class _PageIndicator extends StatelessWidget {
           width(23),
           IconButton(
             onPressed: context.read<QuizListCubit>().nextPage,
-            icon: const Icon(Icons.arrow_forward_ios,
-                color: Colors.black),
+            icon: Icon(
+              Icons.arrow_forward_ios,
+              color: context.colors.dark,
+            ),
           ),
         ],
       ),

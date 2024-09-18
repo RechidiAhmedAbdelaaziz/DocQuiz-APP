@@ -22,7 +22,7 @@ class LinedText extends StatelessWidget {
               text: text[0],
               style: style ??
                   context.textStyles.h2.copyWith(
-                    color: Colors.blue,
+                    color: Colors.teal,
                     fontWeight: FontWeight.w700,
                   ),
               children: [
@@ -40,7 +40,7 @@ class LinedText extends StatelessWidget {
             width: 60.w,
             height: 3.h,
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.8),
+              color: Colors.teal.withOpacity(0.8),
               borderRadius: BorderRadius.circular(8.r),
             ),
           ),

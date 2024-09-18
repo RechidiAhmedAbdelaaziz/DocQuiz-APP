@@ -38,7 +38,7 @@ extension AlertDialogExtension on BuildContext {
                   },
                   child: Text(
                     confirmText,
-                    style: const TextStyle(color: Colors.blue),
+                    style: const TextStyle(color: Colors.teal),
                   ),
                 ),
             ],

@@ -62,4 +62,15 @@ class DomainRepo {
 
     return TryCallApi.call(apiCall);
   }
+
+  RepoListResult<SourceModel> getSources() {
+    apiCall() async {
+      final response = await _domainApi.getSources();
+      return response.data!
+          .map((e) => SourceModel.fromJson(e))
+          .toList();
+    }
+
+    return TryCallApi.call(apiCall);
+  }
 }

@@ -10,7 +10,11 @@ class _SourcesBox extends StatelessWidget {
       'Sources',
       filters: Column(
         children: [
-          const Divider(),
+          BlocProvider(
+            create: (context) =>
+                NamesCubit<SourceModel, void>()..fetchAll(),
+            child: const _Sources(),
+          ),
           height(22),
           AppDropDown(
             title: 'A partir de l\'année :',
@@ -28,6 +32,28 @@ class _SourcesBox extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _Sources extends StatelessWidget {
+  const _Sources({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final sources =
+        context.watch<NamesCubit<SourceModel, void>>().state.items;
+    return NamesSelector(
+      items: sources,
+      onSelect: (value) {
+        context.read<CreateQuizCubit>().updateSource([value]);
+      },
+      canSelect: true,
+      selectedItems:
+          context.watch<CreateQuizCubit>().state.filter.sources,
+      onSelectAll: () {
+        context.read<CreateQuizCubit>().updateSource(sources);
+      },
     );
   }
 }

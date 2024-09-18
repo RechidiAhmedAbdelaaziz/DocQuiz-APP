@@ -14,19 +14,19 @@ class _DifficultiesBox extends StatelessWidget {
         children: [
           AppCheckBox(
             value: difficulties.contains('easy'),
-            onChange: (_) => cubit.updateDifficulty('easy'),
+            onChange: (_) => cubit.updateDifficulties(['easy']),
             title: 'Facile',
           ),
           height(22),
           AppCheckBox(
             value: difficulties.contains('medium'),
-            onChange: (_) => cubit.updateDifficulty('medium'),
+            onChange: (_) => cubit.updateDifficulties(['medium']),
             title: 'Moyen',
           ),
           height(22),
           AppCheckBox(
             value: difficulties.contains('hard'),
-            onChange: (_) => cubit.updateDifficulty('hard'),
+            onChange: (_) => cubit.updateDifficulties(['hard']),
             title: 'Difficile',
           ),
         ],

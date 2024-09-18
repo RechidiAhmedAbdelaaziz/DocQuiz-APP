@@ -17,7 +17,8 @@ abstract class HomeState {
   final Widget child;
 
   bool get isDashboard => this is _Dashboard;
-  bool get isSetting => this is _Settings;
+  bool get isMyQuiz => this is _MyQuiz;
+  bool get isCreateQuiz => this is _CreateQuiz;
 }
 
 class _Dashboard extends HomeState {
@@ -28,6 +29,6 @@ class _MyQuiz extends HomeState {
   _MyQuiz() : super(MyQuizRoute());
 }
 
-class _Settings extends HomeState {
-  _Settings() : super(DashboardRoute());
+class _CreateQuiz extends HomeState {
+  _CreateQuiz() : super(CreateQuizRoute());
 }

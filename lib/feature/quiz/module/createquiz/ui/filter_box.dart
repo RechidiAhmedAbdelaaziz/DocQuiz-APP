@@ -23,7 +23,7 @@ class _FilterBoxState extends State<_FilterBox> {
           padding:
               EdgeInsets.symmetric(horizontal: 22.w, vertical: 6.h),
           decoration: BoxDecoration(
-            color: Colors.blueGrey,
+            color: Colors.teal,
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(18.r),
               bottom: Radius.circular(showFilters ? 0 : 18.r),
@@ -63,10 +63,10 @@ class _FilterBoxState extends State<_FilterBox> {
         ),
         if (showFilters)
           Container(
-            constraints: BoxConstraints(maxHeight: 220.h),
+            constraints: BoxConstraints(maxHeight: 240.h),
             width: double.infinity,
             padding: EdgeInsets.symmetric(
-                horizontal: 24.w, vertical: 22.h),
+                horizontal: 24.w, vertical: 10.h),
             decoration: BoxDecoration(
               color: context.colors.background,
               borderRadius: BorderRadius.vertical(
@@ -76,11 +76,7 @@ class _FilterBoxState extends State<_FilterBox> {
                 color: context.colors.dark.withOpacity(0.5),
               ),
             ),
-            child: Wrap(
-              children: [
-                widget.filters,
-              ],
-            ),
+            child: SingleChildScrollView(child: widget.filters),
           ),
       ],
     );

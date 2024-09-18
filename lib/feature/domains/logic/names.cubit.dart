@@ -21,17 +21,21 @@ class NamesCubit<T extends NamedModel, D>
             (await _domainRepo.getDomains()) as ApiResult<List<T>>;
         break;
       case const (LevelModel):
-        result = _domainRepo.getLevels(domain: parent as DomainModel)
-            as ApiResult<List<T>>;
+        result = (await _domainRepo.getLevels(
+            domain: parent as DomainModel?)) as ApiResult<List<T>>;
         break;
       case const (MajorModel):
-        result = _domainRepo.getMajors(level: parent as LevelModel)
-            as ApiResult<List<T>>;
+        result = (await _domainRepo.getMajors(
+            level: parent as LevelModel?)) as ApiResult<List<T>>;
         break;
       case const (CourseModel):
-        result = _domainRepo.getCourses(major: parent as MajorModel)
-            as ApiResult<List<T>>;
+        result = (await _domainRepo.getCourses(
+            major: parent as MajorModel?)) as ApiResult<List<T>>;
         break;
+
+      case const (SourceModel):
+        result =
+            (await _domainRepo.getSources()) as ApiResult<List<T>>;
     }
 
     _handleResult(result);

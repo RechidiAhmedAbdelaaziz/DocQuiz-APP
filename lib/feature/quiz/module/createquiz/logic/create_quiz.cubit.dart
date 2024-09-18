@@ -2,6 +2,7 @@ import 'package:app/core/di/container.dart';
 import 'package:app/core/types/error_state.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/question/data/dto/question_filter.dto.dart';
+import 'package:app/feature/quiz/data/models/quiz.model.dart';
 import 'package:app/feature/quiz/data/repo/quiz.repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,20 +17,20 @@ class CreateQuizCubit extends Cubit<CreateQuizState> {
   final titleController =
       TextEditingController(text: DateTime.now().toString());
 
-  void updateCourses(CourseModel course) =>
-      _updateFilter(state._filter.copyWith(newCourse: course.id));
+  void updateCourses(List<CourseModel> courses) =>
+      _updateFilter(state._filter.copyWith(courses: courses));
 
-  void updateSource(SourceModel source) =>
-      _updateFilter(state._filter.copyWith(newSource: source.id));
+  void updateSource(List<SourceModel> sources) =>
+      _updateFilter(state._filter.copyWith(sources: sources));
 
   void updateYear(int year) =>
       _updateFilter(state._filter.copyWith(newYear: year));
 
-  void updateDifficulty(String difficulty) => _updateFilter(
-      state._filter.copyWith(newDifficulty: difficulty));
+  void updateDifficulties(List<String> difficulties) => _updateFilter(
+      state._filter.copyWith(difficulties: difficulties));
 
-  void updateType(String type) =>
-      _updateFilter(state._filter.copyWith(newType: type));
+  void updateTypes(List<String> types) =>
+      _updateFilter(state._filter.copyWith(types: types));
 
   void updateWithExplain(bool withExplain) => _updateFilter(
       state._filter.copyWith(withExplanation: withExplain));
@@ -42,7 +43,6 @@ class CreateQuizCubit extends Cubit<CreateQuizState> {
           .copyWith(alreadyAnsweredFalse: alreadyAnsweredFalse));
 
   void _getQuestionNumber() async {
-    print(" OLD STATE : ${state.questionNumber}");
     emit(state._updateing());
 
     final result = await _quizRepo.getQuestionNumber(state._filter);
@@ -50,12 +50,26 @@ class CreateQuizCubit extends Cubit<CreateQuizState> {
     result.when(
       success: (questionNumber) =>
           emit(state._updateQuestionNumber(questionNumber)),
-      error: (error) => emit(state._errorOccured(error.message)),
+      error: (error) => emit(state._updateQuestionNumber(0)),
     );
   }
 
   void _updateFilter(QuestionFilter filter) {
     emit(state._updateFilter(filter));
     _getQuestionNumber();
+  }
+
+  void createQuiz() async {
+    if (state.questionNumber == 0) return;
+
+    emit(state._createting());
+
+    final result = await _quizRepo.createQuiz(
+        title: titleController.text, filters: state._filter);
+
+    result.when(
+      success: (quiz) => emit(state._created(quiz)),
+      error: (error) => emit(state._errorOccured(error.message)),
+    );
   }
 }

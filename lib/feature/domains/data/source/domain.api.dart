@@ -28,4 +28,7 @@ abstract class DomainApi {
   Future<PaginatedDataResponse> getCourse({
     @Query('majorId') String? majorId,
   });
+
+  @GET('/source')
+  Future<PaginatedDataResponse> getSources();
 }

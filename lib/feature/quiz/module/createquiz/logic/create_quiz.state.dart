@@ -24,6 +24,10 @@ class CreateQuizState extends ErrorState {
   CreateQuizState _updateQuestionNumber(int questionNumber) =>
       __copyWith(questionNumber: questionNumber);
 
+  CreateQuizState _createting() => _Creating(this);
+
+  CreateQuizState _created(QuizModel quiz) => _Created(quiz, this);
+
   CreateQuizState _errorOccured(String error) =>
       __copyWith(error: error);
 
@@ -39,10 +43,30 @@ class CreateQuizState extends ErrorState {
       );
 
   bool get isloading => this is _Updating;
+  bool get isCreating => this is _Creating;
+
+  void onCreated(void Function(QuizModel quiz) onCreated) {
+    if (this is _Created) onCreated((this as _Created).quiz);
+  }
 }
 
 class _Updating extends CreateQuizState {
   _Updating(CreateQuizState state)
+      : super(
+            filter: state._filter,
+            questionNumber: state.questionNumber);
+}
+
+class _Creating extends CreateQuizState {
+  _Creating(CreateQuizState state)
+      : super(
+            filter: state._filter,
+            questionNumber: state.questionNumber);
+}
+
+class _Created extends CreateQuizState {
+  final QuizModel quiz;
+  _Created(this.quiz, CreateQuizState state)
       : super(
             filter: state._filter,
             questionNumber: state.questionNumber);

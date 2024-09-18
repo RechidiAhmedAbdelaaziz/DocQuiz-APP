@@ -34,7 +34,7 @@ class _SubmitButtonState extends State<SubmitButton> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Colors.teal,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Center(

@@ -19,7 +19,7 @@ class _HaveAccount extends StatelessWidget {
           child: Text(
             'Se connecter',
             style: context.theme.textStyles.body1
-                .copyWith(color: Colors.blue),
+                .copyWith(color: Colors.teal),
           ),
         ),
       ],
