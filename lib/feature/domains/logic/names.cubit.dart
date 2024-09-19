@@ -10,10 +10,18 @@ part 'names.state.dart';
 class NamesCubit<T extends NamedModel, D>
     extends Cubit<NamesState<T>> {
   final _domainRepo = locator<DomainRepo>();
+  D? _parent;
 
   NamesCubit() : super(NamesState.initial());
 
-  void fetchAll({D? parent}) async {
+  set parent(D? value) {
+    if (value != _parent) {
+      _parent = value;
+      fetchAll();
+    }
+  }
+
+  void fetchAll() async {
     late final ApiResult<List<T>> result;
     switch (T) {
       case const (DomainModel):
@@ -22,15 +30,15 @@ class NamesCubit<T extends NamedModel, D>
         break;
       case const (LevelModel):
         result = (await _domainRepo.getLevels(
-            domain: parent as DomainModel?)) as ApiResult<List<T>>;
+            domain: _parent as DomainModel?)) as ApiResult<List<T>>;
         break;
       case const (MajorModel):
         result = (await _domainRepo.getMajors(
-            level: parent as LevelModel?)) as ApiResult<List<T>>;
+            level: _parent as LevelModel?)) as ApiResult<List<T>>;
         break;
       case const (CourseModel):
         result = (await _domainRepo.getCourses(
-            major: parent as MajorModel?)) as ApiResult<List<T>>;
+            major: _parent as MajorModel?)) as ApiResult<List<T>>;
         break;
 
       case const (SourceModel):

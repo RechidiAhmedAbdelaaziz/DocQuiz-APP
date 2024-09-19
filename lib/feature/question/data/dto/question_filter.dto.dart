@@ -36,8 +36,9 @@ class QuestionFilter {
     int? newYear,
   }) {
     if (courses != null) this.courses.addOrRemoveAll(courses);
-    if (difficulties != null)
+    if (difficulties != null) {
       this.difficulties.addOrRemoveAll(difficulties);
+    }
     if (types != null) this.types.addOrRemoveAll(types);
     if (sources != null) this.sources.addOrRemoveAll(sources);
 
@@ -69,8 +70,9 @@ class QuestionFilter {
 
     if (withNotes) json['withNotes'] = true;
 
-    if (sources.isNotEmpty)
+    if (sources.isNotEmpty) {
       json['sources'] = sources.map((e) => e.id).toList();
+    }
 
     json['year'] = year;
 
@@ -93,8 +95,9 @@ class QuestionFilter {
 
     if (withNotes) query['withNotes'] = true;
 
-    if (sources.isNotEmpty)
+    if (sources.isNotEmpty) {
       query['sources[]'] = sources.map((e) => e.id).toList();
+    }
 
     query['year'] = year;
 

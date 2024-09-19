@@ -381,7 +381,7 @@ class _SearchBar extends StatelessWidget {
 }
 
 class _PageIndicator extends StatelessWidget {
-  const _PageIndicator({super.key});
+  const _PageIndicator();
 
   @override
   Widget build(BuildContext context) {

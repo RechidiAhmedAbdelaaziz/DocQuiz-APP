@@ -63,7 +63,6 @@ class _FilterBoxState extends State<_FilterBox> {
         ),
         if (showFilters)
           Container(
-            constraints: BoxConstraints(maxHeight: 240.h),
             width: double.infinity,
             padding: EdgeInsets.symmetric(
                 horizontal: 24.w, vertical: 10.h),
@@ -76,7 +75,7 @@ class _FilterBoxState extends State<_FilterBox> {
                 color: context.colors.dark.withOpacity(0.5),
               ),
             ),
-            child: SingleChildScrollView(child: widget.filters),
+            child: widget.filters,
           ),
       ],
     );

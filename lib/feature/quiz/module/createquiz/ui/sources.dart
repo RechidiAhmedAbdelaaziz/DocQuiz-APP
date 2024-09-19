@@ -37,7 +37,7 @@ class _SourcesBox extends StatelessWidget {
 }
 
 class _Sources extends StatelessWidget {
-  const _Sources({super.key});
+  const _Sources();
 
   @override
   Widget build(BuildContext context) {

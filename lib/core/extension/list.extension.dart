@@ -17,4 +17,11 @@ extension UniqList<T> on List<T> {
       addOrRemove(value);
     }
   }
+
+  bool containsAll(List<T> values) {
+    for (var value in values) {
+      if (!contains(value)) return false;
+    }
+    return true;
+  }
 }

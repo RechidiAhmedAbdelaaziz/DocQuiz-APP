@@ -1,4 +1,5 @@
 import 'package:app/core/extension/validator.extension.dart';
+import 'package:app/core/shared/logic/pageview/page_view.cubit.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
 import 'package:app/core/shared/widgets/form_field.dart';
 import 'package:app/core/shared/widgets/names_selector.dart';
@@ -54,7 +55,7 @@ class CreateQuizScreen extends StatelessWidget {
                       style: context.textStyles.h5,
                     ),
                     height(25),
-                    _MajorsBox(),
+                    const _MajorsBox(),
                     height(25),
                     const _SourcesBox(),
                     height(25),

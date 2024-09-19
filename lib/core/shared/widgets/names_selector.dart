@@ -1,3 +1,4 @@
+import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
@@ -6,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NamesSelector<T extends NamedModel> extends StatelessWidget {
-  const NamesSelector({
+  NamesSelector({
     super.key,
     required this.items,
     required this.onSelect,
     this.canSelect = true,
-    this.selectedItems = const [],
+    this.selectedItems,
     this.onSelectAll,
   })  : canSelectAll = onSelectAll != null,
-        selectedAll = selectedItems.length == items.length;
+        selectedAll = selectedItems?.containsAll(items) ?? false;
 
   final List<T> items;
-  final List<T> selectedItems;
+  final List<T>? selectedItems;
   final ValueChanged<T> onSelect;
   final VoidCallback? onSelectAll;
   final bool canSelectAll;
@@ -48,7 +49,7 @@ class NamesSelector<T extends NamedModel> extends StatelessWidget {
       children: [
         canSelect
             ? AppCheckBox(
-                value: selectedItems.contains(item),
+                value: selectedItems?.contains(item),
                 onChange: (_) => onSelect(item),
                 title: item.name,
               )

@@ -1,7 +1,7 @@
 part of 'home.screen.dart';
 
 class _Drawer extends StatelessWidget {
-  const _Drawer({super.key});
+  const _Drawer();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _Drawer extends StatelessWidget {
 }
 
 class _DrawerHeader extends StatelessWidget {
-  const _DrawerHeader({super.key});
+  const _DrawerHeader();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class _DrawerHeader extends StatelessWidget {
 }
 
 class _DrawerItem extends StatelessWidget {
-  const _DrawerItem(this.model, {super.key});
+  const _DrawerItem(this.model);
 
   final _DrawerItemModel model;
 

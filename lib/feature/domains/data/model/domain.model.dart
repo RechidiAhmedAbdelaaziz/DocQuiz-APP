@@ -11,7 +11,7 @@ abstract class NamedModel extends Equatable {
 }
 
 class DomainModel extends NamedModel {
-  DomainModel({
+  const DomainModel({
     required String id,
     required String name,
   }) : super(id, name);
@@ -25,7 +25,7 @@ class DomainModel extends NamedModel {
 }
 
 class LevelModel extends NamedModel {
-  LevelModel({
+  const LevelModel({
     required String id,
     required String name,
   }) : super(id, name);
@@ -39,7 +39,7 @@ class LevelModel extends NamedModel {
 }
 
 class MajorModel extends NamedModel {
-  MajorModel({
+  const MajorModel({
     required String id,
     required String name,
   }) : super(id, name);
@@ -53,7 +53,7 @@ class MajorModel extends NamedModel {
 }
 
 class CourseModel extends NamedModel {
-  CourseModel({
+  const CourseModel({
     required String id,
     required String name,
   }) : super(id, name);
@@ -67,7 +67,7 @@ class CourseModel extends NamedModel {
 }
 
 class SourceModel extends NamedModel {
-  SourceModel({
+  const SourceModel({
     required String id,
     required String name,
   }) : super(id, name);
