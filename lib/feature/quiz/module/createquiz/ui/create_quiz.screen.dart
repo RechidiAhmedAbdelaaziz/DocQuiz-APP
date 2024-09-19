@@ -1,3 +1,4 @@
+import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/extension/validator.extension.dart';
 import 'package:app/core/shared/logic/pageview/page_view.cubit.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
@@ -20,6 +21,7 @@ part 'types.dart';
 part 'difficulties.dart';
 part 'preference.dart';
 part 'majors.dart';
+part 'selected_course.dart';
 
 class CreateQuizScreen extends StatelessWidget {
   const CreateQuizScreen({super.key});

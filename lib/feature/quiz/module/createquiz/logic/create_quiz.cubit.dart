@@ -17,6 +17,9 @@ class CreateQuizCubit extends Cubit<CreateQuizState> {
   final titleController =
       TextEditingController(text: DateTime.now().toString());
 
+  double levelScroll = 0;
+  double majorScroll = 0;
+
   void updateCourses(List<CourseModel> courses) =>
       _updateFilter(state._filter.copyWith(courses: courses));
 

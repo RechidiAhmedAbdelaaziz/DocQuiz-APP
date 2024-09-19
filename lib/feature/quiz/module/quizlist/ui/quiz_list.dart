@@ -56,7 +56,7 @@ class QuizListScreen extends StatelessWidget {
                 ),
                 height(45),
                 const QuizListWidget(),
-                _PageIndicator(),
+                const _PageIndicator(),
               ],
             ),
           ),
@@ -214,7 +214,7 @@ class _QuizItem extends StatelessWidget {
 }
 
 class _EditQuiz extends StatelessWidget {
-  _EditQuiz(this.quiz, {super.key, required this.onEdit})
+  _EditQuiz(this.quiz, {required this.onEdit})
       : controller = TextEditingController(
           text: quiz.title,
         );
@@ -301,7 +301,7 @@ class MultiStageProgressBar extends StatelessWidget {
   final int total;
   final int answerd;
 
-  MultiStageProgressBar({
+  const MultiStageProgressBar({super.key, 
     required this.answerd,
     required this.correct,
     required this.total,
@@ -336,7 +336,7 @@ class MultiStageProgressBar extends StatelessWidget {
             height: 24.h,
             width: width * ((answerd - correct) / total),
             alignment: Alignment.center,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.red,
             ),
           ),

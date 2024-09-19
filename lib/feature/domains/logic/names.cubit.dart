@@ -1,6 +1,7 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/core/types/api_result.type.dart';
 import 'package:app/core/types/error_state.dart';
+import 'package:app/feature/auth/data/source/auth.cache.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/domains/data/repo/domain.repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,12 +15,14 @@ class NamesCubit<T extends NamedModel, D>
 
   NamesCubit() : super(NamesState.initial());
 
-  set parent(D? value) {
+  set setParent(D? value) {
     if (value != _parent) {
       _parent = value;
       fetchAll();
     }
   }
+
+  D? get parent => _parent;
 
   void fetchAll() async {
     late final ApiResult<List<T>> result;
@@ -29,8 +32,9 @@ class NamesCubit<T extends NamedModel, D>
             (await _domainRepo.getDomains()) as ApiResult<List<T>>;
         break;
       case const (LevelModel):
-        result = (await _domainRepo.getLevels(
-            domain: _parent as DomainModel?)) as ApiResult<List<T>>;
+        final id = await locator<AuthCache>().domain;
+        result = (await _domainRepo.getLevels(domainId: id))
+            as ApiResult<List<T>>;
         break;
       case const (MajorModel):
         result = (await _domainRepo.getMajors(

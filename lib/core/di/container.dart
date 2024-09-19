@@ -7,6 +7,7 @@ import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
 import 'package:app/feature/domains/helper/domain.dependency.dart';
 import 'package:app/feature/quiz/helper/quiz.dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
+import 'package:app/feature/user/helper/user.dependency.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +31,7 @@ Future<void> setupLocator({required String baseUrl}) async {
   await setupDashboardDependency(locator);
   await setupQuizDependency(locator);
   await setupDomainDependency(locator);
+  await setupUserDependency(locator);
 
   locator.allowReassignment = true;
 }

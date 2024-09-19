@@ -9,8 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class NamesSelector<T extends NamedModel> extends StatelessWidget {
   NamesSelector({
     super.key,
+    this.controller,
     required this.items,
     required this.onSelect,
+    this.highlitedItem,
     this.canSelect = true,
     this.selectedItems,
     this.onSelectAll,
@@ -19,25 +21,30 @@ class NamesSelector<T extends NamedModel> extends StatelessWidget {
 
   final List<T> items;
   final List<T>? selectedItems;
+  final T? highlitedItem;
   final ValueChanged<T> onSelect;
-  final VoidCallback? onSelectAll;
+  final ValueChanged<bool>? onSelectAll;
   final bool canSelectAll;
   final bool canSelect;
   final bool selectedAll;
+  final ScrollController? controller;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      controller: controller,
       child: Column(
         children: [
-          if (canSelectAll)
+          if (canSelectAll) ...[
             AppCheckBox(
               value: selectedAll,
-              onChange: (_) => onSelectAll!(),
+              onChange: (_) => onSelectAll!(selectedAll),
               title: selectedAll
                   ? 'Tout sélectionner'
                   : 'Tout désélectionner',
             ),
+            height(25),
+          ],
           ...items.map((item) => _buildItem(item, context)),
         ],
       ),
@@ -45,38 +52,47 @@ class NamesSelector<T extends NamedModel> extends StatelessWidget {
   }
 
   Widget _buildItem(T item, BuildContext context) {
-    return Column(
-      children: [
-        canSelect
-            ? AppCheckBox(
-                value: selectedItems?.contains(item),
-                onChange: (_) => onSelect(item),
-                title: item.name,
-              )
-            : InkWell(
-                onTap: () {
-                  onSelect(item);
-                },
-                child: Row(
-                  children: [
-                    Text(
-                      ' ${item.name}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.textStyles.body1.copyWith(
-                        fontSize: 17.sp,
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+      decoration: BoxDecoration(
+        color: highlitedItem == item
+            ? context.theme.colors.dark.withOpacity(0.1)
+            : null,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Column(
+        children: [
+          canSelect
+              ? AppCheckBox(
+                  value: selectedItems?.contains(item),
+                  onChange: (_) => onSelect(item),
+                  title: item.name,
+                )
+              : InkWell(
+                  onTap: () {
+                    onSelect(item);
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        ' ${item.name}',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textStyles.body1.copyWith(
+                          fontSize: 17.sp,
+                        ),
                       ),
-                    ),
-                    width(10),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      size: 20.sp,
-                    )
-                  ],
+                      width(10),
+                      Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 20.sp,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-        Divider(height: 22.h)
-      ],
+        ],
+      ),
     );
   }
 }

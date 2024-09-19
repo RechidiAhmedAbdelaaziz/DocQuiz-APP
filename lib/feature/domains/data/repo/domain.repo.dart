@@ -18,10 +18,9 @@ class DomainRepo {
     return TryCallApi.call(apiCall);
   }
 
-  RepoListResult<LevelModel> getLevels({DomainModel? domain}) {
+  RepoListResult<LevelModel> getLevels({String? domainId}) {
     apiCall() async {
-      final response =
-          await _domainApi.getDomain(domainId: domain?.id);
+      final response = await _domainApi.getDomain(domainId: domainId);
       return response.data!
           .map((e) => LevelModel.fromJson(e))
           .toList();

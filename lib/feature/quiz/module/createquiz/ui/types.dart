@@ -1,7 +1,7 @@
 part of 'create_quiz.screen.dart';
 
 class _TypesBox extends StatelessWidget {
-  const _TypesBox({super.key});
+  const _TypesBox();
 
   @override
   Widget build(BuildContext context) {

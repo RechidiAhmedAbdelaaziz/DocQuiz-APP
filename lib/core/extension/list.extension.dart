@@ -24,4 +24,22 @@ extension UniqList<T> on List<T> {
     }
     return true;
   }
+
+  //shared items
+  List<T> sharedItems(List<T> items) {
+    final sharedItems = <T>[];
+    for (var item in items) {
+      if (contains(item)) sharedItems.add(item);
+    }
+    return sharedItems;
+  }
+
+  //non shared items
+  List<T> nonSharedItems(List<T> items) {
+    final nonSharedItems = <T>[];
+    for (var item in items) {
+      if (!contains(item)) nonSharedItems.add(item);
+    }
+    return nonSharedItems;
+  }
 }

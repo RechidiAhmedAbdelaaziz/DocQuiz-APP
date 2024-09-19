@@ -42,7 +42,9 @@ class _SubmitButtonState extends State<SubmitButton> {
               ? const CircularProgressIndicator(color: Colors.white)
               : Text(
                   widget.title,
-                  style: context.theme.textStyles.h4,
+                  style: context.theme.textStyles.h4.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
         ),
       ),

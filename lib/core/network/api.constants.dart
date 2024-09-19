@@ -20,4 +20,8 @@ abstract class ApiConstants {
   static const QUIZ = 'quiz';
   static const QUIZ_ID = 'quiz/{id}';
   static const QUESTION_NUMBER = 'quiz/number';
+
+  // * USER
+  static const PROFILE = 'user/me';
+  static const PASSWORD = 'user/me/password';
 }

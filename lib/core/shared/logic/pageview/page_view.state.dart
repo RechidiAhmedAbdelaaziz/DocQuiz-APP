@@ -17,8 +17,7 @@ class PageViewState {
     return _copyWith(pages: newPages);
   }
 
-  PageViewState _setCurrentPage(int index) =>
-      _copyWith(currentPage: index);
+
 
   PageViewState _deletePage(Widget page) {
     pages.remove(page);
