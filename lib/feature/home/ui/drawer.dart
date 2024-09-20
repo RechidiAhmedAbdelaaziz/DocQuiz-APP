@@ -44,6 +44,13 @@ class _Drawer extends StatelessWidget {
                 isSelected: context.select(
                     (HomeCubit cubit) => cubit.state.isPlayList),
               ),
+              _DrawerItemModel(
+                title: 'Série d\'examens',
+                icon: Icons.school,
+                onTap: cubit.showExam,
+                isSelected: context
+                    .select((HomeCubit cubit) => cubit.state.isExam),
+              ),
             ].map((item) => _DrawerItem(item)),
           ],
         ),

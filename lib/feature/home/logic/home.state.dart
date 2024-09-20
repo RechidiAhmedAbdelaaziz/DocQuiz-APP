@@ -20,6 +20,7 @@ abstract class HomeState {
   bool get isMyQuiz => this is _MyQuiz;
   bool get isCreateQuiz => this is _CreateQuiz;
   bool get isPlayList => this is _PlayList;
+  bool get isExam => this is _Exam;
 }
 
 class _Dashboard extends HomeState {
@@ -36,4 +37,8 @@ class _CreateQuiz extends HomeState {
 
 class _PlayList extends HomeState {
   _PlayList() : super(PlayListRoute());
+}
+
+class _Exam extends HomeState {
+  _Exam() : super(ExamRoute());
 }

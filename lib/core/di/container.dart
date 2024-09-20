@@ -5,6 +5,7 @@ import 'package:app/core/theme/fonts.dart';
 import 'package:app/feature/auth/helper/auth.dependency.dart';
 import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
 import 'package:app/feature/domains/helper/domain.dependency.dart';
+import 'package:app/feature/exam/helper/exam.dependency.dart';
 import 'package:app/feature/playlist/helper/playlist.dependency.dart';
 import 'package:app/feature/quiz/helper/quiz.dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
@@ -34,6 +35,7 @@ Future<void> setupLocator({required String baseUrl}) async {
   await setupDomainDependency(locator);
   await setupUserDependency(locator);
   await setupPlaylistDependency(locator);
+  await setupExamDependency(locator);
 
   locator.allowReassignment = true;
 }
