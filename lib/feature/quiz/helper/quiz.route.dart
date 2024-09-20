@@ -1,4 +1,6 @@
 import 'package:app/core/router/routebase.dart';
+import 'package:app/feature/quiz/module/createquiz/logic/create_quiz.cubit.dart';
+import 'package:app/feature/quiz/module/createquiz/ui/create_quiz.screen.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz_list.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,4 +13,13 @@ class MyQuizRoute extends DrawerRoute {
             child: const QuizListScreen(),
           ),
         );
+}
+
+class CreateQuizRoute extends DrawerRoute {
+  CreateQuizRoute()
+      : super(
+            child: BlocProvider(
+          create: (context) => CreateQuizCubit(),
+          child: const CreateQuizScreen(),
+        ));
 }

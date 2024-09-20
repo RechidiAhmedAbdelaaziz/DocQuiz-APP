@@ -40,13 +40,11 @@ class AppFontStyles {
   TextStyle get body1 => TextStyle(
         fontSize: 16.sp,
         color: primary,
-        fontWeight: FontWeight.w500,
       );
 
   TextStyle get body2 => TextStyle(
         fontSize: 14.sp,
-        color: secondary,
-        fontWeight: FontWeight.w400,
+        color: primary,
       );
 
   TextStyle get caption => TextStyle(

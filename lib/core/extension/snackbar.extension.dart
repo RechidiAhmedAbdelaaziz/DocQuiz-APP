@@ -13,7 +13,7 @@ extension Snackbar on BuildContext {
             )
           ],
         ),
-        duration: const Duration(seconds: 2),
+        duration: const Duration(microseconds: 500, seconds: 1),
         backgroundColor: Colors.red,
       ),
     );
@@ -32,8 +32,27 @@ extension Snackbar on BuildContext {
             ),
           ],
         ),
-        duration: const Duration(milliseconds: 1500),
+        duration: const Duration(microseconds: 500, seconds: 1),
         backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  void showWarningSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const Icon(Icons.warning, color: Colors.white),
+            const SizedBox(width: 10),
+            Text(
+              message,
+              maxLines: 4,
+            ),
+          ],
+        ),
+        duration: const Duration(microseconds: 500, seconds: 1),
+        backgroundColor: Colors.orange,
       ),
     );
   }

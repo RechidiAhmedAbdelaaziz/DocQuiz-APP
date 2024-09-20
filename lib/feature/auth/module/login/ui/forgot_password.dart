@@ -11,7 +11,7 @@ class _ForgotPasswordButton extends StatelessWidget {
       child: Text(
         'Mot de passe oublié ?',
         style: context.theme.textStyles.body1
-            .copyWith(color: Colors.blue),
+            .copyWith(color: Colors.teal),
       ),
     );
   }

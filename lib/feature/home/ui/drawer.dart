@@ -1,7 +1,7 @@
 part of 'home.screen.dart';
 
 class _Drawer extends StatelessWidget {
-  const _Drawer({super.key});
+  const _Drawer();
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +24,18 @@ class _Drawer extends StatelessWidget {
                 ),
               ),
               _DrawerItemModel(
-                title: 'Paramètres',
-                icon: Icons.settings,
-                onTap: cubit.showSettings,
+                title: 'Mes Quiz',
+                icon: Icons.quiz,
+                onTap: cubit.showMyQuiz,
                 isSelected: context.select(
-                    (HomeCubit cubit) => cubit.state.isSetting),
+                    (HomeCubit cubit) => cubit.state.isMyQuiz),
+              ),
+              _DrawerItemModel(
+                title: 'Créer un Quiz',
+                icon: Icons.create,
+                onTap: cubit.showCreateQuiz,
+                isSelected: context.select(
+                    (HomeCubit cubit) => cubit.state.isCreateQuiz),
               ),
             ].map((item) => _DrawerItem(item)),
           ],
@@ -39,7 +46,7 @@ class _Drawer extends StatelessWidget {
 }
 
 class _DrawerHeader extends StatelessWidget {
-  const _DrawerHeader({super.key});
+  const _DrawerHeader();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +69,7 @@ class _DrawerHeader extends StatelessWidget {
 }
 
 class _DrawerItem extends StatelessWidget {
-  const _DrawerItem(this.model, {super.key});
+  const _DrawerItem(this.model);
 
   final _DrawerItemModel model;
 

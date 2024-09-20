@@ -5,12 +5,11 @@ part 'update_quiz.dto.g.dart';
 @JsonSerializable(createFactory: false)
 class UpdateQuizBody {
   UpdateQuizBody({
-    required this.title,
-    required this.isCompleted,
-    required this.questionAnswer,
-    required this.lastAnsweredIndex,
+    this.title,
+    this.isCompleted,
+    this.questionAnswer,
+    this.lastAnsweredIndex,
   });
-
   final String? title;
   final bool? isCompleted;
   final QuestionAnswer? questionAnswer;

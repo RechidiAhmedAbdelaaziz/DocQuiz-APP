@@ -9,8 +9,37 @@ extension UniqList<T> on List<T> {
     }
   }
 
-  void update(T value) {
-    final index = indexWhere((element) => element == value);
-    if (index != -1) this[index] = value;
+  void addOrRemove(T value) =>
+      contains(value) ? remove(value) : add(value);
+
+  void addOrRemoveAll(List<T> values) {
+    for (var value in values) {
+      addOrRemove(value);
+    }
+  }
+
+  bool containsAll(List<T> values) {
+    for (var value in values) {
+      if (!contains(value)) return false;
+    }
+    return true;
+  }
+
+  //shared items
+  List<T> sharedItems(List<T> items) {
+    final sharedItems = <T>[];
+    for (var item in items) {
+      if (contains(item)) sharedItems.add(item);
+    }
+    return sharedItems;
+  }
+
+  //non shared items
+  List<T> nonSharedItems(List<T> items) {
+    final nonSharedItems = <T>[];
+    for (var item in items) {
+      if (!contains(item)) nonSharedItems.add(item);
+    }
+    return nonSharedItems;
   }
 }

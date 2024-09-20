@@ -1,18 +1,34 @@
 part of 'home.cubit.dart';
 
 abstract class HomeState {
-  HomeState(this.child);
+  HomeState(DrawerRoute route) : child = route.child {
+    routesStack.add(this);
+  }
+
+  static final routesStack = <HomeState>[];
+  HomeState? get previous {
+    if (routesStack.length > 1) {
+      routesStack.removeLast();
+      return routesStack.last;
+    }
+    return null;
+  }
 
   final Widget child;
 
   bool get isDashboard => this is _Dashboard;
-  bool get isSetting => this is _Settings;
+  bool get isMyQuiz => this is _MyQuiz;
+  bool get isCreateQuiz => this is _CreateQuiz;
 }
 
 class _Dashboard extends HomeState {
-  _Dashboard() : super(const Dashboard());
+  _Dashboard() : super(DashboardRoute());
 }
 
-class _Settings extends HomeState {
-  _Settings() : super(const LoginScreen());
+class _MyQuiz extends HomeState {
+  _MyQuiz() : super(MyQuizRoute());
+}
+
+class _CreateQuiz extends HomeState {
+  _CreateQuiz() : super(CreateQuizRoute());
 }

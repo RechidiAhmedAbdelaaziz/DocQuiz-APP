@@ -20,7 +20,7 @@ class _DontHaveAccount extends StatelessWidget {
           child: Text(
             'Inscrivez-vous',
             style: context.theme.textStyles.body1.copyWith(
-              color: Colors.blue,
+              color: Colors.teal,
             ),
           ),
         ),

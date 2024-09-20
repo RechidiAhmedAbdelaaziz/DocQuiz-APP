@@ -1,5 +1,8 @@
+import 'package:app/core/shared/widgets/lined_text.dart';
+import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/dashboard/logic/dashboard.cubit.dart';
+import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
@@ -14,10 +17,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DashboardCubit(),
-      child: const _Dashboard(),
-    );
+    return const _Dashboard();
   }
 }
 
@@ -31,8 +31,36 @@ class _Dashboard extends StatelessWidget {
 
     return ConditionalBuilder(
       condition: statistics != null,
-      builder: (context) => Column(
-        children: [_Statistics(statistics!), QuizListWidget()],
+      builder: (context) => SingleChildScrollView(
+        child: Column(
+          children: [
+            _Statistics(statistics!),
+            height(20),
+            SectionBox(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const LinedText('Recent Quizes'),
+                height(20),
+                const QuizListWidget(),
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      context.read<HomeCubit>().showMyQuiz();
+                    },
+                    child: Text(
+                      'Voire plus',
+                      style: context.theme.textStyles.h5
+                          .copyWith(color: context.theme.colors.dark),
+                    ),
+                  ),
+                )
+              ],
+            )),
+            height(20)
+          ],
+        ),
       ),
       fallback: (context) =>
           const Center(child: CircularProgressIndicator()),
@@ -52,7 +80,7 @@ class _Statistics extends StatelessWidget {
         height(20),
         _StatisticItem(
           title: 'MODULES',
-          color: Colors.blue,
+          color: Colors.teal,
           value: statistics.totalMajor.toString(),
         ),
         _StatisticItem(
@@ -63,7 +91,7 @@ class _Statistics extends StatelessWidget {
         _StatisticItem(
           title: 'FAITS AUJOURD\'HUI',
           color: Colors.orange,
-          value: statistics.totalUser.toString(),
+          value: statistics.quizDoneToday.toString(),
         ),
       ],
     );
