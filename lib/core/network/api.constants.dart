@@ -24,4 +24,9 @@ abstract class ApiConstants {
   // * USER
   static const PROFILE = 'user/me';
   static const PASSWORD = 'user/me/password';
+
+  // * PLAYLIST
+  static const PLAYLIST = 'playlist';
+  static const PLAYLIST_ID = 'playlist/{id}';
+
 }

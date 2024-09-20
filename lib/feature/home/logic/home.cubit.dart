@@ -1,5 +1,6 @@
 import 'package:app/core/router/routebase.dart';
 import 'package:app/feature/dashboard/helper/dashboard.route.dart';
+import 'package:app/feature/playlist/helper/playlist.route.dart';
 import 'package:app/feature/quiz/helper/quiz.route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   void showDashboard() => _goTo(_Dashboard());
   void showMyQuiz() => _goTo(_MyQuiz());
   void showCreateQuiz() => _goTo(_CreateQuiz());
+  void showPlayList() => _goTo(_PlayList());
 
   void back() {
     final last = state.previous;
