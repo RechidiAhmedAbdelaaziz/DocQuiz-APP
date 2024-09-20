@@ -49,7 +49,7 @@ class QuizListScreen extends StatelessWidget {
                   ],
                 ),
                 height(20),
-                _SearchBar(
+                AppSearchBar(
                   onSearch: (value) {
                     context.read<QuizListCubit>().keyword = value;
                   },
@@ -301,7 +301,8 @@ class MultiStageProgressBar extends StatelessWidget {
   final int total;
   final int answerd;
 
-  const MultiStageProgressBar({super.key, 
+  const MultiStageProgressBar({
+    super.key,
     required this.answerd,
     required this.correct,
     required this.total,
@@ -346,8 +347,8 @@ class MultiStageProgressBar extends StatelessWidget {
   }
 }
 
-class _SearchBar extends StatelessWidget {
-  const _SearchBar({this.onSearch});
+class AppSearchBar extends StatelessWidget {
+  const AppSearchBar({super.key, this.onSearch});
 
   final ValueChanged<String>? onSearch;
 
@@ -363,13 +364,19 @@ class _SearchBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.search),
+          Icon(Icons.search, color: context.colors.dark),
           width(10),
           Expanded(
             child: TextField(
               onChanged: onSearch,
-              decoration: const InputDecoration(
+              style: context.textStyles.body1.copyWith(
+                color: context.colors.dark,
+              ),
+              decoration: InputDecoration(
                 hintText: 'Rechercher un quiz',
+                hintStyle: context.textStyles.body1.copyWith(
+                  color: context.colors.dark.withOpacity(0.5),
+                ),
                 border: InputBorder.none,
               ),
             ),

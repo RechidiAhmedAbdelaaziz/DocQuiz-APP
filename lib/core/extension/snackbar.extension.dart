@@ -1,3 +1,4 @@
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 
 extension Snackbar on BuildContext {
@@ -9,7 +10,13 @@ extension Snackbar on BuildContext {
             const Icon(Icons.error, color: Colors.white),
             const SizedBox(width: 10),
             Expanded(
-              child: Text(message, maxLines: 4),
+              child: Text(
+                message,
+                maxLines: 4,
+                style: textStyles.h5.copyWith(
+                  color: Colors.white,
+                ),
+              ),
             )
           ],
         ),
@@ -29,6 +36,9 @@ extension Snackbar on BuildContext {
             Text(
               message,
               maxLines: 4,
+              style: textStyles.h5.copyWith(
+                color: Colors.white,
+              ),
             ),
           ],
         ),
@@ -48,6 +58,9 @@ extension Snackbar on BuildContext {
             Text(
               message,
               maxLines: 4,
+              style: textStyles.h5.copyWith(
+                color: Colors.white,
+              ),
             ),
           ],
         ),
