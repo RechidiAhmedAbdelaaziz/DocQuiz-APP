@@ -63,9 +63,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
     return IconButton(
       icon: SvgPicture.asset(
         AppIcons.profile,
-        colorFilter:
-            ColorFilter.mode(context.colors.dark, BlendMode.srcIn),
-        height: 30.h,
+        height: 45.h,
       ),
       onPressed: () => context.read<HomeCubit>().showProfile(),
     );
