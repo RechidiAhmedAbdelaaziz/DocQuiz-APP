@@ -15,7 +15,7 @@ class ExamCubit extends Cubit<ExamState> {
 
   set keyword(String keyword) {
     _query.copyWith(keywords: keyword, page: 1);
-    fetchExams();
+    fetchExams(isSrech: true);
   }
 
   int get page => _query.page - 1;
@@ -27,17 +27,16 @@ class ExamCubit extends Cubit<ExamState> {
     fetchExams();
   }
 
-  Future<void> fetchExams() async {
+  Future<void> fetchExams({bool isSrech = false}) async {
     final result = await _examRepo.getExams(_query);
     result.when(
       success: (exams) {
-        if (exams.isEmpty) {
-          emit(state
-              ._errorOccured('Il n\'y a pas d\'examen disponible'));
-        } else {
-          _query.copyWith(page: _query.page + 1);
-          emit(state._fetchExams(exams));
+        if (exams.isNotEmpty) _query.nextPage();
+        if (isSrech || exams.isNotEmpty) {
+          return emit(state._fetchExams(exams));
         }
+        emit(state
+            ._errorOccured('Il n\'y a pas d\'examen disponible'));
       },
       error: (error) => emit(state._errorOccured(error.message)),
     );

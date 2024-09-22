@@ -14,6 +14,8 @@ class PaginationQuery {
     };
   }
 
+  void nextPage() => copyWith(page: page + 1);
+
   void copyWith({
     int? page,
     int? limit,

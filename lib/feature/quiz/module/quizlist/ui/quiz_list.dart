@@ -368,7 +368,7 @@ class AppSearchBar extends StatelessWidget {
           width(10),
           Expanded(
             child: TextField(
-              onChanged: onSearch,
+              onSubmitted: onSearch,
               style: context.textStyles.body1.copyWith(
                 color: context.colors.dark,
               ),
@@ -402,7 +402,7 @@ class _PageIndicator extends StatelessWidget {
             onPressed: context.read<QuizListCubit>().prePage,
             icon: Icon(
               Icons.arrow_back_ios,
-              color: page == 1
+              color: page <= 1
                   ? context.colors.background
                   : context.colors.dark,
             ),
