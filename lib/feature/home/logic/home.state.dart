@@ -42,3 +42,7 @@ class _PlayList extends HomeState {
 class _Exam extends HomeState {
   _Exam() : super(ExamRoute());
 }
+
+class _Profile extends HomeState {
+  _Profile() : super(ProfileRoute());
+}

@@ -42,6 +42,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         const SwitchThemesButton(),
         width(20),
+        _buildProfileButton(context),
       ],
     );
   }
@@ -55,6 +56,16 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         height: 30.h,
       ),
       onPressed: Scaffold.of(context).openDrawer,
+    );
+  }
+
+  Widget _buildProfileButton(BuildContext context) {
+    return IconButton(
+      icon: SvgPicture.asset(
+        AppIcons.profile,
+        height: 45.h,
+      ),
+      onPressed: () => context.read<HomeCubit>().showProfile(),
     );
   }
 

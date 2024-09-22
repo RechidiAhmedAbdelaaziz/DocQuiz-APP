@@ -18,7 +18,7 @@ class FirstScreen extends StatelessWidget {
         state.whenOrNull(
           authenticated: () {
             context.backToRoot();
-            context.to(UserRoute.setDomin(), canPop: false);
+            context.to(DomainRoute.setDomin(), canPop: false);
           },
           unauthenticated: () {
             context.backToRoot();

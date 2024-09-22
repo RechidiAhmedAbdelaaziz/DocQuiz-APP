@@ -7,10 +7,12 @@ class SubmitButton extends StatefulWidget {
     super.key,
     required this.title,
     required this.onPressed,
+    this.enabled = true,
   });
 
   final Future<void> Function() onPressed;
   final String title;
+  final bool enabled;
 
   @override
   State<SubmitButton> createState() => _SubmitButtonState();
@@ -34,8 +36,8 @@ class _SubmitButtonState extends State<SubmitButton> {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
-          color: Colors.teal,
-          borderRadius: BorderRadius.circular(20.r),
+          color: widget.enabled ? Colors.teal : Colors.grey,
+          borderRadius: BorderRadius.circular(14.r),
         ),
         child: Center(
           child: isLoading

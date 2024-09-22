@@ -109,10 +109,10 @@ class NamesDropDown<T extends NamedModel> extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.colors.primary,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: Colors.grey,
+              color: context.colors.dark.withOpacity(0.4),
               width: 1,
             ),
           ),
@@ -122,6 +122,7 @@ class NamesDropDown<T extends NamedModel> extends StatelessWidget {
               width(12),
               Expanded(
                 child: DropdownButton<T>(
+                  iconEnabledColor: context.colors.dark,
                   isExpanded: true,
                   underline: Container(),
                   hint: Text(
