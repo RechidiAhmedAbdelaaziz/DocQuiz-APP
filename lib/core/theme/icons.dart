@@ -7,5 +7,7 @@ abstract class AppIcons {
   static const String dark = '$_svgPath/dark.svg';
 
   static const String menu = '$_svgPath/menu.svg';
+
+  static const String profile = '$_svgPath/profile.svg';
   
 }
