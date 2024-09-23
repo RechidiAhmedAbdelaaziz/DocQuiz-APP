@@ -1,3 +1,4 @@
+import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/extension/to_time.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
@@ -5,6 +6,7 @@ import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/exam/data/model/exam.model.dart';
 import 'package:app/feature/exam/logic/exam.cubit.dart';
+import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,9 @@ class _ExamItem extends StatelessWidget {
               _buildActionButton(
                 color: Colors.green,
                 icon: Icons.play_arrow,
-                onTap: () {},
+                onTap: () {
+                  context.to(QuestionRoute.exam(exam));
+                },
               ),
             ],
           ),

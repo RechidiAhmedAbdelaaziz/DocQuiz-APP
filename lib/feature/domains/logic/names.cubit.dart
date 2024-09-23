@@ -32,7 +32,9 @@ class NamesCubit<T extends NamedModel, D>
             (await _domainRepo.getDomains()) as ApiResult<List<T>>;
         break;
       case const (LevelModel):
-        final id = await locator<AuthCache>().domain;
+        final id = parent == null
+            ? await locator<AuthCache>().domain
+            : (parent as DomainModel).id;
         result = (await _domainRepo.getLevels(domainId: id))
             as ApiResult<List<T>>;
         break;

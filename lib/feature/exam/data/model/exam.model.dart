@@ -15,7 +15,7 @@ class ExamModel extends Equatable {
 
   @JsonKey(name: '_id')
   final String? id;
-  final num? questions;
+  final int? questions;
   final String? title;
   final num? time;
   final num? year;

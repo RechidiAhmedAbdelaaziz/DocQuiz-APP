@@ -7,6 +7,7 @@ import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
 import 'package:app/feature/domains/helper/domain.dependency.dart';
 import 'package:app/feature/exam/helper/exam.dependency.dart';
 import 'package:app/feature/playlist/helper/playlist.dependency.dart';
+import 'package:app/feature/question/helper/question.di.dart';
 import 'package:app/feature/quiz/helper/quiz.dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
 import 'package:app/feature/user/helper/user.dependency.dart';
@@ -36,6 +37,7 @@ Future<void> setupLocator({required String baseUrl}) async {
   await setupUserDependency(locator);
   await setupPlaylistDependency(locator);
   await setupExamDependency(locator);
+  await injectQuestionDependencies(locator);
 
   locator.allowReassignment = true;
 }

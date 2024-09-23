@@ -1,5 +1,6 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/core/types/error_state.dart';
+import 'package:app/feature/auth/data/source/auth.cache.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/user/data/model/user.model.dart';
 import 'package:app/feature/user/data/repo/user.repo.dart';
@@ -59,10 +60,11 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> updateSpeciality() async {
     if (!canUpdateSpeciality) return;
 
-    final domainId = domain == state.user!.domain ? null : domain!.id;
-    final levelId = level == state.user!.level ? null : level!.id;
+    final domainId = domain!.id;
+    final levelId = level!.id;
 
-    _updateProfile(domainId: domainId, levelId: levelId);
+    await _updateProfile(domainId: domainId, levelId: levelId);
+    await locator<AuthCache>().setDomain(domainId);
   }
 
   bool get canUpdatePassword =>

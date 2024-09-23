@@ -9,6 +9,10 @@ extension UniqList<T> on List<T> {
     }
   }
 
+  
+
+  
+
   void addOrRemove(T value) =>
       contains(value) ? remove(value) : add(value);
 
@@ -42,4 +46,12 @@ extension UniqList<T> on List<T> {
     }
     return nonSharedItems;
   }
+
+  //equals
+  bool equals(List<T> items) {
+    return containsAll(items) && items.containsAll(this);
+  }
+
+
+  
 }

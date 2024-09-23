@@ -1,4 +1,3 @@
-
 import 'package:app/core/types/api_result.type.dart';
 import 'package:flutter/material.dart';
 

@@ -18,10 +18,10 @@ class QuizModel extends Equatable {
 
   @JsonKey(name: '_id')
   final String? id;
-  final num? totalQuestions;
+  final int? totalQuestions;
   final QuizResult? result;
   final bool? isCompleted;
-  final num? lastAnsweredIndex;
+  final int? lastAnsweredIndex;
   final String? title;
   final DateTime? createdAt;
   final DateTime? updatedAt;

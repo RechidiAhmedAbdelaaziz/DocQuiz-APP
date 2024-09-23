@@ -5,6 +5,7 @@ import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';
+import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/data/models/quiz.model.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz_list.cubit.dart';
@@ -123,7 +124,9 @@ class _QuizItem extends StatelessWidget {
                 _buildActionButton(
                   color: Colors.green,
                   icon: Icons.play_arrow_rounded,
-                  onTap: () {},
+                  onTap: () {
+                    context.to(QuestionRoute.quiz(quiz));
+                  },
                 ),
                 _buildActionButton(
                   color: Colors.orange,
@@ -192,7 +195,7 @@ class _QuizItem extends StatelessWidget {
 
   Widget _buildAnswersSlider(BuildContext context, QuizModel quiz) {
     final answered = quiz.result!.answered! as int;
-    final total = quiz.totalQuestions! as int;
+    final total = quiz.totalQuestions!;
     return Column(
       children: [
         Container(

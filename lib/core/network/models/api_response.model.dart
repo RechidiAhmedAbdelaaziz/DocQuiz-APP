@@ -76,19 +76,19 @@ class PaginatedDataResponse extends _ApiResponseModel {
       _$PaginatedDataResponseFromJson(json ?? {});
 }
 
-@JsonSerializable(createToJson: false)
-class PaginatedObjectDataResponse extends _ApiResponseModel {
-  final Map<String, dynamic>? data;
-  final _Paginations? pagination;
+// @JsonSerializable(createToJson: false)
+// class PaginatedObjectDataResponse extends _ApiResponseModel {
+//   final Map<String, dynamic>? data;
+//   final _Paginations? pagination;
 
-  PaginatedObjectDataResponse({
-    super.success,
-    super.statusCode,
-    this.data,
-    this.pagination,
-  });
+//   PaginatedObjectDataResponse({
+//     super.success,
+//     super.statusCode,
+//     this.data,
+//     this.pagination,
+//   });
 
-  factory PaginatedObjectDataResponse.fromJson(
-          Map<String, dynamic>? json) =>
-      _$PaginatedObjectDataResponseFromJson(json ?? {});
-}
+//   factory PaginatedObjectDataResponse.fromJson(
+//           Map<String, dynamic>? json) =>
+//       _$PaginatedObjectDataResponseFromJson(json ?? {});
+// }

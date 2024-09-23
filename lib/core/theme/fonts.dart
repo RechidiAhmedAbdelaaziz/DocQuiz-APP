@@ -40,6 +40,7 @@ class AppFontStyles {
   TextStyle get body1 => TextStyle(
         fontSize: 16.sp,
         color: primary,
+        fontWeight: FontWeight.w600,
       );
 
   TextStyle get body2 => TextStyle(
