@@ -1,3 +1,4 @@
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,14 +14,14 @@ extension BottomSheet on BuildContext {
         children: [
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 35.h),
+            margin: EdgeInsets.only(top: 100.h),
             padding: EdgeInsets.symmetric(
-                horizontal: 12.w, vertical: 12.h),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                horizontal: 22.w, vertical: 20.h),
+            decoration: BoxDecoration(
+              color: colors.background,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(35),
+                topRight: Radius.circular(35),
               ),
             ),
             child: Column(

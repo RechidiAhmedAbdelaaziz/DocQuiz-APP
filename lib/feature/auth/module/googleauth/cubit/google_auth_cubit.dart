@@ -18,7 +18,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     final result = await _authRepo.googleAuth(GoogleSignIn(
       scopes: ['email', 'profile'],
       serverClientId:
-          '933236697069-mrmr7vndplo8ap4pm1um81m4rlb3acdf.apps.googleusercontent.com',
+          '657663867003-b4vdfcag1puldl32phnb9hukflg53fh1.apps.googleusercontent.com',
     ));
 
     result.when(

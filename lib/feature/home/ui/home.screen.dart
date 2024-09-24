@@ -26,6 +26,13 @@ class HomeScreen extends StatelessWidget {
         appBar: const _AppBar(),
         body: body,
         drawer: const _Drawer(),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.teal,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25.r)),
+          onPressed: () => context.read<HomeCubit>().refresh(),
+          child: const Icon(Icons.refresh, color: Colors.white),
+        ),
       ),
     );
   }

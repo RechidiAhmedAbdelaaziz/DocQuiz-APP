@@ -1,4 +1,5 @@
 import 'package:app/core/extension/list.extension.dart';
+import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/validator.extension.dart';
 import 'package:app/core/shared/logic/pageview/page_view.cubit.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
@@ -8,6 +9,8 @@ import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/domains/logic/names.cubit.dart';
+import 'package:app/feature/home/logic/home.cubit.dart';
+import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/module/createquiz/logic/create_quiz.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +35,17 @@ class CreateQuizScreen extends StatelessWidget {
         context.watch<CreateQuizCubit>().state.isCreating;
 
     if (isCreating) {
-      return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(color: Colors.teal),
+      return BlocListener<CreateQuizCubit, CreateQuizState>(
+        listener: (context, state) {
+          state.onCreated((newQuiz) {
+            context.read<HomeCubit>().showMyQuiz();
+            context.to(QuestionRoute.quiz(newQuiz));
+          });
+        },
+        child: const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(color: Colors.teal),
+          ),
         ),
       );
     }

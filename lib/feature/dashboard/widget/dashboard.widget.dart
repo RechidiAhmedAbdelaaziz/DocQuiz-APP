@@ -1,7 +1,9 @@
+import 'package:app/core/extension/bottomsheet.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/dashboard/logic/dashboard.cubit.dart';
+import 'package:app/feature/domains/module/mymajors/widget/majors.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
@@ -82,6 +84,9 @@ class _Statistics extends StatelessWidget {
           title: 'MODULES',
           color: Colors.teal,
           value: statistics.totalMajor.toString(),
+          onTap: () {
+            context.showBottomSheet(child: MyMajors());
+          },
         ),
         _StatisticItem(
           title: 'QUESTIONS',

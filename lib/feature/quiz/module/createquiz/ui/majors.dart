@@ -53,6 +53,25 @@ class _LevelsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final levels =
         context.watch<NamesCubit<LevelModel, void>>().state.items;
+
+    if (levels.isEmpty) {
+      return Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          SizedBox(
+            height: 6.h,
+            // width: 120.w,
+            child: const LinearProgressIndicator(
+              color: Colors.teal,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     final cubit = context.read<NamesCubit<MajorModel, LevelModel>>();
 
     final controller = ScrollController(
@@ -93,6 +112,24 @@ class _MajorsPage extends StatelessWidget {
         .state
         .items;
 
+    if (majors.isEmpty) {
+      return Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          SizedBox(
+            height: 6.h,
+            // width: 120.w,
+            child: const LinearProgressIndicator(
+              color: Colors.teal,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     final controller = ScrollController(
       initialScrollOffset:
           context.read<CreateQuizCubit>().majorScroll,
@@ -130,6 +167,25 @@ class _CoursePage extends StatelessWidget {
         .watch<NamesCubit<CourseModel, MajorModel>>()
         .state
         .items;
+
+    if (courses.isEmpty) {
+      return Stack(
+        alignment: AlignmentDirectional.topCenter,
+        children: [
+          SizedBox(
+            height: 6.h,
+            // width: 120.w,
+            child: const LinearProgressIndicator(
+              color: Colors.teal,
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     final quizCubit = context.watch<CreateQuizCubit>();
 
     final selected = quizCubit.state.filter.courses;

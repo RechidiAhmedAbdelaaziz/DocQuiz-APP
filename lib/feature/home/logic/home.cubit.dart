@@ -19,13 +19,21 @@ class HomeCubit extends Cubit<HomeState> {
   void showExam() => _goTo(_Exam());
   void showProfile() => _goTo(_Profile());
 
+  void refresh() {
+    emit(_Loading());
+    Future.delayed(const Duration(milliseconds: 500), () {
+      back();
+    });
+  }
+
   void back() {
     final last = state.previous;
     if (last != null) emit(last);
   }
 
-  void _goTo<T extends HomeState>(T newState) {
-    if (state is T) return;
+  void _goTo<T extends HomeState>(T newState,
+      {bool refresh = false}) {
+    if (state is T && !refresh) return;
     emit(newState);
   }
 }
