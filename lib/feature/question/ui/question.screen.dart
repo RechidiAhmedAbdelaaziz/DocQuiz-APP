@@ -241,11 +241,14 @@ class _QuestionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      question.question.questionText!,
-      maxLines: 12,
-      overflow: TextOverflow.ellipsis,
-      style: context.textStyles.body1,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 3.h),
+      child: Text(
+        question.question.questionText!,
+        maxLines: 12,
+        overflow: TextOverflow.ellipsis,
+        style: context.textStyles.body1,
+      ),
     );
   }
 }

@@ -98,6 +98,7 @@ class _Choice extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.r),
         ),
         child: Row(
+          
           children: [
             CircleAvatar(
               backgroundColor: prefixColor,
@@ -110,10 +111,13 @@ class _Choice extends StatelessWidget {
               ),
             ),
             width(15),
-            Text(
-              choice,
-              style:
-                  context.textStyles.body1.copyWith(color: textColor),
+            Expanded(
+              child: Text(
+                choice,
+                maxLines: 25,
+                style: context.textStyles.body1
+                    .copyWith(color: textColor),
+              ),
             ),
           ],
         ),
