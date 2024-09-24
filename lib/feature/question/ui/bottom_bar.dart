@@ -7,7 +7,7 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isAnswered = question.result?.isAnswerd ?? false;
+    final isAnswered = question.result.isAnswerd ?? false;
     final cubit = context.read<QuestionCubit>();
     return Container(
       padding: const EdgeInsets.all(8.0),
@@ -59,7 +59,7 @@ class _BottomBar extends StatelessWidget {
                         ),
                       ),
                       onTap: () {},
-                    )
+                    ),
         ],
       ),
     );

@@ -17,7 +17,7 @@ class ExamModel extends Equatable {
   final String? id;
   final int? questions;
   final String? title;
-  final num? time;
+  final int? time;
   final num? year;
 
   factory ExamModel.fromJson(Map<String, dynamic> json) =>

@@ -3,7 +3,7 @@ part of 'question.screen.dart';
 class _QuestionChoices extends StatelessWidget {
   _QuestionChoices(
     this.question,
-  )   : isAnswered = question.result?.isAnswerd ?? false,
+  )   : isAnswered = question.result.isAnswerd ?? false,
         isMultiple = question.question.type == 'QCM';
 
   final QuestionResultModel question;

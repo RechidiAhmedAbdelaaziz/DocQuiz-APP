@@ -15,8 +15,15 @@ class QuestionState extends ErrorState {
   final int _currentIndex;
   final int _max;
 
-
   bool exists(int index) => _questions[index] != null;
+  bool isAnswered(int index) =>
+      _questions[index]?.result.isAnswerd == true;
+  bool isCorrect(int index) =>
+      _questions[index]?.result.isCorrect == true;
+  bool isCurrent(int index) => _currentIndex == index;
+
+  int get max => _max;
+
   int page(int index) => (index ~/ 10) + 1;
   String get progres => 'N°${_currentIndex + 1} sur $_max';
 
@@ -38,6 +45,12 @@ class QuestionState extends ErrorState {
   QuestionState _answerQuestion(List<String> choices) {
     _questions[_currentIndex] =
         _questions[_currentIndex]!.answerWith(choices);
+    return _copyWith(questions: _questions);
+  }
+
+  QuestionState _saveTime(int time) {
+    _questions[_currentIndex] =
+        _questions[_currentIndex]!.saveTime(time);
     return _copyWith(questions: _questions);
   }
 

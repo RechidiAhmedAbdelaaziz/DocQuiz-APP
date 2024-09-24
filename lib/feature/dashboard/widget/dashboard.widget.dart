@@ -87,11 +87,17 @@ class _Statistics extends StatelessWidget {
           title: 'QUESTIONS',
           color: Colors.green,
           value: statistics.totalQuestion.toString(),
+          onTap: () {
+            context.read<HomeCubit>().showCreateQuiz();
+          },
         ),
         _StatisticItem(
           title: 'FAITS AUJOURD\'HUI',
           color: Colors.orange,
           value: statistics.quizDoneToday.toString(),
+          onTap: () {
+            context.read<HomeCubit>().showMyQuiz();
+          },
         ),
       ],
     );
@@ -103,45 +109,50 @@ class _StatisticItem extends StatelessWidget {
     required this.title,
     required this.value,
     required this.color,
+    this.onTap,
   });
 
   final String title;
   final String value;
   final Color color;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-      padding: EdgeInsets.symmetric(vertical: 16.h),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 2,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            title,
-            style: context.theme.textStyles.h2
-                .copyWith(color: Colors.white),
-          ),
-          height(5),
-          Text(
-            value,
-            style: context.theme.textStyles.h2
-                .copyWith(color: Colors.white),
-          ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        padding: EdgeInsets.symmetric(vertical: 16.h),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(16.r),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              title,
+              style: context.theme.textStyles.h2
+                  .copyWith(color: Colors.white),
+            ),
+            height(5),
+            Text(
+              value,
+              style: context.theme.textStyles.h2
+                  .copyWith(color: Colors.white),
+            ),
+          ],
+        ),
       ),
     );
   }

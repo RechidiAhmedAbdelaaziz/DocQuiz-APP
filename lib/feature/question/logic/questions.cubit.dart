@@ -2,6 +2,7 @@
 
 import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/shared/dto/pagination.dto.dart';
+import 'package:app/core/shared/widgets/timer.dart';
 import 'package:app/core/types/error_state.dart';
 import 'package:app/core/types/repo_functions.type.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
@@ -17,9 +18,12 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   final _OnAnswered? _onAnswered;
 
+  final TimeCubit _timeCubit;
+
   QuestionCubit(int max, this._fetchFunction,
-      {_OnAnswered? onAnswered})
+      {_OnAnswered? onAnswered, required TimeCubit timeCubit})
       : _onAnswered = onAnswered,
+        _timeCubit = timeCubit,
         super(QuestionState.initial(max));
 
   final _query = PaginationQuery(page: 1, limit: 10);
@@ -30,7 +34,7 @@ class QuestionCubit extends Cubit<QuestionState> {
   bool get previousExist => state._currentIndex > 0;
 
   set choseAnswer(String choice) {
-    if (state.question?.result?.isAnswerd == true) return;
+    if (state.question?.result.isAnswerd == true) return;
     if (state.question?.question.type == "QCM") {
       myChoices.addOrRemove(choice);
     } else {
@@ -42,30 +46,41 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void nextQuestion() {
     if (state._currentIndex + 1 < state._max) {
-      showQuestion(state._currentIndex + 1);
+      toQuestion(state._currentIndex + 1);
     }
   }
 
   void previousQuestion() {
     if (state._currentIndex > 0) {
-      showQuestion(state._currentIndex - 1);
+      toQuestion(state._currentIndex - 1);
     }
   }
 
-  void showQuestion(int index) async {
+  void toQuestion(int index) async {
     if (index != state._currentIndex) myChoices.clear();
 
     if (!state.exists(index)) {
       await fetchQuestions(page: state.page(index));
     }
 
+    emit(state._saveTime(_timeCubit.state.seconds));
+
     emit(state._toQuestion(index));
+
+    _timeCubit.start(newTime: state.question?.result.time ?? 0);
+
+    if (state.question?.result.isAnswerd == true) {
+      _timeCubit.stopWhenStopwatch();
+    }
   }
 
   void answerQuestion() {
     emit(state._answerQuestion(myChoices));
+    print(state._questions.length);
 
-    _onAnswered?.call(state._questions[state._currentIndex]!);
+    _timeCubit.stopWhenStopwatch();
+
+    _onAnswered?.call(state.question!);
   }
 
   Future<void> fetchQuestions({int? page}) async {

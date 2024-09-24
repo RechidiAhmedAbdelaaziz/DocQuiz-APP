@@ -8,8 +8,6 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isPaused = false;
-
     return Container(
       color: Colors.blue[800],
       child: Row(
@@ -26,23 +24,35 @@ class _Header extends StatelessWidget {
             ),
           ),
           width(10),
-          _buildPauseButton(isPaused),
+          // _buildPauseButton(),
+          _buildButton(
+              icon: Icons.pause,
+              onPressed: () {
+                context.read<TimeCubit>().pause();
+                context.showDialogBox(
+                  title: 'Pause',
+                  // body: 'Voulez-vous vraiment mettre en pause le test ?',
+                  confirmText: 'Continuer',
+                  onConfirm: (back) {
+                    context.read<TimeCubit>().start();
+                    back();
+                  },
+                  cancelText: 'Quitter',
+                  onCancel: (_) {},
+                );
+              }),
           width(12),
-          _buildSaveButton(),
+          _buildButton(
+            icon: Icons.save,
+            onPressed: () {},
+          ),
+        
           width(10),
-          _Timer(),
+          const AppTimer(),
         ],
       ),
     );
   }
-
-  Widget _buildPauseButton(bool isPaused) => _buildButton(
-        icon: isPaused ? Icons.play_arrow : Icons.pause,
-        onPressed: () {},
-      );
-
-  Widget _buildSaveButton() =>
-      _buildButton(icon: Icons.save, onPressed: () {});
 
   Widget _buildButton({
     required IconData icon,
@@ -54,26 +64,6 @@ class _Header extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Icon(icon, color: Colors.redAccent),
-      ),
-    );
-  }
-}
-
-class _Timer extends StatelessWidget {
-  const _Timer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 65.h,
-      padding: EdgeInsets.symmetric(horizontal: 10.w),
-      color: Colors.amber,
-      alignment: Alignment.center,
-      child: Text(
-        '00:00',
-        style: context.textStyles.h3.copyWith(
-          color: Colors.white,
-        ),
       ),
     );
   }

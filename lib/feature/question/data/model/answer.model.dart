@@ -4,16 +4,17 @@ part of 'question.model.dart';
 
 class QuestionResultModel extends Equatable {
   QuestionResultModel({
-    required this.result,
+    _Result? result,
     required this.question,
     List<String>? choices,
-  }) : choices = choices ??
+  })  : choices = choices ??
             ([...question.correctAnswers!, ...question.wrongAnswers!]
-              ..shuffle());
+              ..shuffle()),
+        result = result ?? _Result();
 
   final List<String> choices;
 
-  final _Result? result;
+  final _Result result;
   final _QuestionModel question;
 
   factory QuestionResultModel.fromJson(
@@ -25,15 +26,17 @@ class QuestionResultModel extends Equatable {
         question: _QuestionModel.fromJson(questionJson),
       );
 
-  QuestionResultModel answerWith(
-    List<String> choices,
-  ) {
-    final result = this.result?.copyWith(
-              choices: choices,
-              isAnswerd: true,
-              isCorrect: choices.equals(question.correctAnswers!),
-            ) ??
-        _Result(
+  QuestionResultModel saveTime(int time) {
+    final result = this.result.copyWith(time: time);
+    return QuestionResultModel(
+      result: result,
+      question: question,
+      choices: choices,
+    );
+  }
+
+  QuestionResultModel answerWith(List<String> choices) {
+    final result = this.result.copyWith(
           choices: choices,
           isAnswerd: true,
           isCorrect: choices.equals(question.correctAnswers!),
@@ -52,11 +55,13 @@ class QuestionResultModel extends Equatable {
 
 class _Result {
   const _Result({
-    required this.choices,
-    required this.isAnswerd,
-    required this.isCorrect,
+    this.choices,
+    this.isAnswerd = false,
+    this.isCorrect,
+    this.time,
   });
 
+  final int? time;
   final List<String>? choices;
   final bool? isAnswerd;
   final bool? isCorrect;
@@ -67,17 +72,20 @@ class _Result {
             : null,
         isAnswerd: json['isAnswerd'],
         isCorrect: json['isCorrect'],
+        time: json['time'],
       );
 
   _Result copyWith({
     List<String>? choices,
     bool? isAnswerd,
     bool? isCorrect,
+    int? time,
   }) {
     return _Result(
       choices: choices ?? this.choices,
       isAnswerd: isAnswerd ?? this.isAnswerd,
       isCorrect: isCorrect ?? this.isCorrect,
+      time: time ?? this.time,
     );
   }
 }

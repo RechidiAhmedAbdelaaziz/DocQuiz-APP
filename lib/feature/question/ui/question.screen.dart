@@ -1,3 +1,7 @@
+import 'package:app/core/extension/alertdialog.extenstion.dart';
+import 'package:app/core/extension/navigator.extension.dart';
+import 'package:app/core/shared/widgets/lined_text.dart';
+import 'package:app/core/shared/widgets/timer.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/core/utils/constants.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
@@ -5,6 +9,7 @@ import 'package:app/feature/question/logic/questions.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:app/feature/themes/widget/switch_themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -12,6 +17,7 @@ import 'package:text_scroll/text_scroll.dart';
 part 'header.dart';
 part 'choices.dart';
 part 'bottom_bar.dart';
+part 'progress.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key, required this.title});
@@ -55,6 +61,7 @@ class QuestionScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: _BottomBar(question),
+      endDrawer: _Progress(),
     );
   }
 }
@@ -64,9 +71,45 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isFullScreen = false;
     return AppBar(
-      title: const Text('Question'),
-      actions: [SwitchThemesButton()],
+      backgroundColor: context.colors.primary,
+      automaticallyImplyLeading: false,
+      actions: [
+        const SwitchThemesButton(),
+        width(20),
+        InkWell(
+          onTap: () {
+            SystemChrome.setEnabledSystemUIMode(
+              SystemUiMode.manual,
+              overlays: isFullScreen ? SystemUiOverlay.values : [],
+            );
+
+            isFullScreen = !isFullScreen;
+          },
+          child: CircleAvatar(
+            backgroundColor: Colors.teal,
+            radius: 20.w,
+            child: const Icon(
+              Icons.fullscreen,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        width(20),
+        InkWell(
+          child: CircleAvatar(
+            backgroundColor: Colors.red,
+            radius: 20.w,
+            child: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
+          ),
+          onTap: () {},
+        ),
+        width(10),
+      ],
     );
   }
 
@@ -96,19 +139,43 @@ class _QuestionInfo extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            width(22),
-            Text(
-              progres,
-              style: context.textStyles.body1,
-            ),
-            width(25),
-            _buildType(),
-            width(12),
-            _buildDifficulty(),
-          ],
+        SizedBox(
+          width: double.infinity,
+          child: Stack(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  width(22),
+                  Text(
+                    progres,
+                    style: context.textStyles.body1,
+                  ),
+                  width(25),
+                  _buildType(),
+                  width(12),
+                  _buildDifficulty(),
+                  // const Spacer(),
+                  //button to open drawer
+                ],
+              ),
+              Positioned(
+                right: -12.w,
+                child: InkWell(
+                  onTap: () => Scaffold.of(context).openEndDrawer(),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.teal,
+                    radius: 15.w,
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: Colors.white,
+                      size: 22.sp,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
         if (source != null) ...[
           height(10),
