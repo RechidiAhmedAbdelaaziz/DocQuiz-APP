@@ -10,7 +10,7 @@ class _DontHaveAccount extends StatelessWidget {
       children: [
         Text(
           'Vous n\'avez pas de compte ?  ',
-          style: context.theme.textStyles.body1
+          style: context.theme.textStyles.body2
               .copyWith(color: Colors.grey),
         ),
         TextButton(
