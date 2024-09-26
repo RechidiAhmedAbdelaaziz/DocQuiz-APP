@@ -87,7 +87,7 @@ android {
         }
         production {
             dimension "default"
-            resValue "string", "app_name", "DocQuiz"
+            resValue "string", "app_name", "FenneQCM"
             resValue "string", "base_url", "https://api.docquizz.top"
         }
     }

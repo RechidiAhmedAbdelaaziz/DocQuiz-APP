@@ -19,46 +19,48 @@ class _FilterBoxState extends State<_FilterBox> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          padding:
-              EdgeInsets.symmetric(horizontal: 22.w, vertical: 6.h),
-          decoration: BoxDecoration(
-            color: Colors.teal,
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(18.r),
-              bottom: Radius.circular(showFilters ? 0 : 18.r),
+        InkWell(
+          onTap: () => setState(() => showFilters = !showFilters),
+          child: Container(
+            padding:
+                EdgeInsets.symmetric(horizontal: 22.w, vertical: 6.h),
+            decoration: BoxDecoration(
+              color: Colors.teal,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(18.r),
+                bottom: Radius.circular(showFilters ? 0 : 18.r),
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text.rich(
-                  TextSpan(
-                    text: widget.title,
-                    style: context.textStyles.h5.copyWith(
-                      color: Colors.white,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: widget.additionalText,
-                        style: context.textStyles.body1,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text.rich(
+                    TextSpan(
+                      text: widget.title,
+                      style: context.textStyles.h5.copyWith(
+                        color: Colors.white,
                       ),
-                    ],
+                      children: [
+                        TextSpan(
+                          text: widget.additionalText,
+                          style: context.textStyles.body1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() => showFilters = !showFilters);
-                },
-                icon: Icon(
-                  showFilters
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: Colors.white,
+                IconButton(
+                  onPressed: () =>
+                      setState(() => showFilters = !showFilters),
+                  icon: Icon(
+                    showFilters
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: Colors.white,
+                  ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
         ),
         if (showFilters)

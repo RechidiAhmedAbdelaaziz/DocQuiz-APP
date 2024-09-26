@@ -20,11 +20,11 @@ class AppCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: () => onChange(canSelect ? !value! : true),
-          child: Icon(
+    return InkWell(
+      onTap: () => onChange(canSelect ? !value! : true),
+      child: Row(
+        children: [
+          Icon(
             !canSelect
                 ? Icons.arrow_forward_ios_rounded
                 : value!
@@ -33,15 +33,15 @@ class AppCheckBox extends StatelessWidget {
             color: context.colors.dark,
             size: canSelect ? 25.sp : 20.sp,
           ),
-        ),
-        width(5),
-        Text(
-          title,
-          style: context.textStyles.body1.copyWith(
-            fontSize: 20.sp,
+          width(5),
+          Text(
+            title,
+            style: context.textStyles.body1.copyWith(
+              fontSize: 20.sp,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

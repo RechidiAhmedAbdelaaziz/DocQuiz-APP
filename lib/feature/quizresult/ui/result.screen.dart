@@ -64,7 +64,7 @@ class QuizResultScreen extends StatelessWidget {
             height(10),
             _buildInfo(
               context,
-              title: 'Réponses correctes',
+              title: 'Correctes',
               color: Colors.green,
               value: result.correctAnswers,
               percent: (result.correctAnswers /
@@ -74,7 +74,7 @@ class QuizResultScreen extends StatelessWidget {
             height(10),
             _buildInfo(
               context,
-              title: 'Réponses incorrectes',
+              title: 'Incorrectes',
               color: Colors.red,
               value: result.wrongAnswers,
               percent:

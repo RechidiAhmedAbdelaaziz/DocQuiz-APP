@@ -6,51 +6,54 @@ class _Drawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
-    return Drawer(
-      backgroundColor: context.colors.background,
-      child: Column(
-        children: [
-          const _DrawerHeader(),
-          height(12),
-          ...[
-            _DrawerItemModel(
-              title: 'Tableau de bord',
-              icon: Icons.dashboard,
-              onTap: cubit.showDashboard,
-              isSelected: context.select(
-                (HomeCubit cubit) => cubit.state.isDashboard,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 12.h),
+      child: Drawer(
+        backgroundColor: context.colors.background,
+        child: Column(
+          children: [
+            const _DrawerHeader(),
+            height(12),
+            ...[
+              _DrawerItemModel(
+                title: 'Tableau de bord',
+                icon: Icons.dashboard,
+                onTap: cubit.showDashboard,
+                isSelected: context.select(
+                  (HomeCubit cubit) => cubit.state.isDashboard,
+                ),
               ),
-            ),
-            _DrawerItemModel(
-              title: 'Mes Quiz',
-              icon: Icons.quiz,
-              onTap: cubit.showMyQuiz,
-              isSelected: context
-                  .select((HomeCubit cubit) => cubit.state.isMyQuiz),
-            ),
-            _DrawerItemModel(
-              title: 'Créer un Quiz',
-              icon: Icons.playlist_add,
-              onTap: cubit.showCreateQuiz,
-              isSelected: context.select(
-                  (HomeCubit cubit) => cubit.state.isCreateQuiz),
-            ),
-            _DrawerItemModel(
-              title: 'Playlist',
-              icon: Icons.playlist_play_rounded,
-              onTap: cubit.showPlayList,
-              isSelected: context.select(
-                  (HomeCubit cubit) => cubit.state.isPlayList),
-            ),
-            _DrawerItemModel(
-              title: 'Série d\'examens',
-              icon: Icons.school,
-              onTap: cubit.showExam,
-              isSelected: context
-                  .select((HomeCubit cubit) => cubit.state.isExam),
-            ),
-          ].map((item) => _DrawerItem(item)),
-        ],
+              _DrawerItemModel(
+                title: 'Mes Quiz',
+                icon: Icons.quiz,
+                onTap: cubit.showMyQuiz,
+                isSelected: context.select(
+                    (HomeCubit cubit) => cubit.state.isMyQuiz),
+              ),
+              _DrawerItemModel(
+                title: 'Créer un Quiz',
+                icon: Icons.playlist_add,
+                onTap: cubit.showCreateQuiz,
+                isSelected: context.select(
+                    (HomeCubit cubit) => cubit.state.isCreateQuiz),
+              ),
+              _DrawerItemModel(
+                title: 'Playlist',
+                icon: Icons.playlist_play_rounded,
+                onTap: cubit.showPlayList,
+                isSelected: context.select(
+                    (HomeCubit cubit) => cubit.state.isPlayList),
+              ),
+              _DrawerItemModel(
+                title: 'Série d\'examens',
+                icon: Icons.school,
+                onTap: cubit.showExam,
+                isSelected: context
+                    .select((HomeCubit cubit) => cubit.state.isExam),
+              ),
+            ].map((item) => _DrawerItem(item)),
+          ],
+        ),
       ),
     );
   }

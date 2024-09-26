@@ -236,7 +236,7 @@ class _QuestionInfo extends StatelessWidget {
 
   Widget _buildSource() {
     return _buildInfo(
-      source!,
+      '$source | ${question.question.year}',
       Colors.teal[600]!,
       isSource: true,
     );

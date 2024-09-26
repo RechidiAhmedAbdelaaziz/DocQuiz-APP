@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:app/feature/question/data/model/question.model.dart';
 import 'package:app/feature/quiz/data/models/quiz.model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
 class QuizResultModel {
   final String title;
