@@ -36,7 +36,7 @@ class TimerState {
   }) {
     return TimerState._(
       seconds: seconds ?? this.seconds,
-      type: type ?? this._type,
+      type: type ?? _type,
     );
   }
 

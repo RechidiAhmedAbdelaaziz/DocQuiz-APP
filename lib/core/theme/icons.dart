@@ -1,5 +1,9 @@
 abstract class AppIcons {
   static const _svgPath = 'assets/svg';
+  static const _pngPath = 'assets/png';
+
+  static const String logo = '$_pngPath/logo.png';
+  static const String name = '$_pngPath/name.png';
 
   static const String google = '$_svgPath/google.svg';
 
@@ -9,5 +13,7 @@ abstract class AppIcons {
   static const String menu = '$_svgPath/menu.svg';
 
   static const String profile = '$_svgPath/profile.svg';
+
+
   
 }

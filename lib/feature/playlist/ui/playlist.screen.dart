@@ -4,8 +4,11 @@ import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
+import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/playlist/data/model/playlist.model.dart';
 import 'package:app/feature/playlist/logic/playlist.cubit.dart';
+import 'package:app/feature/question/data/model/question.model.dart';
+import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +79,7 @@ class _PlayListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
     return Container(
       margin: EdgeInsets.only(bottom: 15.h),
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
@@ -108,7 +112,15 @@ class _PlayListItem extends StatelessWidget {
               _buildActionButton(
                 color: Colors.green,
                 icon: Icons.play_arrow_rounded,
-                onTap: () {},
+                onTap: () async {
+                  final questions =
+                      await context.to<List<QuestionResultModel?>>(
+                          QuestionRoute.playlist(playlist));
+                  if (questions != null) {
+                    homeCubit.showQuestionsResult(
+                        playlist.title!, questions);
+                  }
+                },
               ),
               _buildActionButton(
                 color: Colors.teal,

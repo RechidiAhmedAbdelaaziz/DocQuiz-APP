@@ -11,7 +11,7 @@ class PlaylistModel extends Equatable {
     this.title,
   });
 
-  final num? totalQuestions;
+  final int? totalQuestions;
 
   @JsonKey(name: '_id')
   final String? id;

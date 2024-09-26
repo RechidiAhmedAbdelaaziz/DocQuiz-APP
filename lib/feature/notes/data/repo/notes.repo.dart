@@ -35,7 +35,7 @@ class NotesRepo {
 
   RepoResult<NoteModel> updateNotes(
     String noteId,
-    String index, {
+    int index, {
     String? newNote,
     bool? deleteNote,
   }) async {
@@ -44,8 +44,8 @@ class NotesRepo {
         noteId,
         index,
         {
-          if (newNote != null) 'note': newNote,
-          if (deleteNote != null) 'delete': deleteNote,
+          if (newNote != null) 'newNote': newNote,
+          if (deleteNote != null) 'deleteNote': deleteNote,
         },
       );
       return NoteModel.fromJson(response.data!);

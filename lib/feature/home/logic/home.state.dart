@@ -3,7 +3,6 @@ part of 'home.cubit.dart';
 abstract class HomeState {
   HomeState(DrawerRoute route) : child = route.child {
     routesStack.add(this);
-    print("Last route: $this");
   }
 
   static final routesStack = <HomeState>[];
@@ -46,6 +45,15 @@ class _Exam extends HomeState {
 
 class _Profile extends HomeState {
   _Profile() : super(ProfileRoute());
+}
+
+class _QuizResult extends HomeState {
+  _QuizResult.quiz(QuizModel quiz)
+      : super(QuizResultRoute.quiz(quiz));
+
+  _QuizResult.questions(
+      String title, List<QuestionResultModel?> questions , int? totalTemps)
+      : super(QuizResultRoute.questions(title, questions, totalTemps:  totalTemps));
 }
 
 class _Loading extends HomeState {

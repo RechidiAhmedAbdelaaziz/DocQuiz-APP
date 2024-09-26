@@ -19,7 +19,7 @@ abstract class NotesApi {
   @PATCH('notes/{noteId}/{index}')
   Future<DataResponse> updateNotes(
     @Path('noteId') String noteId,
-    @Path('index') String index,
+    @Path('index') int index,
     @Body() Map<String, dynamic> body,
   );
 }

@@ -1,4 +1,5 @@
 import 'package:app/core/extension/navigator.extension.dart';
+import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 
 extension AlertDialogExtension on BuildContext {
@@ -18,8 +19,13 @@ extension AlertDialogExtension on BuildContext {
         return PopScope(
           canPop: canPop,
           child: AlertDialog(
-            title: Text(title),
-            content: content ?? Text(body),
+            backgroundColor: context.colors.background,
+            title: Text(
+              title,
+              style: context.textStyles.h3,
+            ),
+            content: content ??
+                Text(body, style: context.textStyles.body1),
             actions: <Widget>[
               if (cancelText != null)
                 TextButton(
@@ -28,7 +34,8 @@ extension AlertDialogExtension on BuildContext {
                   },
                   child: Text(
                     cancelText,
-                    style: const TextStyle(color: Colors.red),
+                    style: context.textStyles.h5
+                        .copyWith(color: Colors.red),
                   ),
                 ),
               if (confirmText != null)
@@ -38,7 +45,8 @@ extension AlertDialogExtension on BuildContext {
                   },
                   child: Text(
                     confirmText,
-                    style: const TextStyle(color: Colors.teal),
+                    style: context.textStyles.h5
+                        .copyWith(color: Colors.teal),
                   ),
                 ),
             ],

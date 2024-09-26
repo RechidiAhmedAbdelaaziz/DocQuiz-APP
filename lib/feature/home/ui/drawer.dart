@@ -8,52 +8,49 @@ class _Drawer extends StatelessWidget {
     final cubit = context.read<HomeCubit>();
     return Drawer(
       backgroundColor: context.colors.background,
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
-        child: Column(
-          children: [
-            const _DrawerHeader(),
-            ...[
-              _DrawerItemModel(
-                title: 'Tableau de bord',
-                icon: Icons.dashboard,
-                onTap: cubit.showDashboard,
-                isSelected: context.select(
-                  (HomeCubit cubit) => cubit.state.isDashboard,
-                ),
+      child: Column(
+        children: [
+          const _DrawerHeader(),
+          height(12),
+          ...[
+            _DrawerItemModel(
+              title: 'Tableau de bord',
+              icon: Icons.dashboard,
+              onTap: cubit.showDashboard,
+              isSelected: context.select(
+                (HomeCubit cubit) => cubit.state.isDashboard,
               ),
-              _DrawerItemModel(
-                title: 'Mes Quiz',
-                icon: Icons.quiz,
-                onTap: cubit.showMyQuiz,
-                isSelected: context.select(
-                    (HomeCubit cubit) => cubit.state.isMyQuiz),
-              ),
-              _DrawerItemModel(
-                title: 'Créer un Quiz',
-                icon: Icons.create,
-                onTap: cubit.showCreateQuiz,
-                isSelected: context.select(
-                    (HomeCubit cubit) => cubit.state.isCreateQuiz),
-              ),
-              _DrawerItemModel(
-                title: 'Playlist',
-                icon: Icons.playlist_play_rounded,
-                onTap: cubit.showPlayList,
-                isSelected: context.select(
-                    (HomeCubit cubit) => cubit.state.isPlayList),
-              ),
-              _DrawerItemModel(
-                title: 'Série d\'examens',
-                icon: Icons.school,
-                onTap: cubit.showExam,
-                isSelected: context
-                    .select((HomeCubit cubit) => cubit.state.isExam),
-              ),
-            ].map((item) => _DrawerItem(item)),
-          ],
-        ),
+            ),
+            _DrawerItemModel(
+              title: 'Mes Quiz',
+              icon: Icons.quiz,
+              onTap: cubit.showMyQuiz,
+              isSelected: context
+                  .select((HomeCubit cubit) => cubit.state.isMyQuiz),
+            ),
+            _DrawerItemModel(
+              title: 'Créer un Quiz',
+              icon: Icons.playlist_add,
+              onTap: cubit.showCreateQuiz,
+              isSelected: context.select(
+                  (HomeCubit cubit) => cubit.state.isCreateQuiz),
+            ),
+            _DrawerItemModel(
+              title: 'Playlist',
+              icon: Icons.playlist_play_rounded,
+              onTap: cubit.showPlayList,
+              isSelected: context.select(
+                  (HomeCubit cubit) => cubit.state.isPlayList),
+            ),
+            _DrawerItemModel(
+              title: 'Série d\'examens',
+              icon: Icons.school,
+              onTap: cubit.showExam,
+              isSelected: context
+                  .select((HomeCubit cubit) => cubit.state.isExam),
+            ),
+          ].map((item) => _DrawerItem(item)),
+        ],
       ),
     );
   }
@@ -64,20 +61,30 @@ class _DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        width(30),
-        Text(
-          'DocQuiz',
-          style: context.textStyles.h4,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 12.w),
+      decoration: BoxDecoration(
+        color: Colors.teal,
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(12.r),
         ),
-        const Spacer(),
-        IconButton(
-          onPressed: () => context.back(),
-          icon: Icon(Icons.close, color: context.colors.dark),
-        ),
-      ],
+      ),
+      child: Row(
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Image.asset(AppIcons.logo, height: 55.h),
+          Padding(
+            padding: EdgeInsets.only(top: 12.h),
+            child: Image.asset(AppIcons.name, height: 45.h),
+          ),
+          const Spacer(),
+          InkWell(
+            onTap: () => context.back(),
+            child: Icon(Icons.arrow_back_ios_rounded,
+                color: Colors.black, size: 25.h),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -106,7 +113,14 @@ class _DrawerItem extends StatelessWidget {
         child: Row(
           children: [
             width(20),
-            Icon(model.icon, color: context.colors.dark),
+            if (model.isSelected)
+              Container(
+                width: 3.w,
+                height: 35.h,
+                margin: EdgeInsets.only(right: 10.w),
+                color: context.colors.dark,
+              ),
+            Icon(model.icon, color: context.colors.dark, size: 33.h),
             width(20),
             Text(
               model.title,

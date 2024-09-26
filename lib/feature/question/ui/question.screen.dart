@@ -1,9 +1,12 @@
 import 'package:app/core/extension/alertdialog.extenstion.dart';
+import 'package:app/core/extension/bottomsheet.extension.dart';
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/timer.dart';
+import 'package:app/core/theme/icons.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/core/utils/constants.dart';
+import 'package:app/feature/notes/ui/notes.widget.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
 import 'package:app/feature/question/logic/questions.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
@@ -42,26 +45,24 @@ class QuestionScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: const _AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _Header(question, title),
-            height(15),
-            _QuestionInfo(question),
-            height(30),
-            _QuestionText(question),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: 35.w, vertical: 5.h),
-              child: const Divider(),
-            ),
-            height(10),
-            _QuestionChoices(question),
-          ],
-        ),
+      body: Column(
+        children: [
+          _Header(question, title),
+          height(15),
+          _QuestionInfo(question),
+          height(30),
+          _QuestionText(question),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: 35.w, vertical: 5.h),
+            child: const Divider(),
+          ),
+          height(10),
+          Expanded(child: _QuestionChoices(question)),
+        ],
       ),
       bottomNavigationBar: _BottomBar(question),
-      endDrawer: _Progress(),
+      endDrawer: const _Progress(),
     );
   }
 }
@@ -73,8 +74,20 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     bool isFullScreen = false;
     return AppBar(
-      backgroundColor: context.colors.primary,
+      backgroundColor: Colors.teal,
       automaticallyImplyLeading: false,
+      title: Row(
+        children: [
+          Image.asset(
+            AppIcons.logo,
+            height: 55.h,
+          ),
+          Image.asset(
+            AppIcons.name,
+            height: 36.h,
+          ),
+        ],
+      ),
       actions: [
         const SwitchThemesButton(),
         width(20),
@@ -88,7 +101,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
             isFullScreen = !isFullScreen;
           },
           child: CircleAvatar(
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.teal[600],
             radius: 20.w,
             child: const Icon(
               Icons.fullscreen,
@@ -106,7 +119,23 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
               color: Colors.white,
             ),
           ),
-          onTap: () {},
+          onTap: () {
+            context.showDialogBox(
+              title: 'Quitter',
+              body: 'Voulez-vous vraiment quitter le test ?',
+              confirmText: 'Oui',
+              onConfirm: (back) {
+                back();
+                context.back(
+                  context.read<QuestionCubit>().state.questions,
+                );
+              },
+              cancelText: 'Non',
+              onCancel: (back) {
+                back();
+              },
+            );
+          },
         ),
         width(10),
       ],

@@ -11,36 +11,42 @@ class AppFontStyles {
         fontSize: 26.sp,
         fontWeight: FontWeight.bold,
         color: primary,
+        letterSpacing: 1.2,
       );
 
   TextStyle get h2 => TextStyle(
         fontSize: 24.sp,
         fontWeight: FontWeight.w700,
         color: primary,
+        letterSpacing: 1.2,
       );
 
   TextStyle get h3 => TextStyle(
         fontSize: 22.sp,
         fontWeight: FontWeight.bold,
         color: primary,
+        letterSpacing: 1.2,
       );
 
   TextStyle get h4 => TextStyle(
         fontSize: 20.sp,
         fontWeight: FontWeight.bold,
         color: primary,
+        letterSpacing: 1.2,
       );
 
   TextStyle get h5 => TextStyle(
         fontSize: 18.sp,
         fontWeight: FontWeight.bold,
         color: primary,
+        letterSpacing: 1.2,
       );
 
   TextStyle get body1 => TextStyle(
         fontSize: 16.sp,
         color: primary,
         fontWeight: FontWeight.w600,
+        letterSpacing: 1.2,
       );
 
   TextStyle get body2 => TextStyle(

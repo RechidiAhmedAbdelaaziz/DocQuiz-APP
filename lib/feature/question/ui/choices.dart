@@ -12,24 +12,26 @@ class _QuestionChoices extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: question.choices.map((choice) {
-        return _Choice(
-          choice: choice,
-          prefix:
-              Constants.ALPHABET[question.choices.indexOf(choice)],
-          isCorrect: context
-              .read<QuestionCubit>()
-              .state
-              .question!
-              .question
-              .correctAnswers!
-              .contains(choice),
-          isAnswered: isAnswered,
-          onSelect: (choice) =>
-              context.read<QuestionCubit>().choseAnswer = choice,
-        );
-      }).toList(),
+    return SingleChildScrollView(
+      child: Column(
+        children: question.choices.map((choice) {
+          return _Choice(
+            choice: choice,
+            prefix:
+                Constants.ALPHABET[question.choices.indexOf(choice)],
+            isCorrect: context
+                .read<QuestionCubit>()
+                .state
+                .question!
+                .question
+                .correctAnswers!
+                .contains(choice),
+            isAnswered: isAnswered,
+            onSelect: (choice) =>
+                context.read<QuestionCubit>().choseAnswer = choice,
+          );
+        }).toList(),
+      ),
     );
   }
 }
@@ -98,7 +100,6 @@ class _Choice extends StatelessWidget {
           borderRadius: BorderRadius.circular(14.r),
         ),
         child: Row(
-          
           children: [
             CircleAvatar(
               backgroundColor: prefixColor,

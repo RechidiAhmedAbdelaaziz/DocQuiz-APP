@@ -76,7 +76,8 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void answerQuestion() {
     emit(state._answerQuestion(myChoices));
-    print(state._questions.length);
+
+    emit(state._saveTime(_timeCubit.state.seconds));
 
     _timeCubit.stopWhenStopwatch();
 

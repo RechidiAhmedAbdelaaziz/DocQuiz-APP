@@ -6,6 +6,8 @@ import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/exam/data/model/exam.model.dart';
 import 'package:app/feature/exam/logic/exam.cubit.dart';
+import 'package:app/feature/home/logic/home.cubit.dart';
+import 'package:app/feature/question/data/model/question.model.dart';
 import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
@@ -53,6 +55,7 @@ class _ExamItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeCubit = context.read<HomeCubit>();
     return Container(
       margin: EdgeInsets.only(bottom: 15.h),
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
@@ -80,8 +83,15 @@ class _ExamItem extends StatelessWidget {
               _buildActionButton(
                 color: Colors.green,
                 icon: Icons.play_arrow,
-                onTap: () {
-                  context.to(QuestionRoute.exam(exam));
+                onTap: () async {
+                  final questions =
+                      await context.to<List<QuestionResultModel?>>(
+                          QuestionRoute.exam(exam));
+                  if (questions != null) {
+                    homeCubit.showQuestionsResult(
+                        exam.title!, questions,
+                        totalTemps: exam.time);
+                  }
                 },
               ),
             ],

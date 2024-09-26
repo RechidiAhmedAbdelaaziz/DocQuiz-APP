@@ -1,4 +1,3 @@
-import 'package:app/app.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';

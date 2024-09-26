@@ -15,6 +15,8 @@ class QuestionState extends ErrorState {
   final int _currentIndex;
   final int _max;
 
+  List<QuestionResultModel?> get questions => _questions;
+
   bool exists(int index) => _questions[index] != null;
   bool isAnswered(int index) =>
       _questions[index]?.result.isAnswerd == true;
@@ -51,6 +53,7 @@ class QuestionState extends ErrorState {
   QuestionState _saveTime(int time) {
     _questions[_currentIndex] =
         _questions[_currentIndex]!.saveTime(time);
+
     return _copyWith(questions: _questions);
   }
 

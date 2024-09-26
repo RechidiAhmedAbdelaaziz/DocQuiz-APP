@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 extension NavigatorExtension on BuildContext {
   /// Navigate to a named route with the provided AbstractRoute
-  Future<T?> to<T>(RouteBase route, {bool canPop = true}) async {
+  Future<T?> to<T>(RouteBase<T> route, {bool canPop = true}) async {
     if (!canPop) route.navigator = NoPopNavigator<T>();
 
     return await _tryNavigate<T>(() => Navigator.of(this)
@@ -39,7 +39,7 @@ extension NavigatorExtension on BuildContext {
   /// Pop the current route off the navigator stack
   void back<T>([T? result]) {
     if (!Navigator.of(this).canPop()) return;
-    Navigator.of(this).pop(result);
+    Navigator.of(this).pop<T>(result);
   }
 
   /// Pop routes until the root route is reached

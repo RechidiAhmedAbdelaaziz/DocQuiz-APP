@@ -29,7 +29,7 @@ class NoteCubit extends Cubit<NoteState> {
     );
   }
 
-  void updateNotes(String index, String newNote) async {
+  void updateNotes(int index, String newNote) async {
     final result = await _noteRepo.updateNotes(
       state.note!.id,
       index,
@@ -42,7 +42,7 @@ class NoteCubit extends Cubit<NoteState> {
     );
   }
 
-  void deleteNotes(String index) async {
+  void deleteNotes(int index) async {
     final result = await _noteRepo.updateNotes(
       state.note!.id,
       index,

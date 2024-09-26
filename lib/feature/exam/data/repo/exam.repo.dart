@@ -11,7 +11,7 @@ class ExamRepo {
   RepoListResult<ExamModel> getExams(KeywordQuery query) async {
     apiCall() async {
       final response = await _examApi.getExams(
-          query.toJson()); //TODO Fix the problem in  BACKEND
+          query.toJson()); 
       return response.data!
           .map((e) => ExamModel.fromJson(e))
           .toList();

@@ -5,6 +5,7 @@ import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';
+import 'package:app/feature/question/data/model/question.model.dart';
 import 'package:app/feature/question/helper/question.route.dart';
 import 'package:app/feature/quiz/data/models/quiz.model.dart';
 import 'package:app/feature/quiz/module/quizlist/logic/quiz.cubit.dart';
@@ -95,10 +96,11 @@ class _QuizItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       final quiz = context.watch<QuizCubit>().state.quiz;
+      final homeCubit = context.read<HomeCubit>();
       return Container(
         margin: EdgeInsets.only(bottom: 15.h),
         padding:
-            EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+            EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
         decoration: BoxDecoration(
           color: context.colors.background,
           borderRadius: BorderRadius.circular(12.r),
@@ -124,14 +126,21 @@ class _QuizItem extends StatelessWidget {
                 _buildActionButton(
                   color: Colors.green,
                   icon: Icons.play_arrow_rounded,
-                  onTap: () {
-                    context.to(QuestionRoute.quiz(quiz));
+                  onTap: () async {
+                    final questions =
+                        await context.to<List<QuestionResultModel?>>(
+                            QuestionRoute.quiz(quiz));
+                    if (questions != null) {
+                      homeCubit.showQuestionsResult(
+                          quiz.title!, questions);
+                    }
                   },
                 ),
                 _buildActionButton(
                   color: Colors.orange,
                   icon: Icons.equalizer_outlined,
-                  onTap: () {},
+                  onTap: () =>
+                      context.read<HomeCubit>().showQuizResult(quiz),
                 ),
                 _buildActionButton(
                   color: Colors.teal,
@@ -313,19 +322,20 @@ class MultiStageProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = 300.w;
+    final width = 285.w;
+
     return Container(
       // height: 10.h,
       width: width,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         color: Colors.grey,
-        borderRadius: BorderRadius.circular(10.r),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Row(
         children: [
           Container(
-            height: 24.h,
+            height: 20.h,
             width: width * (correct / total),
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -337,7 +347,7 @@ class MultiStageProgressBar extends StatelessWidget {
             ),
           ),
           Container(
-            height: 24.h,
+            height: 20.h,
             width: width * ((answerd - correct) / total),
             alignment: Alignment.center,
             decoration: const BoxDecoration(
