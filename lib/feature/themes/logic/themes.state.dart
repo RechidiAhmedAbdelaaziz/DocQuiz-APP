@@ -13,7 +13,7 @@ class _DarkTheme extends ThemesState {
           theme: ThemeData(
             primaryColor: locator<AppColors>().primary,
             scaffoldBackgroundColor: locator<AppColors>().background,
-            fontFamily: 'Carthage',
+            fontFamily: 'Varela Round',
           ),
         );
 }
@@ -24,7 +24,7 @@ class _LightTheme extends ThemesState {
           theme: ThemeData(
             primaryColor: locator<AppColors>().primary,
             scaffoldBackgroundColor: locator<AppColors>().background,
-            fontFamily: 'Carthage',
+            fontFamily: 'Varela Round',
             // increase space between letters
           ),
         );

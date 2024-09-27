@@ -19,14 +19,17 @@ class _SourcesBox extends StatelessWidget {
           AppDropDown(
             title: 'A partir de l\'année :',
             items: [
+              '- Acune -',
               for (var i = DateTime.now().year; i >= 2000; i--)
                 i.toString()
             ],
-            value: filter.year.toString(),
+            value: filter.year == 0
+                ? '- Acune -'
+                : filter.year.toString(),
             onChanged: (value) {
               context
                   .read<CreateQuizCubit>()
-                  .updateYear(int.parse(value!));
+                  .updateYear(int.tryParse(value!) ?? 0);
             },
             icon: const Icon(Icons.calendar_today),
           ),
@@ -76,7 +79,8 @@ class AppDropDown extends StatelessWidget {
   final Icon? icon;
   final String? value;
 
-  const AppDropDown({super.key, 
+  const AppDropDown({
+    super.key,
     required this.title,
     required this.items,
     required this.onChanged,

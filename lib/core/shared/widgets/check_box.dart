@@ -34,10 +34,13 @@ class AppCheckBox extends StatelessWidget {
             size: canSelect ? 25.sp : 20.sp,
           ),
           width(5),
-          Text(
-            title,
-            style: context.textStyles.body1.copyWith(
-              fontSize: 20.sp,
+          Expanded(
+            child: Text(
+              title,
+              maxLines: 2,
+              style: context.textStyles.body1.copyWith(
+                fontSize: 17.sp,
+              ),
             ),
           ),
         ],
