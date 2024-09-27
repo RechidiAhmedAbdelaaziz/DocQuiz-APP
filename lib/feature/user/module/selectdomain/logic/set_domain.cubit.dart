@@ -40,8 +40,6 @@ class SetDomainCubit extends Cubit<SetDomainState> {
       return;
     }
 
-    emit(state._done());
-
     final result = await _userRepo.updateProfile(
       domainId: state.domain?.id,
       levelId: state.level?.id,

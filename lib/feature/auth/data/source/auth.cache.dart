@@ -18,7 +18,7 @@ class AuthCache {
   }
 
   Future<void> setDomain(String domain) async {
-    await _cacheHelper.setSecuredString(
+    await _cacheHelper.setData(
       'DOMAIN',
       domain,
     );
@@ -31,11 +31,11 @@ class AuthCache {
       await _cacheHelper.getSecuredString('REFRESH_TOKEN');
 
   Future<String?> get domain async =>
-      await _cacheHelper.getSecuredString('DOMAIN');
+      await _cacheHelper.getString('DOMAIN');
 
   Future<void> clearTokens() async {
     await _cacheHelper.removeSecuredData('ACCESS_TOKEN');
     await _cacheHelper.removeSecuredData('REFRESH_TOKEN');
-    await _cacheHelper.removeSecuredData('DOMAIN');
+    await _cacheHelper.removeData('DOMAIN');
   }
 }

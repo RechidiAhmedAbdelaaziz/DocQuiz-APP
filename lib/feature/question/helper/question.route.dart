@@ -46,7 +46,7 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => TimeCubit(),
+                create: (context) => TimeCubit(autoStart: false),
               ),
               BlocProvider(
                 create: (context) => QuestionCubit(
@@ -56,7 +56,9 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
                         .getQuizQuestions(quiz.id!, query: query);
                   },
                   timeCubit: context.read<TimeCubit>(),
-                  onAnswered: (question) {
+                  correctIndexes: quiz.coerrectIndexes,
+                  wrongIndexes: quiz.wrongIndexes,
+                  onAnswered: (question, index) {
                     locator<QuizRepo>().updateQuiz(
                       id: quiz.id!,
                       updates: UpdateQuizBody(
@@ -66,17 +68,17 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
                           choices: question.result.choices,
                           time: question.result.time,
                         ),
+                        lastAnsweredIndex: index,
                       ),
                     );
                   },
-                )..fetchQuestions(),
+                )..toQuestion(quiz.lastAnsweredIndex ?? 0,
+                    isInitial: true),
               ),
             ],
             child: QuestionScreen(title: quiz.title!),
           ),
         );
-
-
 
   static const String playlistQuestion = '/playlist';
 
@@ -93,7 +95,8 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
                   playlist.totalQuestions!,
                   (query) {
                     return locator<QuestionRepo>()
-                        .getPlaylistQuestions(playlist.id!, query: query);
+                        .getPlaylistQuestions(playlist.id!,
+                            query: query);
                   },
                   timeCubit: context.read<TimeCubit>(),
                 )..fetchQuestions(),

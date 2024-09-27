@@ -14,6 +14,8 @@ class QuizModel extends Equatable {
     required this.title,
     required this.createdAt,
     required this.updatedAt,
+    required this.coerrectIndexes,
+    required this.wrongIndexes,
   });
 
   @JsonKey(name: '_id')
@@ -25,6 +27,8 @@ class QuizModel extends Equatable {
   final String? title;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final List<int> coerrectIndexes;
+  final List<int> wrongIndexes;
 
   factory QuizModel.fromJson(Map<String, dynamic> json) =>
       _$QuizModelFromJson(json);

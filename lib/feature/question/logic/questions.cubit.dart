@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'question.state.dart';
 
-typedef _OnAnswered = void Function(QuestionResultModel question);
+typedef _OnAnswered = void Function(
+    QuestionResultModel question, int index);
 
 class QuestionCubit extends Cubit<QuestionState> {
   final RepoListResult<QuestionResultModel> Function(
@@ -20,11 +21,17 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   final TimeCubit _timeCubit;
 
-  QuestionCubit(int max, this._fetchFunction,
-      {_OnAnswered? onAnswered, required TimeCubit timeCubit})
-      : _onAnswered = onAnswered,
+  QuestionCubit(
+    int max,
+    this._fetchFunction, {
+    _OnAnswered? onAnswered,
+    required TimeCubit timeCubit,
+    List<int> correctIndexes = const [],
+    List<int> wrongIndexes = const [],
+  })  : _onAnswered = onAnswered,
         _timeCubit = timeCubit,
-        super(QuestionState.initial(max));
+        super(
+            QuestionState.initial(max, correctIndexes, wrongIndexes));
 
   final _query = PaginationQuery(page: 1, limit: 10);
 
@@ -56,14 +63,14 @@ class QuestionCubit extends Cubit<QuestionState> {
     }
   }
 
-  void toQuestion(int index) async {
+  void toQuestion(int index, {bool isInitial = false}) async {
     if (index != state._currentIndex) myChoices.clear();
 
     if (!state.exists(index)) {
       await fetchQuestions(page: state.page(index));
     }
 
-    emit(state._saveTime(_timeCubit.state.seconds));
+    if (!isInitial) emit(state._saveTime(_timeCubit.state.seconds));
 
     emit(state._toQuestion(index));
 
@@ -81,7 +88,7 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     _timeCubit.stopWhenStopwatch();
 
-    _onAnswered?.call(state.question!);
+    _onAnswered?.call(state.question!, state._currentIndex);
   }
 
   Future<void> fetchQuestions({int? page}) async {

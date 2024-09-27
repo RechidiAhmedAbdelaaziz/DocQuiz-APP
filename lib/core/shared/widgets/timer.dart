@@ -50,8 +50,9 @@ class TimerState {
 class TimeCubit extends Cubit<TimerState> {
   final int? time;
 
-  TimeCubit({this.time}) : super(TimerState._initial(time: time)) {
-    start();
+  TimeCubit({this.time, bool autoStart = true})
+      : super(TimerState._initial(time: time)) {
+    if (autoStart) start();
   }
 
   Timer? _timer;

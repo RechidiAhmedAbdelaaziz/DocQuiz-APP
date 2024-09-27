@@ -6,22 +6,33 @@ class QuestionState extends ErrorState {
     int currentIndex = 0,
     required int max,
     String? error,
+    List<int>? correctIndexes,
+    List<int>? wrongIndexes,
   })  : _max = max,
         _currentIndex = currentIndex,
         _questions = questions,
+        _correctIndexes = correctIndexes ?? [],
+        _wrongIndexes = wrongIndexes ?? [],
         super(error);
 
   final List<QuestionResultModel?> _questions;
   final int _currentIndex;
   final int _max;
+  final List<int> _correctIndexes;
+  final List<int> _wrongIndexes;
 
   List<QuestionResultModel?> get questions => _questions;
 
   bool exists(int index) => _questions[index] != null;
   bool isAnswered(int index) =>
-      _questions[index]?.result.isAnswerd == true;
+      _questions[index]?.result.isAnswerd == true ||
+      _correctIndexes.contains(index) ||
+      _wrongIndexes.contains(index);
+
   bool isCorrect(int index) =>
-      _questions[index]?.result.isCorrect == true;
+      _questions[index]?.result.isCorrect == true ||
+      _correctIndexes.contains(index);
+
   bool isCurrent(int index) => _currentIndex == index;
 
   int get max => _max;
@@ -41,8 +52,14 @@ class QuestionState extends ErrorState {
     }
   }
 
-  factory QuestionState.initial(int max) =>
-      QuestionState(questions: List.filled(max, null), max: max);
+  factory QuestionState.initial(int max, List<int> correctIndexes,
+          List<int> wrongIndexes) =>
+      QuestionState(
+        questions: List.filled(max, null),
+        max: max,
+        correctIndexes: correctIndexes,
+        wrongIndexes: wrongIndexes,
+      );
 
   QuestionState _answerQuestion(List<String> choices) {
     _questions[_currentIndex] =
@@ -51,6 +68,7 @@ class QuestionState extends ErrorState {
   }
 
   QuestionState _saveTime(int time) {
+    if (question == null) return this;
     _questions[_currentIndex] =
         _questions[_currentIndex]!.saveTime(time);
 
