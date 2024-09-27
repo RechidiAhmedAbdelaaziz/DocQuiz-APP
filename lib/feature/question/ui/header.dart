@@ -44,9 +44,16 @@ class _Header extends StatelessWidget {
           width(12),
           _buildButton(
             icon: Icons.save,
-            onPressed: () {},
+            onPressed: () {
+              context.showPopUp(
+                  content: BlocProvider(
+                create: (context) =>
+                    PlaylistCubit()..fetchPlaylists(),
+                child: SavePlaylist(),
+              ));
+            },
           ),
-        
+
           width(10),
           const AppTimer(),
         ],

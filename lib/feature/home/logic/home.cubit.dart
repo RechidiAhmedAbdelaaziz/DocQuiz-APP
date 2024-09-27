@@ -15,20 +15,21 @@ part 'home.state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(_Dashboard());
 
-  void showDashboard() => _goTo(_Dashboard());
-  void showMyQuiz() => _goTo(_MyQuiz());
-  void showCreateQuiz() => _goTo(_CreateQuiz());
-  void showPlayList() => _goTo(_PlayList());
-  void showExam() => _goTo(_Exam());
-  void showProfile() => _goTo(_Profile());
+  void showDashboard() => _goTo(() => _Dashboard());
+  void showMyQuiz() => _goTo(() => _MyQuiz());
+  void showCreateQuiz() => _goTo(() => _CreateQuiz());
+  void showPlayList() => _goTo(() => _PlayList());
+  void showExam() => _goTo(() => _Exam());
+  void showProfile() => _goTo(() => _Profile());
   void showQuizResult(QuizModel quiz) =>
-      _goTo(_QuizResult.quiz(quiz));
+      _goTo(() => _QuizResult.quiz(quiz));
   void showQuestionsResult(
     String title,
     List<QuestionResultModel?> questions, {
     int? totalTemps,
   }) =>
-      _goTo(_QuizResult.questions(title, questions, totalTemps));
+      _goTo(
+          () => _QuizResult.questions(title, questions, totalTemps));
 
   void refresh() {
     emit(_Loading());
@@ -65,9 +66,12 @@ class HomeCubit extends Cubit<HomeState> {
     if (last != null) emit(last);
   }
 
-  void _goTo<T extends HomeState>(T newState,
+  void _goTo<T extends HomeState>(T Function() newState,
       {bool refresh = false}) {
-    if (state is T && !refresh) return;
-    emit(newState);
+    if (state.runtimeType == T) return;
+
+    print("${state.runtimeType} => ${newState.runtimeType}");
+    print("isEquals: ${state.runtimeType == newState.runtimeType}");
+    emit(newState());
   }
 }

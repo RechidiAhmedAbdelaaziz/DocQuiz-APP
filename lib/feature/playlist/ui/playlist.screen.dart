@@ -38,7 +38,8 @@ class PlayListScreen extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       context.showPopUp(
-                        content: _NamePopup(
+                        content: NamePopup(
+                          title: 'Nom de la playlist',
                           onSave: (title) => context
                               .read<PlaylistCubit>()
                               .createPlaylist(title),
@@ -127,8 +128,9 @@ class _PlayListItem extends StatelessWidget {
                 icon: Icons.edit,
                 onTap: () {
                   context.showPopUp(
-                    content: _NamePopup(
+                    content: NamePopup(
                       initial: playlist.title,
+                      title: 'Nom de la playlist',
                       onSave: (title) => context
                           .read<PlaylistCubit>()
                           .updatePlaylist(playlist, title: title),
@@ -191,12 +193,16 @@ class _PlayListItem extends StatelessWidget {
   }
 }
 
-class _NamePopup extends StatelessWidget {
-  _NamePopup({required this.onSave, String? initial})
-      : controller = TextEditingController(text: initial);
+class NamePopup extends StatelessWidget {
+  NamePopup({
+    required this.onSave,
+    String? initial,
+    required this.title,
+  }) : controller = TextEditingController(text: initial);
 
   final TextEditingController controller;
   final void Function(String) onSave;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -227,7 +233,7 @@ class _NamePopup extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '  Nom du playlist',
+                  '  $title',
                   style: context.textStyles.h4,
                 ),
                 height(10),

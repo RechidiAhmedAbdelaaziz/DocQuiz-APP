@@ -1,6 +1,8 @@
+import 'package:app/core/di/container.dart';
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/theme/icons.dart';
 import 'package:app/core/theme/spaces.dart';
+import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:app/feature/themes/widget/switch_themes.dart';
 import 'package:flutter/material.dart';
@@ -66,13 +68,77 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
+  // Widget _buildProfileButton(BuildContext context) {
+  //   return IconButton(
+  //     icon: SvgPicture.asset(
+  //       AppIcons.profile,
+  //       height: 45.h,
+  //     ),
+  //     onPressed: () => context.read<HomeCubit>().showProfile(),
+  //   );
+  // }
+
   Widget _buildProfileButton(BuildContext context) {
-    return IconButton(
-      icon: SvgPicture.asset(
+    return PopupMenuButton(
+      child: SvgPicture.asset(
         AppIcons.profile,
         height: 45.h,
       ),
-      onPressed: () => context.read<HomeCubit>().showProfile(),
+      color: context.colors.background,
+      itemBuilder: (_) {
+        return [
+          _buildPopupItem(
+            context,
+            title: 'Profile',
+            icon: Icons.person,
+            color: context.colors.dark,
+            onTap: () => context.read<HomeCubit>().showProfile(),
+            withDivider: true,
+          ),
+          _buildPopupItem(
+            context,
+            title: 'Logout',
+            icon: Icons.logout,
+            color: Colors.red,
+            onTap: () => locator<AuthCubit>().onLogOut(),
+          ),
+        ];
+      },
+    );
+  }
+
+  PopupMenuItem _buildPopupItem(
+    BuildContext context, {
+    required String title,
+    required VoidCallback onTap,
+    IconData? icon,
+    Color? color,
+    bool withDivider = false,
+  }) {
+    return PopupMenuItem(
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              onTap();
+              Navigator.pop(context);
+            },
+            child: Row(
+              children: [
+                Icon(icon, color: color),
+                width(10),
+                Text(title,
+                    style: context.textStyles.body1
+                        .copyWith(color: color)),
+              ],
+            ),
+          ),
+          // if (withDivider) ...[
+          //   height(10),
+          //   const Divider(),
+          // ],
+        ],
+      ),
     );
   }
 
