@@ -166,7 +166,7 @@ class _QuestionInfo extends StatelessWidget {
         type = question.type!,
         source = question.sources
                 ?.map((e) =>
-                    '${e.source?.name}${e.year! > 0 ? '| ${e.year}' : ''}')
+                    '${e.source == null ? '' : e.source!.name}${e.year! > 0 ? '| ${e.year}' : ''}')
                 .toList() ??
             [];
 
@@ -251,18 +251,22 @@ class _QuestionInfo extends StatelessWidget {
   }
 
   Widget _buildSource() {
-    return Wrap(
-      spacing: 5.w,
-      runSpacing: 4.h,
-      children: source
-          .map(
-            (e) => _buildInfo(
-              e,
-              Colors.teal,
-              isSource: true,
-            ),
-          )
-          .toList(),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: source
+            .map(
+              (e) => Padding(
+                padding: EdgeInsets.symmetric(horizontal: 6.w),
+                child: _buildInfo(
+                  e,
+                  Colors.teal,
+                  isSource: true,
+                ),
+              ),
+            )
+            .toList(),
+      ),
     );
   }
 
