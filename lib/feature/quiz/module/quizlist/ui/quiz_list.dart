@@ -98,9 +98,9 @@ class _QuizItem extends StatelessWidget {
       final quiz = context.watch<QuizCubit>().state.quiz;
       final homeCubit = context.read<HomeCubit>();
       return Container(
-        margin: EdgeInsets.only(bottom: 15.h),
+        margin: EdgeInsets.only(bottom: 10.h),
         padding:
-            EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
+            EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
         decoration: BoxDecoration(
           color: context.colors.background,
           borderRadius: BorderRadius.circular(12.r),
@@ -111,20 +111,18 @@ class _QuizItem extends StatelessWidget {
           children: [
             Text(
               quiz.title!,
-              maxLines: 3,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: context.textStyles.h5,
             ),
-            height(15),
+            height(6),
             _buildAnswersSlider(context, quiz),
-            height(15),
             const Divider(),
-            height(10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _buildActionButton(
-                  color: Colors.green,
+                  color: const Color(0xff26425E),
                   icon: Icons.play_arrow_rounded,
                   onTap: () async {
                     final questions =
@@ -189,10 +187,10 @@ class _QuizItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(10.r),
+        padding: EdgeInsets.all(2.r),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(20.r),
+          borderRadius: BorderRadius.circular(8.r),
         ),
         child: Icon(
           icon,
@@ -214,11 +212,12 @@ class _QuizItem extends StatelessWidget {
             style: context.textStyles.body1,
           ),
         ),
-        height(10),
+        height(2),
         MultiStageProgressBar(
           answerd: answered,
           correct: 0,
           total: total,
+          primary: Colors.teal,
         ),
       ],
     );
@@ -312,19 +311,19 @@ class MultiStageProgressBar extends StatelessWidget {
   final int correct;
   final int total;
   final int answerd;
+  final Color? primary;
 
   const MultiStageProgressBar({
     super.key,
     required this.answerd,
     required this.correct,
     required this.total,
+    this.primary,
   });
 
   @override
   Widget build(BuildContext context) {
     final width = 285.w;
-
-    
 
     return Container(
       // height: 10.h,
@@ -337,11 +336,11 @@ class MultiStageProgressBar extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: 20.h,
+            height: 14.h,
             width: width * (correct / total),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: primary ?? Colors.green,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10.r),
                 bottomLeft: Radius.circular(10.r),
@@ -349,11 +348,11 @@ class MultiStageProgressBar extends StatelessWidget {
             ),
           ),
           Container(
-            height: 20.h,
+            height: 14.h,
             width: width * ((answerd - correct) / total),
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              color: Colors.red,
+            decoration: BoxDecoration(
+              color: primary ?? Colors.red,
             ),
           ),
         ],

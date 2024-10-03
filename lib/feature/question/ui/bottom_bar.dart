@@ -213,7 +213,7 @@ class _Explination extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 6.w),
             child: Text(
               explication ?? 'Il n\'y a pas d\'explication',
-              style: context.textStyles.body1.copyWith(
+              style: context.textStyles.h5.copyWith(
                 color: context.colors.dark,
               ),
             ),

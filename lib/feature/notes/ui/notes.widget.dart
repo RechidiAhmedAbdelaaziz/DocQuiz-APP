@@ -42,7 +42,7 @@ class _Notes extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(note.note!, style: context.textStyles.body1),
+                Text(note.note!, style: context.textStyles.h5),
                 height(10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

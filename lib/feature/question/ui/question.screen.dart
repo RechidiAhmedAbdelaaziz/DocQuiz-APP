@@ -221,12 +221,7 @@ class _QuestionInfo extends StatelessWidget {
           ),
         ),
         height(10),
-        Row(
-          children: [
-            width(20),
-            _buildSource(),
-          ],
-        ),
+        _buildSource(),
       ],
     );
   }
@@ -253,11 +248,12 @@ class _QuestionInfo extends StatelessWidget {
   Widget _buildSource() {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
       child: Row(
         children: source
             .map(
               (e) => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w),
+                padding: EdgeInsets.symmetric(horizontal: 8.w),
                 child: _buildInfo(
                   e,
                   Colors.teal,
