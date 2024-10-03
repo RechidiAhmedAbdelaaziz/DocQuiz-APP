@@ -166,7 +166,7 @@ class _QuestionInfo extends StatelessWidget {
         type = question.type!,
         source = question.sources
                 ?.map((e) =>
-                    '${e.source == null ? '' : e.source!.name}${e.year! > 0 ? '| ${e.year}' : ''}')
+                    '${e.source?.name ?? ''}${e.year! > 0 ? '| ${e.year}' : ''}')
                 .toList() ??
             [];
 
