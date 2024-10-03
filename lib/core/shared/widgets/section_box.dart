@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SectionBox extends StatelessWidget {
-  const SectionBox({super.key, required this.child});
+  const SectionBox({super.key, required this.child, this.margin});
 
   final Widget child;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 22.w),
+      margin: margin ?? EdgeInsets.symmetric(horizontal: 22.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         color: context.theme.colors.primary,

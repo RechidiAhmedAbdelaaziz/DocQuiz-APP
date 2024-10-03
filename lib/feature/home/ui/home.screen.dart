@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app/core/di/container.dart';
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/theme/icons.dart';
@@ -5,6 +7,8 @@ import 'package:app/core/theme/spaces.dart';
 import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:app/feature/themes/widget/switch_themes.dart';
+import 'package:app/feature/updates/logic/updtes.cubit.dart';
+import 'package:app/feature/updates/ui/updates.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,10 +34,12 @@ class HomeScreen extends StatelessWidget {
         drawer: const _Drawer(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.r)),
           onPressed: () => context.read<HomeCubit>().refresh(),
           child: const Icon(Icons.refresh, color: Colors.white),
+        ),
+        endDrawer: BlocProvider(
+          create: (context) => UpdatesCubit()..fetchUpdates(),
+          child: const NotificationBox(),
         ),
       ),
     );
@@ -50,8 +56,35 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: _buildDrawerButton(context),
       actions: [
         const SwitchThemesButton(),
-        width(20),
+        width(12),
+        _buildUpdatesButton(context),
+        width(12),
         _buildProfileButton(context),
+        width(10)
+      ],
+    );
+  }
+
+  Widget _buildUpdatesButton(BuildContext context) {
+    return Stack(
+      children: [
+        Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationY(pi),
+          child: IconButton(
+            icon: Image.asset(
+              'assets/png/new.png',
+              height: 40.h,
+              color: context.colors.dark,
+             
+            ),
+            onPressed: () => Scaffold.of(context).openEndDrawer(),
+          ),
+        ),
+        // CircleAvatar(
+        //   radius: 10.r,
+        //   backgroundColor: context.colors.dark,
+        // ),
       ],
     );
   }
@@ -80,10 +113,6 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   Widget _buildProfileButton(BuildContext context) {
     return PopupMenuButton(
-      child: SvgPicture.asset(
-        AppIcons.profile,
-        height: 45.h,
-      ),
       color: context.colors.background,
       itemBuilder: (_) {
         return [
@@ -104,6 +133,10 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ];
       },
+      child: SvgPicture.asset(
+        AppIcons.profile,
+        height: 45.h,
+      ),
     );
   }
 

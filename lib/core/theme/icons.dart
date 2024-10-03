@@ -13,7 +13,9 @@ abstract class AppIcons {
   static const String menu = '$_svgPath/menu.svg';
 
   static const String profile = '$_svgPath/profile.svg';
+}
 
-
-  
+abstract class AppSounds {
+  static const String invalid = 'sounds/invalid.mp3';
+  static const String valid = 'sounds/valid.wav';
 }

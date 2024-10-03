@@ -28,5 +28,9 @@ abstract class ApiConstants {
   // * PLAYLIST
   static const PLAYLIST = 'playlist';
   static const PLAYLIST_ID = 'playlist/{id}';
+  static const PLAYLIST_QUESTION_QID =
+      'playlist/question/{questionId}';
 
+  // * UPDATES
+  static const UPDATES = 'updates';
 }

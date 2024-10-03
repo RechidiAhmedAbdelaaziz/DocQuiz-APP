@@ -48,8 +48,9 @@ class _Header extends StatelessWidget {
               context.showPopUp(
                   content: BlocProvider(
                 create: (context) =>
-                    PlaylistCubit()..fetchPlaylists(),
-                child: SavePlaylist(),
+                    SavePlaylistCubit(question.question)
+                      ..fetchPlaylists(),
+                child: const SavePlaylist(),
               ));
             },
           ),

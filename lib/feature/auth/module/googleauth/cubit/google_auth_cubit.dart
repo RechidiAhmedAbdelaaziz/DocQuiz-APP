@@ -15,11 +15,15 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
   Future<void> signIn() async {
     emit(const GoogleAuthState.loading());
 
-    final result = await _authRepo.googleAuth(GoogleSignIn(
-      scopes: ['email', 'profile'],
-      serverClientId:
-          '657663867003-b4vdfcag1puldl32phnb9hukflg53fh1.apps.googleusercontent.com',
-    ));
+    final result = await _authRepo.googleAuth(
+      GoogleSignIn(
+        scopes: ['email', 'profile'],
+        // serverClientId:
+        //     '657663867003-79o4kjpcm60aq18096bhrfsruq0cb3bi.apps.googleusercontent.com',
+        clientId:
+            '657663867003-b4vdfcag1puldl32phnb9hukflg53fh1.apps.googleusercontent.com',
+      ),
+    );
 
     result.when(
       success: (_) => emit(const GoogleAuthState.success()),

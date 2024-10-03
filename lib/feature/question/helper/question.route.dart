@@ -31,7 +31,7 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
                         .getExamQuestions(exam.id!, query: query);
                   },
                   timeCubit: context.read<TimeCubit>(),
-                )..fetchQuestions(),
+                )..toQuestion(0, isInitial: true),
               ),
             ],
             child: QuestionScreen(title: exam.title!),
@@ -95,11 +95,13 @@ class QuestionRoute extends RouteBase<List<QuestionResultModel?>> {
                   playlist.totalQuestions!,
                   (query) {
                     return locator<QuestionRepo>()
-                        .getPlaylistQuestions(playlist.id!,
-                            query: query);
+                        .getPlaylistQuestions(
+                      playlist.id!,
+                      query: query,
+                    );
                   },
                   timeCubit: context.read<TimeCubit>(),
-                )..fetchQuestions(),
+                )..toQuestion(0, isInitial: true),
               ),
             ],
             child: QuestionScreen(title: playlist.title!),

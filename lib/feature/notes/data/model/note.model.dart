@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 class NoteModel {
   final String id;
   final List<_Note> notes;

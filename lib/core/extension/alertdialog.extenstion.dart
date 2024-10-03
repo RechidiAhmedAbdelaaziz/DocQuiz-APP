@@ -61,6 +61,8 @@ extension AlertDialogExtension on BuildContext {
   }) async {
     return showDialog<T>(
       context: this,
+      // barrierDismissible: false,
+
       builder: (context) {
         return content;
       },

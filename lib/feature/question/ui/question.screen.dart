@@ -7,12 +7,13 @@ import 'package:app/core/theme/icons.dart';
 import 'package:app/core/theme/spaces.dart';
 import 'package:app/core/utils/constants.dart';
 import 'package:app/feature/notes/ui/notes.widget.dart';
-import 'package:app/feature/playlist/logic/playlist.cubit.dart';
+import 'package:app/feature/playlist/logic/playlist_save.cubit.dart';
 import 'package:app/feature/playlist/ui/save_playlist.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
 import 'package:app/feature/question/logic/questions.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:app/feature/themes/widget/switch_themes.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +24,7 @@ part 'header.dart';
 part 'choices.dart';
 part 'bottom_bar.dart';
 part 'progress.dart';
+part 'questions.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key, required this.title});
@@ -31,9 +33,10 @@ class QuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final question = context.watch<QuestionCubit>().state.question;
+    final questionResult =
+        context.watch<QuestionCubit>().state.question;
 
-    if (question == null) {
+    if (questionResult == null) {
       return SafeArea(
         child: Scaffold(
           body: LinearProgressIndicator(
@@ -49,28 +52,31 @@ class QuestionScreen extends StatelessWidget {
       appBar: const _AppBar(),
       body: Column(
         children: [
-          _Header(question, title),
+          _Header(questionResult, title),
           height(15),
-          _QuestionInfo(question),
-          height(30),
-          _QuestionText(question),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: 35.w, vertical: 5.h),
-            child: const Divider(),
+          _QuestionInfo(questionResult.question),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  height(30),
+                  _Text(questionResult.question.caseText),
+                  height(12),
+                  _Questions(questionResult),
+                ],
+              ),
+            ),
           ),
-          height(10),
-          Expanded(child: _QuestionChoices(question)),
         ],
       ),
-      bottomNavigationBar: _BottomBar(question),
+      bottomNavigationBar: _BottomBar(questionResult),
       endDrawer: const _Progress(),
     );
   }
 }
 
 class _AppBar extends StatelessWidget implements PreferredSizeWidget {
-  const _AppBar({super.key});
+  const _AppBar();
 
   @override
   Widget build(BuildContext context) {
@@ -150,23 +156,29 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
 
 class _QuestionInfo extends StatelessWidget {
   _QuestionInfo(this.question)
-      : difficulty = question.question.difficulty == 'easy'
-            ? 'Facile'
-            : question.question.difficulty == 'medium'
-                ? 'Moyen'
-                : 'Difficile',
-        type = question.question.type!,
-        source = question.question.source?.name;
+      : difficulty = question.questions?.length == 1
+            ? question.questions![0].difficulty == 'easy'
+                ? 'Facile'
+                : question.questions![0].difficulty == 'medium'
+                    ? 'Moyen'
+                    : 'Difficile'
+            : null,
+        type = question.type!,
+        source = question.sources
+                ?.map((e) =>
+                    '${e.source?.name}${e.year! > 0 ? '| ${e.year}' : ''}')
+                .toList() ??
+            [];
 
-  final QuestionResultModel question;
+  final QuestionModel question;
 
-  final String difficulty;
+  final String? difficulty;
   final String type;
-  final String? source;
+  final List<String> source;
 
   @override
   Widget build(BuildContext context) {
-    final progres = context.read<QuestionCubit>().state.progres;
+    final progres = context.read<QuestionCubit>().state.progress;
 
     return Column(
       children: [
@@ -208,22 +220,24 @@ class _QuestionInfo extends StatelessWidget {
             ],
           ),
         ),
-        if (source != null) ...[
-          height(10),
-          Row(
-            children: [
-              width(20),
-              _buildSource(),
-            ],
-          ),
-        ],
+        height(10),
+        Row(
+          children: [
+            width(20),
+            _buildSource(),
+          ],
+        ),
       ],
     );
   }
 
   Widget _buildDifficulty() {
     return _buildInfo(
-        difficulty,
+        difficulty == 'easy'
+            ? "Facile"
+            : difficulty == 'medium'
+                ? "Moyenne"
+                : "Difficile",
         difficulty == 'Facile'
             ? Colors.green
             : difficulty == 'Moyen'
@@ -237,49 +251,71 @@ class _QuestionInfo extends StatelessWidget {
   }
 
   Widget _buildSource() {
-    return _buildInfo(
-      '$source | ${question.question.year}',
-      Colors.teal[600]!,
-      isSource: true,
+    return Wrap(
+      spacing: 5.w,
+      runSpacing: 4.h,
+      children: source
+          .map(
+            (e) => _buildInfo(
+              e,
+              Colors.teal,
+              isSource: true,
+            ),
+          )
+          .toList(),
     );
   }
 
-  Widget _buildInfo(String value, Color color,
+  Widget _buildInfo(String? value, Color color,
       {bool isSource = false}) {
+    if (value == null) return const SizedBox.shrink();
     return Container(
       padding:
           const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
         color: isSource ? color : null,
         borderRadius: BorderRadius.circular(14.r),
-        border: isSource ? null : Border.all(color: color),
+        border:
+            isSource ? null : Border.all(color: color, width: 1.4),
       ),
       child: Text(
         value,
         style: TextStyle(
           color: isSource ? Colors.white : color,
-          fontSize: 14.sp,
+          fontSize: 15.sp,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
   }
 }
 
-class _QuestionText extends StatelessWidget {
-  const _QuestionText(this.question, {super.key});
+class _Text extends StatelessWidget {
+  const _Text(this.text);
 
-  final QuestionResultModel question;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 3.h),
-      child: Text(
-        question.question.questionText!,
-        maxLines: 12,
-        overflow: TextOverflow.ellipsis,
-        style: context.textStyles.body1,
-      ),
+    if (text == null) return const SizedBox.shrink();
+    return Column(
+      children: [
+        Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: 20.w, vertical: 3.h),
+          child: Text(text!,
+              maxLines: 120,
+              overflow: TextOverflow.ellipsis,
+              style: context.textStyles.body2.copyWith(
+                fontSize: 20.sp,
+              )),
+        ),
+        Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: 35.w, vertical: 5.h),
+          child: const Divider(),
+        ),
+      ],
     );
   }
 }

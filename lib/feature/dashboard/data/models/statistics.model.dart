@@ -11,6 +11,7 @@ class StatisticsModel {
     required this.totalSubscribedUser,
     required this.totalMajor,
     required this.quizDoneToday,
+    required this.totalCCQuestion,
   });
 
   final num? totalExam;
@@ -19,6 +20,7 @@ class StatisticsModel {
   final num? totalSubscribedUser;
   final num? totalMajor;
   final num? quizDoneToday;
+  final int totalCCQuestion;
 
   factory StatisticsModel.fromJson(Map<String, dynamic> json) =>
       _$StatisticsModelFromJson(json);

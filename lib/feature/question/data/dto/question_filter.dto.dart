@@ -10,7 +10,7 @@ class QuestionFilter {
     this.withExplanation = false,
     this.withNotes = false,
     List<SourceModel>? sources,
-    this.year = 2000,
+    this.year = 0,
   })  : courses = courses ?? [],
         difficulties = difficulties ?? [],
         types = types ?? [],

@@ -22,6 +22,12 @@ class _TypesBox extends StatelessWidget {
             onChange: (_) => cubit.updateTypes(['QCU']),
             title: 'Question à choix unique',
           ),
+          height(22),
+          AppCheckBox(
+            value: filter.types.contains('Cas Clinique'),
+            onChange: (_) => cubit.updateTypes(['Cas Clinique']),
+            title: 'Cas Cliniques',
+          ),
         ],
       ),
     );

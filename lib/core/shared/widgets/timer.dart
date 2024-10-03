@@ -103,7 +103,7 @@ class AppTimer extends StatelessWidget {
             : state.seconds < time / 4
                 ? Colors.orange
                 : Colors.teal
-        : state.seconds > 180
+        : state.seconds > 60 * 1.5
             ? Colors.red
             : state.seconds > 60
                 ? Colors.orange

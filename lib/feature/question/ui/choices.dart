@@ -2,36 +2,42 @@ part of 'question.screen.dart';
 
 class _QuestionChoices extends StatelessWidget {
   _QuestionChoices(
-    this.question,
-  )   : isAnswered = question.result.isAnswerd ?? false,
-        isMultiple = question.question.type == 'QCM';
+    this.question, {
+    required this.isAnswered,
+    required this.index,
+    this.myChoices = const [],
+  })  : answers = question.answers,
+        isMultiple = question.isMultiple;
 
-  final QuestionResultModel question;
+  final int index;
+  final Question question;
+  final List<Answer> answers;
+  final List<List<int>> myChoices;
   final bool isAnswered;
   final bool isMultiple;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: question.choices.map((choice) {
+    final cubit = context.watch<QuestionCubit>();
+
+    return Column(
+      children: [
+        ...answers.map((answer) {
           return _Choice(
-            choice: choice,
-            prefix:
-                Constants.ALPHABET[question.choices.indexOf(choice)],
-            isCorrect: context
-                .read<QuestionCubit>()
-                .state
-                .question!
-                .question
-                .correctAnswers!
-                .contains(choice),
+            choice: answer.text!,
+            prefix: Constants.ALPHABET[answers.indexOf(answer)],
+            isCorrect: answer.isCorrect == true,
             isAnswered: isAnswered,
-            onSelect: (choice) =>
-                context.read<QuestionCubit>().choseAnswer = choice,
+            isSelected: myChoices.isEmpty
+                ? cubit.myChoices[index]
+                    .contains(answers.indexOf(answer))
+                : myChoices[index].contains(answers.indexOf(answer)),
+            onSelect: () =>
+                cubit.choseAnswer(question, answers.indexOf(answer)),
           );
-        }).toList(),
-      ),
+        }),
+        height(12.h)
+      ],
     );
   }
 }
@@ -42,21 +48,19 @@ class _Choice extends StatelessWidget {
     required this.choice,
     required this.isCorrect,
     required this.isAnswered,
+    required this.isSelected,
     this.onSelect,
   });
 
+  final bool isSelected;
   final String choice;
   final bool isCorrect;
   final bool isAnswered;
   final String prefix;
-  final void Function(String choice)? onSelect;
+  final void Function()? onSelect;
 
   @override
   Widget build(BuildContext context) {
-    final myChoices = context.watch<QuestionCubit>().myChoices;
-
-    final isSelected = myChoices.contains(choice);
-
     final boxColor = isAnswered
         ? isSelected
             ? isCorrect
@@ -87,7 +91,7 @@ class _Choice extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        onSelect?.call(choice);
+        onSelect?.call();
       },
       child: Container(
         width: double.infinity,
@@ -116,8 +120,10 @@ class _Choice extends StatelessWidget {
               child: Text(
                 choice,
                 maxLines: 25,
-                style: context.textStyles.body1
-                    .copyWith(color: textColor),
+                style: context.textStyles.body2.copyWith(
+                  color: textColor,
+                  fontSize: 20.sp,
+                ),
               ),
             ),
           ],

@@ -21,6 +21,12 @@ abstract class PlaylistApi {
   Future<DataResponse> updatePlaylist(
       @Path('id') String id, @Body() Map<String, dynamic> body);
 
+  @PATCH(ApiConstants.PLAYLIST_QUESTION_QID)
+  Future<MessageResponse> addQuestionToPlaylist(
+    @Path('questionId') String questionId,
+    @Body() Map<String, dynamic> body,
+  );
+
   @DELETE(ApiConstants.PLAYLIST_ID)
   Future<MessageResponse> deletePlaylist(@Path('id') String id);
 }

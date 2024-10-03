@@ -6,14 +6,13 @@ class _Drawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<HomeCubit>();
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+    return SafeArea(
       child: Drawer(
         backgroundColor: context.colors.background,
         child: Column(
           children: [
             const _DrawerHeader(),
-            height(12),
+            height(5),
             ...[
               _DrawerItemModel(
                 title: 'Tableau de bord',

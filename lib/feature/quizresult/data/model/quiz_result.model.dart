@@ -40,7 +40,7 @@ class QuizResultModel {
     final results = questions.map((e) => e?.result).toList();
 
     final correctAnswers =
-        results.where((e) => e?.isCorrect == true).length;
+        results.where((e) => e?.isAllCorrect == true).length;
 
     final nonAnswered =
         results.where((e) => e?.isAnswerd != true).length;
@@ -57,7 +57,7 @@ class QuizResultModel {
       0,
       (previousValue, element) =>
           previousValue +
-          (element?.isCorrect == true ? element?.time ?? 0 : 0),
+          (element?.isAllCorrect == true ? element?.time ?? 0 : 0),
     );
 
     return QuizResultModel(

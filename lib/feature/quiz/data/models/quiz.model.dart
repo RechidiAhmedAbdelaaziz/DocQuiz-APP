@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'quiz.model.g.dart';
 
-@JsonSerializable(createToJson: false)
 class QuizModel extends Equatable {
   const QuizModel({
     required this.id,
@@ -28,10 +27,45 @@ class QuizModel extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final List<int> coerrectIndexes;
-  final List<int> wrongIndexes;
+  final Map<int, List<int>> wrongIndexes;
 
-  factory QuizModel.fromJson(Map<String, dynamic> json) =>
-      _$QuizModelFromJson(json);
+  factory QuizModel.fromJson(Map<String, dynamic> json) => QuizModel(
+        id: json['_id'] as String?,
+        totalQuestions: (json['totalQuestions'] as num?)?.toInt(),
+        result: json['result'] == null
+            ? null
+            : QuizResult.fromJson(
+                json['result'] as Map<String, dynamic>),
+        isCompleted: json['isCompleted'] as bool?,
+        lastAnsweredIndex:
+            (json['lastAnsweredIndex'] as num?)?.toInt(),
+        title: json['title'] as String?,
+        createdAt: json['createdAt'] == null
+            ? null
+            : DateTime.parse(json['createdAt'] as String),
+        updatedAt: json['updatedAt'] == null
+            ? null
+            : DateTime.parse(json['updatedAt'] as String),
+        coerrectIndexes: (json['coerrectIndexes'] as List<dynamic>)
+            .map((e) => (e as num).toInt())
+            .toList(),
+        // "wrongIndexes": [{questionIndex: 0, subQuestionIndexes: [0]}]
+        wrongIndexes: (json['wrongIndexes'] as List<dynamic>) // 1
+            .map(
+          (e) => (e as Map<String, dynamic>).map(
+            (_, __) => MapEntry(
+              e['questionIndex'] as int,
+              (e['subQuestionIndexes'] as List<dynamic>)
+                  .map((e) => (e as num).toInt())
+                  .toList(),
+            ),
+          ),
+        )
+            .fold<Map<int, List<int>>>({}, (previousValue, element) {
+          previousValue.addAll(element);
+          return previousValue;
+        }),
+      );
 
   @override
   List<Object?> get props => [id];

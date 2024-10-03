@@ -2,6 +2,7 @@ part of 'create_quiz.screen.dart';
 
 class _FilterBox extends StatefulWidget {
   const _FilterBox(this.title,
+      // ignore: unused_element
       {required this.filters, this.additionalText = ''});
 
   final String title;

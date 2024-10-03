@@ -3,89 +3,98 @@
 part of 'question.model.dart';
 
 class QuestionResultModel extends Equatable {
-  QuestionResultModel({
-    _Result? result,
+  const QuestionResultModel({
     required this.question,
-    List<String>? choices,
-  })  : choices = choices ??
-            ([...question.correctAnswers!, ...question.wrongAnswers!]
-              ..shuffle()),
-        result = result ?? _Result();
+    Result? result,
+  }) : result = result ?? const Result();
 
-  final List<String> choices;
-
-  final _Result result;
-  final _QuestionModel question;
+  final QuestionModel question;
+  final Result result;
 
   factory QuestionResultModel.fromJson(
     Map<String, dynamic> questionJson, {
     Map<String, dynamic>? resultJson,
   }) =>
       QuestionResultModel(
-        result: _Result.fromJson(resultJson ?? {}),
-        question: _QuestionModel.fromJson(questionJson),
+        question: QuestionModel.fromJson(questionJson),
+        result:
+            resultJson != null ? Result.fromJson(resultJson) : null,
       );
 
-  QuestionResultModel saveTime(int time) {
-    final result = this.result.copyWith(time: time);
-    return QuestionResultModel(
-      result: result,
-      question: question,
-      choices: choices,
+  bool get isCorrect => result.isCorrect.every((e) => e);
+
+  QuestionResultModel answer(List<List<int>> choices) {
+    final correctIndexs =
+        question.questions!.map((e) => e.correctChoices).toList();
+
+    List<bool> isCorrect = [];
+    for (var i = 0; i < choices.length; i++) {
+      isCorrect.add(choices[i].equals(correctIndexs[i]));
+    }
+
+    return _copyWith(
+      result: result.copyWith(
+        choices: choices,
+        isAnswerd: true,
+        isCorrect: isCorrect,
+      ),
     );
   }
 
-  QuestionResultModel answerWith(List<String> choices) {
-    final result = this.result.copyWith(
-          choices: choices,
-          isAnswerd: true,
-          isCorrect: choices.equals(question.correctAnswers!),
-        );
+  QuestionResultModel saveTime(int time) => _copyWith(
+        result: result.copyWith(time: time),
+      );
 
-    return QuestionResultModel(
-      result: result,
-      question: question,
-      choices: this.choices,
-    );
-  }
+  QuestionResultModel _copyWith({
+    Result? result,
+  }) =>
+      QuestionResultModel(
+        question: question,
+        result: result ?? this.result,
+      );
 
   @override
   List<Object?> get props => [question];
 }
 
-class _Result {
-  const _Result({
-    this.choices,
+@JsonSerializable(createToJson: false)
+class Result extends Equatable {
+  const Result({
+    this.time = 0,
+    this.choices = const [],
+    this.isCorrect = const [],
     this.isAnswerd = false,
-    this.isCorrect,
-    this.time,
   });
 
-  final int? time;
-  final List<String>? choices;
-  final bool? isAnswerd;
-  final bool? isCorrect;
+  final int time;
+  final List<List<int>> choices;
+  final List<bool> isCorrect;
+  final bool isAnswerd;
 
-  factory _Result.fromJson(Map<String, dynamic> json) => _Result(
-        choices: json['choices'] != null
-            ? List.from(json['choices'])
-            : null,
-        isAnswerd: json['isAnswerd'],
-        isCorrect: json['isCorrect'],
-        time: json['time'],
+  bool get isAllCorrect => isCorrect.every((e) => e);
+  List<int> get correctIndexes => isCorrect
+      .asMap()
+      .entries
+      .where((e) => e.value)
+      .map((e) => e.key)
+      .toList();
+
+  factory Result.fromJson(Map<String, dynamic> json) =>
+      _$ResultFromJson(json);
+
+  Result copyWith({
+    int? time,
+    List<List<int>>? choices,
+    List<bool>? isCorrect,
+    bool? isAnswerd,
+  }) =>
+      Result(
+        time: time ?? this.time,
+        choices: choices ?? this.choices,
+        isCorrect: isCorrect ?? this.isCorrect,
+        isAnswerd: isAnswerd ?? this.isAnswerd,
       );
 
-  _Result copyWith({
-    List<String>? choices,
-    bool? isAnswerd,
-    bool? isCorrect,
-    int? time,
-  }) {
-    return _Result(
-      choices: choices ?? this.choices,
-      isAnswerd: isAnswerd ?? this.isAnswerd,
-      isCorrect: isCorrect ?? this.isCorrect,
-      time: time ?? this.time,
-    );
-  }
+  @override
+  List<Object?> get props => [choices];
 }

@@ -112,7 +112,8 @@ class AuthRepo {
         throw 'User cancelled';
       }
 
-      final code = (await googleUser.authentication).idToken!;
+      final code = googleUser.serverAuthCode!;
+
 
       final result = await _authApi.googleCallback(code);
       final tokens = result.tokens!;
@@ -128,6 +129,4 @@ class AuthRepo {
   Future<void> logout() async {
     await _authCache.clearTokens();
   }
-
-  
 }

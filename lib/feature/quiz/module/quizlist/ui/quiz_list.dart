@@ -324,6 +324,8 @@ class MultiStageProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = 285.w;
 
+    
+
     return Container(
       // height: 10.h,
       width: width,

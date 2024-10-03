@@ -3,9 +3,11 @@
 import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/shared/dto/pagination.dto.dart';
 import 'package:app/core/shared/widgets/timer.dart';
+import 'package:app/core/theme/icons.dart';
 import 'package:app/core/types/error_state.dart';
 import 'package:app/core/types/repo_functions.type.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'question.state.dart';
@@ -26,8 +28,8 @@ class QuestionCubit extends Cubit<QuestionState> {
     this._fetchFunction, {
     _OnAnswered? onAnswered,
     required TimeCubit timeCubit,
-    List<int> correctIndexes = const [],
-    List<int> wrongIndexes = const [],
+    List<int>? correctIndexes,
+    Map<int, List<int>>? wrongIndexes,
   })  : _onAnswered = onAnswered,
         _timeCubit = timeCubit,
         super(
@@ -35,42 +37,50 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   final _query = PaginationQuery(page: 1, limit: 10);
 
-  final myChoices = <String>[];
+  final List<List<int>> myChoices = [];
 
-  bool get nextExist => state._currentIndex + 1 < state._max;
-  bool get previousExist => state._currentIndex > 0;
+  bool get nextExist => state._currentIndex! + 1 < state.max;
+  bool get previousExist => state._currentIndex! > 0;
 
-  set choseAnswer(String choice) {
-    if (state.question?.result.isAnswerd == true) return;
-    if (state.question?.question.type == "QCM") {
-      myChoices.addOrRemove(choice);
+  void choseAnswer(Question question, int choice) {
+    final index =
+        state.question!.question.questions!.indexOf(question);
+    if (state.question!.result.isAnswerd == true) return;
+    if (state.question!.question.questions![index].type == "QCM") {
+      myChoices[index].addOrRemove(choice);
     } else {
-      myChoices.clear();
-      myChoices.add(choice);
+      myChoices[index].clear();
+      myChoices[index].add(choice);
     }
     emit(state._copyWith());
   }
 
   void nextQuestion() {
-    if (state._currentIndex + 1 < state._max) {
-      toQuestion(state._currentIndex + 1);
+    if (state._currentIndex! + 1 < state.max) {
+      toQuestion(state._currentIndex! + 1);
     }
   }
 
   void previousQuestion() {
-    if (state._currentIndex > 0) {
-      toQuestion(state._currentIndex - 1);
+    if (state._currentIndex! > 0) {
+      toQuestion(state._currentIndex! - 1);
     }
   }
 
   void toQuestion(int index, {bool isInitial = false}) async {
-    if (index != state._currentIndex) myChoices.clear();
-
-    if (!state.exists(index)) {
-      await fetchQuestions(page: state.page(index));
+    if (!state.isExists(index)) {
+      await fetchQuestions(page: (index ~/ 10) + 1);
     }
 
-    if (!isInitial) emit(state._saveTime(_timeCubit.state.seconds));
+    if (index != state._currentIndex || isInitial) {
+      myChoices.clear();
+      for (var i = 0;
+          i < state.questions[index]!.question.questions!.length;
+          i++) {
+        myChoices.add([]);
+      }
+    }
+    if (!isInitial) state._saveTime(_timeCubit.state.seconds);
 
     emit(state._toQuestion(index));
 
@@ -81,14 +91,24 @@ class QuestionCubit extends Cubit<QuestionState> {
     }
   }
 
-  void answerQuestion() {
+  Future<void> answerQuestion() async {
     emit(state._answerQuestion(myChoices));
 
-    emit(state._saveTime(_timeCubit.state.seconds));
+    final player = AudioPlayer();
+
+    state.question!.result.isAllCorrect
+        ? await player.play(AssetSource(AppSounds.valid))
+        : await player.play(AssetSource(AppSounds.invalid));
+
+    state._saveTime(_timeCubit.state.seconds);
 
     _timeCubit.stopWhenStopwatch();
 
-    _onAnswered?.call(state.question!, state._currentIndex);
+    _onAnswered?.call(state.question!, state._currentIndex!);
+  }
+
+  void toSubQuestion(int index) {
+    emit(state._toSubQuestion(index));
   }
 
   Future<void> fetchQuestions({int? page}) async {

@@ -59,7 +59,7 @@ class _Scaffold extends StatelessWidget {
                 const SwitchThemesButton(),
                 height(10),
                 Text(
-                  'Connectez-vous à DocQuizz',
+                  'Connectez-vous à FenneQCM',
                   style: context.theme.textStyles.h2,
                 ),
                 height(20),

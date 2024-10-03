@@ -14,13 +14,13 @@ class MyMajors extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MyMajorsCubit()..fetchMajors(),
-      child: _MjoarList(),
+      child: const _MjoarList(),
     );
   }
 }
 
 class _MjoarList extends StatefulWidget {
-  const _MjoarList({super.key});
+  const _MjoarList();
 
   @override
   State<_MjoarList> createState() => _MjoarListState();

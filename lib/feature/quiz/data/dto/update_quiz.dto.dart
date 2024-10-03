@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'update_quiz.dto.g.dart';
 
-@JsonSerializable(createFactory: false)
 class UpdateQuizBody {
   UpdateQuizBody({
     this.title,
@@ -15,7 +14,13 @@ class UpdateQuizBody {
   final QuestionAnswer? questionAnswer;
   final num? lastAnsweredIndex;
 
-  Map<String, dynamic> toJson() => _$UpdateQuizBodyToJson(this);
+  Map<String, dynamic> toJson() =>
+    <String, dynamic>{
+      'title': title,
+      'isCompleted': isCompleted,
+      'questionAnswer': questionAnswer?.toJson(),
+      'lastAnsweredIndex': lastAnsweredIndex,
+    };
 }
 
 @JsonSerializable(createFactory: false)
@@ -28,8 +33,8 @@ class QuestionAnswer {
   });
 
   final String? questionId;
-  final bool? isCorrect;
-  final List<String>? choices;
+  final List<bool>? isCorrect;
+  final List<List<int>>? choices;
   final num? time;
 
   Map<String, dynamic> toJson() => _$QuestionAnswerToJson(this);

@@ -114,6 +114,7 @@ class _PlayListItem extends StatelessWidget {
                 color: Colors.green,
                 icon: Icons.play_arrow_rounded,
                 onTap: () async {
+                  if ((playlist.totalQuestions ?? 0) < 1) return;
                   final questions =
                       await context.to<List<QuestionResultModel?>>(
                           QuestionRoute.playlist(playlist));
@@ -195,6 +196,7 @@ class _PlayListItem extends StatelessWidget {
 
 class NamePopup extends StatelessWidget {
   NamePopup({
+    super.key,
     required this.onSave,
     String? initial,
     required this.title,

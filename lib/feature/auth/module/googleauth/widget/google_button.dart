@@ -1,4 +1,6 @@
+import 'package:app/core/di/container.dart';
 import 'package:app/core/theme/icons.dart';
+import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:app/feature/auth/module/googleauth/cubit/google_auth_cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
@@ -14,16 +16,22 @@ class GoogleAuthButton extends StatelessWidget {
     return BlocProvider(
       create: (context) => GoogleAuthCubit(),
       child: Builder(builder: (context) {
-        return InkWell(
-          onTap: () {
-            context.read<GoogleAuthCubit>().signIn();
+        return BlocListener<GoogleAuthCubit, GoogleAuthState>(
+          listener: (context, state) {
+            state.whenOrNull(
+                success: () => locator<AuthCubit>().onAuthinit());
           },
-          child: CircleAvatar(
-            backgroundColor: context.colors.background,
-            radius: 26.r,
-            child: SvgPicture.asset(
-              AppIcons.google,
-              height: 70.h,
+          child: InkWell(
+            onTap: () {
+              context.read<GoogleAuthCubit>().signIn();
+            },
+            child: CircleAvatar(
+              backgroundColor: context.colors.background,
+              radius: 26.r,
+              child: SvgPicture.asset(
+                AppIcons.google,
+                height: 70.h,
+              ),
             ),
           ),
         );

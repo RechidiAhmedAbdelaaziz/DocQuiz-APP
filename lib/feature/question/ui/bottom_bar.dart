@@ -1,13 +1,18 @@
 part of 'question.screen.dart';
 
 class _BottomBar extends StatelessWidget {
-  const _BottomBar(this.question);
+  const _BottomBar(
+    this.question,
+  );
 
   final QuestionResultModel question;
 
   @override
   Widget build(BuildContext context) {
-    final isAnswered = question.result.isAnswerd ?? false;
+    final isAnswered = question.result.isAnswerd;
+    final current = (question.question.questions?.length ?? 0) > 1
+        ? context.read<QuestionCubit>().state.subIndex + 1
+        : null;
     final cubit = context.read<QuestionCubit>();
     return Container(
       padding: const EdgeInsets.all(8.0),
@@ -40,18 +45,20 @@ class _BottomBar extends StatelessWidget {
                   ),
                 )
               : width(40),
-          width(75),
+          width(40),
           _buildButton(context,
-              title: isAnswered ? 'Explication' : 'Valider',
-              onPressed: () {
+              title: isAnswered
+                  ? 'Explication${current == null ? '' : '( Q$current )'}'
+                  : 'Valider', onPressed: () {
             if (isAnswered) {
               context.showBottomSheet(
-                  child: _ExplanationAndNotes(question));
+                  child:
+                      _ExplanationAndNotes(question, current ?? 1));
             } else {
               cubit.answerQuestion();
             }
           }),
-          width(75),
+          width(40),
           cubit.nextExist
               ? InkWell(
                   onTap: cubit.nextQuestion,
@@ -110,9 +117,10 @@ class _BottomBar extends StatelessWidget {
 }
 
 class _ExplanationAndNotes extends StatefulWidget {
-  const _ExplanationAndNotes(this.question);
+  const _ExplanationAndNotes(this.question, this.index);
 
   final QuestionResultModel question;
+  final int index;
 
   @override
   State<_ExplanationAndNotes> createState() =>
@@ -148,7 +156,8 @@ class _ExplanationAndNotesState extends State<_ExplanationAndNotes> {
               ),
             ),
             child: [
-              _Explination(widget.question.question.explanation),
+              _Explination(widget.question.question
+                  .questions![widget.index - 1].explanation),
               _Notes(widget.question.question.id!)
             ][selected],
           ),
@@ -204,7 +213,7 @@ class _Explination extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 6.w),
             child: Text(
               explication ?? 'Il n\'y a pas d\'explication',
-              style: context.textStyles.body2.copyWith(
+              style: context.textStyles.body1.copyWith(
                 color: context.colors.dark,
               ),
             ),
@@ -216,7 +225,7 @@ class _Explination extends StatelessWidget {
 }
 
 class _Notes extends StatelessWidget {
-  const _Notes(this.id, {super.key});
+  const _Notes(this.id);
   final String id;
   @override
   Widget build(BuildContext context) {

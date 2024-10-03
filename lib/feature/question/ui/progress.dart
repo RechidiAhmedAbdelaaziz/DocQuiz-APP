@@ -1,7 +1,7 @@
 part of 'question.screen.dart';
 
 class _Progress extends StatelessWidget {
-  const _Progress({super.key});
+  const _Progress();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class _Progress extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               width(20),
-              const LinedText('Progress'),
+              const LinedText('Progression'),
               const Spacer(),
               IconButton(
                 onPressed: () => context.back(),
@@ -50,30 +50,54 @@ class _Progress extends StatelessWidget {
                     },
                     child: Column(
                       children: [
-                        Container(
-                          width: 50.r,
-                          height: 50.r,
-                          decoration: BoxDecoration(
-                            color: state.isAnswered(index)
-                                ? color
-                                : null,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: state.isAnswered(index)
-                                  ? color
-                                  : context.colors.dark,
-                              width: 2.w,
-                            ),
-                          ),
+                        Stack(
                           alignment: Alignment.center,
-                          child: Text(
-                            '${index + 1}',
-                            style: context.textStyles.h5.copyWith(
-                              color: state.isAnswered(index)
-                                  ? Colors.white
-                                  : context.colors.dark,
+                          children: [
+                            SizedBox(
+                              width: 58.r,
+                              height: 58.r,
+                              child: PieChart(
+                                PieChartData(
+                                  sections: List.generate(
+                                    state.questionMax(index),
+                                    (i) => PieChartSectionData(
+                                      color: state.isAnswered(index)
+                                          ? state.isSubCorrectIndex(
+                                                  index, i)
+                                              ? Colors.green
+                                              : Colors.red
+                                          : context.colors.background,
+                                      value: 1,
+                                      showTitle: false,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              width: 50.r,
+                              height: 50.r,
+                              decoration: BoxDecoration(
+                                color: state.isAnswered(index)
+                                    ? color
+                                    : null,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: context.colors.primary,
+                                  width: 2.w,
+                                ),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                '${index + 1}',
+                                style: context.textStyles.h5.copyWith(
+                                  color: state.isAnswered(index)
+                                      ? Colors.white
+                                      : context.colors.dark,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         state.isCurrent(index)
                             ? Container(

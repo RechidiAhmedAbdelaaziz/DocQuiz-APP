@@ -11,6 +11,7 @@ import 'package:app/feature/playlist/helper/playlist.dependency.dart';
 import 'package:app/feature/question/helper/question.di.dart';
 import 'package:app/feature/quiz/helper/quiz.dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
+import 'package:app/feature/updates/helper/updates.di.dart';
 import 'package:app/feature/user/helper/user.dependency.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -40,6 +41,7 @@ Future<void> setupLocator({required String baseUrl}) async {
   await setupExamDependency(locator);
   await injectQuestionDependencies(locator);
   await setupNoteDependencies(locator);
+  await setupUpdatesDi(locator);
 
   locator.allowReassignment = true;
 }

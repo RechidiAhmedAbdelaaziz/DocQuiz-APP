@@ -70,8 +70,6 @@ class HomeCubit extends Cubit<HomeState> {
       {bool refresh = false}) {
     if (state.runtimeType == T) return;
 
-    print("${state.runtimeType} => ${newState.runtimeType}");
-    print("isEquals: ${state.runtimeType == newState.runtimeType}");
     emit(newState());
   }
 }

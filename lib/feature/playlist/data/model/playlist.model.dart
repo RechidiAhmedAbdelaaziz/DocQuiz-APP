@@ -9,6 +9,7 @@ class PlaylistModel extends Equatable {
     this.totalQuestions,
     this.id,
     this.title,
+    this.isIn
   });
 
   final int? totalQuestions;
@@ -16,6 +17,7 @@ class PlaylistModel extends Equatable {
   @JsonKey(name: '_id')
   final String? id;
   final String? title;
+  final bool? isIn;
 
   factory PlaylistModel.fromJson(Map<String, dynamic> json) =>
       _$PlaylistModelFromJson(json);
