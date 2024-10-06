@@ -59,9 +59,9 @@ class QuestionScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  height(30),
+                  height(8),
                   _Text(questionResult.question.caseText),
-                  height(12),
+                  height(6),
                   _Questions(questionResult),
                 ],
               ),
@@ -228,11 +228,13 @@ class _QuestionInfo extends StatelessWidget {
 
   Widget _buildDifficulty() {
     return _buildInfo(
-        difficulty == 'easy'
-            ? "Facile"
-            : difficulty == 'medium'
-                ? "Moyenne"
-                : "Difficile",
+        difficulty == null
+            ? null
+            : difficulty == 'easy'
+                ? "Facile"
+                : difficulty == 'medium'
+                    ? "Moyenne"
+                    : "Difficile",
         difficulty == 'Facile'
             ? Colors.green
             : difficulty == 'Moyen'
@@ -250,6 +252,7 @@ class _QuestionInfo extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: source
             .map(
               (e) => Padding(

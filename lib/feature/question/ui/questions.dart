@@ -9,11 +9,8 @@ class _Questions extends StatelessWidget {
   final Result result;
   final List<Question> questions;
 
-
   @override
   Widget build(BuildContext context) {
-    
-
     final state = context.watch<QuestionCubit>().state;
 
     return Column(
@@ -42,10 +39,10 @@ class _Questions extends StatelessWidget {
                     width(12),
                     _buildInfo(
                         difficulty == 'easy'
-                            ? "Facile"
-                            : difficulty == 'medium'
-                                ? "Moyenne"
-                                : "Difficile",
+                                ? "Facile"
+                                : difficulty == 'medium'
+                                    ? "Moyenne"
+                                    : "Difficile",
                         difficulty == 'easy'
                             ? Colors.green
                             : difficulty == 'medium'
@@ -111,7 +108,9 @@ class _Questions extends StatelessWidget {
                 width(14),
                 InkWell(
                   onTap: () {
-                    context.read<QuestionCubit>().toSubQuestion(index);
+                    context
+                        .read<QuestionCubit>()
+                        .toSubQuestion(index);
                   },
                   child: Column(
                     children: [

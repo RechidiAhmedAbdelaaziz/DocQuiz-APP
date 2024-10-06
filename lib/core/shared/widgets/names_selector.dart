@@ -39,7 +39,7 @@ class NamesSelector<T extends NamedModel> extends StatelessWidget {
             AppCheckBox(
               value: selectedAll,
               onChange: (_) => onSelectAll!(selectedAll),
-              title: selectedAll
+              title: !selectedAll
                   ? 'Tout sélectionner'
                   : 'Tout désélectionner',
             ),
