@@ -11,7 +11,8 @@ class QuizResultModel {
   final int time;
   final int correctTime;
 
-  int get wrongAnswers => totalQuestions - correctAnswers;
+  int get wrongAnswers =>
+      totalQuestions - correctAnswers - unAnswered;
 
   const QuizResultModel({
     required this.title,

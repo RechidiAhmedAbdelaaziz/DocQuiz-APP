@@ -338,7 +338,6 @@ class MultiStageProgressBar extends StatelessWidget {
           Container(
             height: 14.h,
             width: width * (correct / total),
-            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: primary ?? Colors.green,
               borderRadius: BorderRadius.only(
@@ -350,7 +349,6 @@ class MultiStageProgressBar extends StatelessWidget {
           Container(
             height: 14.h,
             width: width * ((answerd - correct) / total),
-            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: primary ?? Colors.red,
             ),

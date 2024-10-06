@@ -27,6 +27,8 @@ class QuizResultScreen extends StatelessWidget {
             Text(
               result.title,
               style: context.textStyles.h3,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
             const Divider(),
             height(20),

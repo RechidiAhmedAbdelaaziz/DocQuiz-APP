@@ -181,6 +181,7 @@ class _QuestionInfo extends StatelessWidget {
     final progres = context.read<QuestionCubit>().state.progress;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
           width: double.infinity,
@@ -228,18 +229,13 @@ class _QuestionInfo extends StatelessWidget {
 
   Widget _buildDifficulty() {
     return _buildInfo(
-        difficulty == null
-            ? null
-            : difficulty == 'easy'
-                ? "Facile"
-                : difficulty == 'medium'
-                    ? "Moyenne"
-                    : "Difficile",
-        difficulty == 'Facile'
-            ? Colors.green
-            : difficulty == 'Moyen'
-                ? Colors.orange
-                : Colors.red);
+      difficulty,
+      difficulty == 'Facile'
+          ? Colors.green
+          : difficulty == 'Moyen'
+              ? Colors.deepOrange
+              : Colors.red,
+    );
   }
 
   Widget _buildType() {

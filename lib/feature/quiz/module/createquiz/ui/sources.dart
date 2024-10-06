@@ -20,7 +20,7 @@ class _SourcesBox extends StatelessWidget {
             title: 'A partir de l\'année :',
             items: [
               '- Acune -',
-              for (var i = DateTime.now().year; i >= 2000; i--)
+              for (var i = DateTime.now().year + 2; i >= 2000; i--)
                 i.toString()
             ],
             value: filter.year == 0
