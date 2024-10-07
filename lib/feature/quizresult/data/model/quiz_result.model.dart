@@ -12,7 +12,7 @@ class QuizResultModel {
   final int correctTime;
 
   int get wrongAnswers =>
-      totalQuestions - unAnswered - correctAnswers;
+      totalQuestions - (unAnswered + correctAnswers);
 
   const QuizResultModel({
     required this.title,
