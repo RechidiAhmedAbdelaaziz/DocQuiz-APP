@@ -71,7 +71,9 @@ class Result extends Equatable {
   final List<bool> isCorrect;
   final bool isAnswerd;
 
-  bool get isAllCorrect => isCorrect.every((e) => e);
+  bool get isAllCorrect =>
+      isCorrect.isNotEmpty && isCorrect.every((e) => e);
+      
   List<int> get correctIndexes => isCorrect
       .asMap()
       .entries
