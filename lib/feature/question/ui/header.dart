@@ -8,56 +8,77 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue[800],
-      child: Row(
-        children: [
-          width(5),
-          Expanded(
-            child: TextScroll(
-              '$title   ',
-              pauseBetween: const Duration(seconds: 2),
-              fadeBorderSide: FadeBorderSide.left,
-              style: context.textStyles.body1.copyWith(
-                color: Colors.white,
+    return BlocListener<TimeCubit, TimerState>(
+      listener: (context, state) {
+        
+        state.onEnd(() {
+          context.read<TimeCubit>().pause();
+          context.showDialogBox(
+            title: 'Le temps de l\'examen est écoulé',
+            body: 'Voulez-vous vraiment terminer l\'examen ?',
+            confirmText: 'Terminer',
+            onConfirm: (back) {
+              back();
+              context.back(
+                context.read<QuestionCubit>().state.questions,
+              );
+            },
+            cancelText: 'Continuer',
+            onCancel: (back) => back(),
+          );
+        });
+      },
+      child: Container(
+        color: Colors.blue[800],
+        child: Row(
+          children: [
+            width(5),
+            Expanded(
+              child: TextScroll(
+                '$title   ',
+                pauseBetween: const Duration(seconds: 2),
+                fadeBorderSide: FadeBorderSide.left,
+                style: context.textStyles.body1.copyWith(
+                  color: Colors.white,
+                ),
               ),
             ),
-          ),
-          width(10),
-          // _buildPauseButton(),
-          _buildButton(
-              icon: Icons.pause,
+            width(10),
+            // _buildPauseButton(),
+            _buildButton(
+                icon: Icons.pause,
+                onPressed: () {
+                  context.read<TimeCubit>().pause();
+                  context.showDialogBox(
+                    title: 'Pause',
+                    // body: 'Voulez-vous vraiment mettre en pause le test ?',
+                    confirmText: 'Continuer',
+                    onConfirm: (back) {
+                      context.read<TimeCubit>().start();
+                      back();
+                    },
+                    cancelText: 'Quitter',
+                    onCancel: (_) {},
+                  );
+                }),
+            width(12),
+            _buildButton(
+              icon: Icons.save,
               onPressed: () {
-                context.read<TimeCubit>().pause();
-                context.showDialogBox(
-                  title: 'Pause',
-                  // body: 'Voulez-vous vraiment mettre en pause le test ?',
-                  confirmText: 'Continuer',
-                  onConfirm: (back) {
-                    context.read<TimeCubit>().start();
-                    back();
-                  },
-                  cancelText: 'Quitter',
-                  onCancel: (_) {},
-                );
-              }),
-          width(12),
-          _buildButton(
-            icon: Icons.save,
-            onPressed: () {
-              context.showPopUp(
-                  content: BlocProvider(
-                create: (context) =>
-                    SavePlaylistCubit(question.question)
-                      ..fetchPlaylists(),
-                child: const SavePlaylist(),
-              ));
-            },
-          ),
+                context.showPopUp(
+                    content: BlocProvider(
+                  create: (context) =>
+                      SavePlaylistCubit(question.question)
+                        ..fetchPlaylists(),
+                  child: const SavePlaylist(),
+                ));
+              },
+            ),
 
-          width(10),
-          const AppTimer(),
-        ],
+            width(10),
+            const AppTimer(),
+          ],
+        ),
       ),
     );
   }

@@ -64,7 +64,11 @@ class TimeCubit extends Cubit<TimerState> {
     });
   }
 
-  void start({int? newTime}) {
+  void start({int? newTime, bool forceStart = false}) {
+    if (state._type == TimerType.countdown && state.seconds == 0) {
+      return;
+    }
+
     if (_timer != null) _timer!.cancel();
 
     emit(state.updateTimer(newTime: newTime));
