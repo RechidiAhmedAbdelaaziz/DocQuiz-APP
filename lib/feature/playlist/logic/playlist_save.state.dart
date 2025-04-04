@@ -34,6 +34,10 @@ class SavePlaylistState extends ErrorState {
     return _copyWith();
   }
 
+  SavePlaylistState _createPlaylist(PlaylistModel playlist) {
+    return _copyWith(playlists: [playlist, ...playlists]);
+  }
+
   SavePlaylistState _done() => _copyWith(done: true);
 
   SavePlaylistState _errorOccured(String error) =>

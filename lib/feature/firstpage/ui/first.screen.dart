@@ -1,8 +1,10 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/core/extension/alertdialog.extenstion.dart';
 import 'package:app/core/extension/navigator.extension.dart';
+import 'package:app/feature/auth/data/source/auth.cache.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
 import 'package:app/feature/auth/logic/auth.cubit.dart';
+import 'package:app/feature/home/helper/home.route.dart';
 import 'package:app/feature/user/helper/user.route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,9 +18,13 @@ class FirstScreen extends StatelessWidget {
       bloc: locator<AuthCubit>()..onAppStarted(),
       listener: (context, state) {
         state.whenOrNull(
-          authenticated: () {
+          authenticated: (user) async {
             context.backToRoot();
-            context.to(DomainRoute.setDomin(), canPop: false);
+            (user?.domain == null &&
+                    await locator<AuthCache>().domain == null)
+                ? context.to(DomainRoute.setDomin(user),
+                    canPop: false)
+                : context.to(HomeRoute(), canPop: false);
           },
           unauthenticated: () {
             context.backToRoot();
@@ -26,9 +32,11 @@ class FirstScreen extends StatelessWidget {
           },
           sessionExpired: () {
             context.showDialogBox(
-              title: 'Session Expired',
-              body: 'Please login again',
-              confirmText: 'Login',
+              // in french
+              title: 'Session expirée',
+              body:
+                  'Votre session a expirée, veuillez vous reconnecter',
+              confirmText: 'Se reconnecter',
               onConfirm: (back) => back(),
             );
           },

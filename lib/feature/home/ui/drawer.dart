@@ -9,6 +9,7 @@ class _Drawer extends StatelessWidget {
     return SafeArea(
       child: Drawer(
         backgroundColor: context.colors.background,
+        width: 280.w,
         child: Column(
           children: [
             const _DrawerHeader(),
@@ -46,7 +47,7 @@ class _Drawer extends StatelessWidget {
               _DrawerItemModel(
                 title: 'Série d\'examens',
                 icon: Icons.school,
-                onTap: cubit.showExam,
+                onTap: cubit.showExamFilter,
                 isSelected: context
                     .select((HomeCubit cubit) => cubit.state.isExam),
               ),

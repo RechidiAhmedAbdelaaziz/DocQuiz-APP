@@ -1,5 +1,6 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/feature/auth/data/repo/auth.repo.dart';
+import 'package:app/feature/user/data/model/user.model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,7 +27,7 @@ class GoogleAuthCubit extends Cubit<GoogleAuthState> {
     );
 
     result.when(
-      success: (_) => emit(const GoogleAuthState.success()),
+      success: (data) => emit(GoogleAuthState.success(data.user!)),
       error: (error) => emit(GoogleAuthState.error(error.message)),
     );
   }

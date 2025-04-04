@@ -139,11 +139,11 @@ class _PlayListItem extends StatelessWidget {
                   );
                 },
               ),
-              _buildActionButton(
-                color: Colors.teal,
-                icon: Icons.settings,
-                onTap: () {},
-              ),
+              // _buildActionButton(
+              //   color: Colors.teal,
+              //   icon: Icons.settings,
+              //   onTap: () {},
+              // ),
               _buildActionButton(
                 color: Colors.red,
                 icon: Icons.delete,
@@ -200,11 +200,13 @@ class NamePopup extends StatelessWidget {
     required this.onSave,
     String? initial,
     required this.title,
+    this.hintText,
   }) : controller = TextEditingController(text: initial);
 
   final TextEditingController controller;
   final void Function(String) onSave;
   final String title;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +245,7 @@ class NamePopup extends StatelessWidget {
                   controller: controller,
                   style: context.textStyles.body1,
                   decoration: InputDecoration(
+                    hintText: hintText,
                     border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.all(Radius.circular(14.r)),

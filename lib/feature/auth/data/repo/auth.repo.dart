@@ -10,7 +10,7 @@ class AuthRepo {
   final _authApi = locator<AuthApi>();
   final _authCache = locator<AuthCache>();
 
-  RepoResult<AuthTokens> login({
+  RepoResult<AuthResponse> login({
     required String email,
     required String password,
   }) {
@@ -22,13 +22,13 @@ class AuthRepo {
 
       final tokens = result.tokens!;
       await _authCache.setTokens(tokens);
-      return tokens;
+      return result;
     }
 
     return TryCallApi.call(apiCall);
   }
 
-  RepoResult<AuthTokens> register({
+  RepoResult<AuthResponse> register({
     required String email,
     required String password,
     required String name,
@@ -42,7 +42,7 @@ class AuthRepo {
 
       final tokens = result.tokens!;
       await _authCache.setTokens(tokens);
-      return tokens;
+      return result;
     }
 
     return TryCallApi.call(apiCall);
@@ -104,7 +104,7 @@ class AuthRepo {
     return TryCallApi.call(apiCall);
   }
 
-  RepoResult<AuthTokens> googleAuth(GoogleSignIn googleSignIn) {
+  RepoResult<AuthResponse> googleAuth(GoogleSignIn googleSignIn) {
     apiCall() async {
       final googleUser = await googleSignIn.signIn();
 
@@ -114,13 +114,12 @@ class AuthRepo {
 
       final code = googleUser.serverAuthCode!;
 
-
       final result = await _authApi.googleCallback(code);
       final tokens = result.tokens!;
 
       await _authCache.setTokens(tokens);
 
-      return tokens;
+      return result;
     }
 
     return TryCallApi.call(apiCall);

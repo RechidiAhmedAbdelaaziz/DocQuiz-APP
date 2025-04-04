@@ -10,7 +10,6 @@ class _Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TimeCubit, TimerState>(
       listener: (context, state) {
-        
         state.onEnd(() {
           context.read<TimeCubit>().pause();
           context.showDialogBox(
@@ -58,7 +57,12 @@ class _Header extends StatelessWidget {
                       back();
                     },
                     cancelText: 'Quitter',
-                    onCancel: (_) {},
+                    onCancel: (back) {
+                      back();
+                      context.back(
+                        context.read<QuestionCubit>().state.questions,
+                      );
+                    },
                   );
                 }),
             width(12),

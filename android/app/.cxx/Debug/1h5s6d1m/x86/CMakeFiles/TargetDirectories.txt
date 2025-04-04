@@ -1,0 +1,2 @@
+/home/rechidi-ahmed/Documents/Projects/FenneQCM/DocQuiz-APP/android/app/.cxx/Debug/1h5s6d1m/x86/CMakeFiles/edit_cache.dir
+/home/rechidi-ahmed/Documents/Projects/FenneQCM/DocQuiz-APP/android/app/.cxx/Debug/1h5s6d1m/x86/CMakeFiles/rebuild_cache.dir

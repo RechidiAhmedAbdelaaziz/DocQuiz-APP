@@ -26,3 +26,17 @@ class ExamModel extends Equatable {
   @override
   List<Object?> get props => [id];
 }
+
+
+
+class ExamRecordModel {
+  const ExamRecordModel({required this.years});
+
+  final List<int> years;
+
+  factory ExamRecordModel.fromJson(Map<String, dynamic> json) {
+    return ExamRecordModel(
+      years: List<int>.from(json['years']),
+    );
+  }
+}

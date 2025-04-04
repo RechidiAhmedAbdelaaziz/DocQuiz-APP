@@ -31,12 +31,22 @@ class ExamsScreen extends StatelessWidget {
           child: Column(
             children: [
               height(10),
-              const LinedText('Les examens'),
-              height(20),
-              AppSearchBar(
-                onSearch: (value) =>
-                    context.read<ExamCubit>().keyword = value,
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      context.read<HomeCubit>().back();
+                    },
+                  ),
+                  const LinedText('Les examens'),
+                ],
               ),
+              // height(20),
+              // AppSearchBar(
+              //   onSearch: (value) =>
+              //       context.read<ExamCubit>().keyword = value,
+              // ),
               height(35),
               ...exams.map((exam) => _ExamItem(exam)),
               const _PageIndicator(),
@@ -74,12 +84,13 @@ class _ExamItem extends StatelessWidget {
               Expanded(
                 // Remove "Exam: " from the title
                 child: Text(
-                  exam.title!.replaceFirst('Exam: ', ''),
+                  exam.title!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: context.textStyles.h5,
                 ),
               ),
+              width(6),
               _buildActionButton(
                 color: Colors.green,
                 icon: Icons.play_arrow,

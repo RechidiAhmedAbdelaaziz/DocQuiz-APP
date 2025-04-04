@@ -63,7 +63,7 @@ class _InfoForm extends StatelessWidget {
                 Icon(
                   Icons.person,
                   color: Colors.teal,
-                  size: 30.sp,
+                  size: 30.spMin,
                 ),
               ],
             ),
@@ -121,7 +121,7 @@ class _SecurityForm extends StatelessWidget {
                 Icon(
                   Icons.lock,
                   color: Colors.teal,
-                  size: 30.sp,
+                  size: 30.spMin,
                 ),
               ],
             ),
@@ -201,7 +201,7 @@ class _DomainForm extends StatelessWidget {
               Icon(
                 Icons.school,
                 color: Colors.teal,
-                size: 30.sp,
+                size: 30.spMin,
               ),
             ],
           ),

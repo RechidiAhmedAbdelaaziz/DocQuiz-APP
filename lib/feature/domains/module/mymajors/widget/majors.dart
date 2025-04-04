@@ -64,7 +64,7 @@ class _MjoarListState extends State<_MjoarList> {
                               ? Icons.arrow_drop_up
                               : Icons.arrow_drop_down,
                           color: context.colors.dark,
-                          size: 30.sp,
+                          size: 30.spMin,
                         ),
                       ),
                     ],

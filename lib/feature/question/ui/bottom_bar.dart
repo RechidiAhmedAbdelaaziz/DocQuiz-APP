@@ -37,7 +37,7 @@ class _BottomBar extends StatelessWidget {
                   onTap: cubit.previousQuestion,
                   child: CircleAvatar(
                     backgroundColor: Colors.teal,
-                    radius: 20.w,
+                    radius: 20.spMin,
                     child: const Icon(
                       Icons.arrow_back_ios_new_rounded,
                       color: Colors.white,
@@ -64,7 +64,7 @@ class _BottomBar extends StatelessWidget {
                   onTap: cubit.nextQuestion,
                   child: CircleAvatar(
                     backgroundColor: Colors.teal,
-                    radius: 20.w,
+                    radius: 20.spMin,
                     child: const Icon(
                       Icons.arrow_forward_ios_rounded,
                       color: Colors.white,
@@ -76,7 +76,7 @@ class _BottomBar extends StatelessWidget {
                   : InkWell(
                       child: CircleAvatar(
                         backgroundColor: Colors.red,
-                        radius: 20.w,
+                        radius: 20.spMin,
                         child: const Icon(
                           Icons.logout,
                           color: Colors.white,
@@ -143,7 +143,7 @@ class _ExplanationAndNotesState extends State<_ExplanationAndNotes> {
         ),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 1.h),
             width: double.infinity,
             decoration: BoxDecoration(
               color: context.colors.primary,

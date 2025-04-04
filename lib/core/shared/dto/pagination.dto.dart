@@ -4,7 +4,7 @@ class PaginationQuery {
 
   PaginationQuery({
     this.page = 1,
-    this.limit = 15,
+    this.limit = 10,
   });
 
   Map<String, dynamic> toJson() {

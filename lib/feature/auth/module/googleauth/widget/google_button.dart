@@ -19,7 +19,7 @@ class GoogleAuthButton extends StatelessWidget {
         return BlocListener<GoogleAuthCubit, GoogleAuthState>(
           listener: (context, state) {
             state.whenOrNull(
-                success: () => locator<AuthCubit>().onAuthinit());
+                success: (user) => locator<AuthCubit>().onAuthinit(user));
           },
           child: InkWell(
             onTap: () {
@@ -38,4 +38,7 @@ class GoogleAuthButton extends StatelessWidget {
       }),
     );
   }
+
+
+  
 }

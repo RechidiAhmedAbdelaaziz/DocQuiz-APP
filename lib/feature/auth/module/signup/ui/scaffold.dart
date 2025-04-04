@@ -17,12 +17,12 @@ class _Scaffold extends StatelessWidget {
       listener: (context, state) {
         state.whenOrNull(
           error: (message) => context.showDialogBox(
-            title: 'Error',
+            title: 'Erreur',
             body: message,
-            cancelText: 'Retry',
+            cancelText: 'Ressayer',
             onCancel: (back) => back(),
           ),
-          success: () => locator<AuthCubit>().onAuthinit(),
+          success: (user) => locator<AuthCubit>().onAuthinit(user),
         );
       },
       child: Scaffold(

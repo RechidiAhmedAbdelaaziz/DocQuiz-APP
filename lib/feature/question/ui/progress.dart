@@ -23,7 +23,7 @@ class _Progress extends StatelessWidget {
                 icon: Icon(
                   Icons.cancel_outlined,
                   color: Colors.red,
-                  size: 35.sp,
+                  size: 35.spMin,
                 ),
               ),
               width(20),
@@ -54,8 +54,8 @@ class _Progress extends StatelessWidget {
                           alignment: Alignment.center,
                           children: [
                             SizedBox(
-                              width: 58.r,
-                              height: 58.r,
+                              width: 60.r,
+                              height: 60.r,
                               child: PieChart(
                                 PieChartData(
                                   sections: List.generate(
@@ -75,8 +75,8 @@ class _Progress extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              width: 50.r,
-                              height: 50.r,
+                              width: 55.r,
+                              height: 55.r,
                               decoration: BoxDecoration(
                                 color: state.isAnswered(index)
                                     ? color

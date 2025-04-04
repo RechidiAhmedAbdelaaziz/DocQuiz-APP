@@ -18,11 +18,11 @@ class PlaylistCubit extends Cubit<PlaylistState> {
     fetchPlaylists();
   }
 
-  int get page => _query.page - 1;
+  int get page => _query.page - 1; //1
   void nextPage() => fetchPlaylists();
   void prevPage() {
-    if (_query.page > 1) {
-      _query.copyWith(page: _query.page - 1);
+    if (page > 0) {
+      _query.copyWith(page: page - 1);
       fetchPlaylists();
     }
   }
@@ -33,7 +33,7 @@ class PlaylistCubit extends Cubit<PlaylistState> {
     result.when(
       success: (playlists) {
         if (playlists.isNotEmpty) {
-          _query.copyWith(page: _query.page + 1);
+          _query.copyWith(page: _query.page + 1); // 2
           emit(state._fetchPlaylists(playlists));
         } else {
           emit(state

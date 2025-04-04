@@ -6,11 +6,15 @@ part 'exam.api.g.dart';
 
 @RestApi()
 abstract class ExamApi {
-
-    factory ExamApi(Dio dio, {String baseUrl}) = _ExamApi;
+  factory ExamApi(Dio dio, {String baseUrl}) = _ExamApi;
 
   @GET('/exam')
   Future<PaginatedDataResponse> getExams(
+    @Queries() Map<String, dynamic> queries,
+  );
+
+  @GET('exam-record')
+  Future<DataResponse> getExamRecords(
     @Queries() Map<String, dynamic> queries,
   );
 }

@@ -48,6 +48,15 @@ class SavePlaylistCubit extends Cubit<SavePlaylistState> {
     );
   }
 
+  Future<void> createPlaylist(String title) async {
+    final result = await _playlistRepo.createPlaylist(title);
+
+    result.when(
+      success: (playlist) => emit(state._createPlaylist(playlist)),
+      error: (error) => emit(state._errorOccured(error.message)),
+    );
+  }
+
   Future<void> submit() async {
     await _playlistRepo.addQuestionToPlaylist(
       _questionId,

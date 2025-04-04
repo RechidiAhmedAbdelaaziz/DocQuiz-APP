@@ -13,15 +13,32 @@
 				"--flavor",
 				"development",
 				"--target",
-				"lib/main_development.dart"
+				"lib/main_development.dart",
+				"--web-port",
+				"8000"
 			]
 		},
 
+		// Production
 		{
 			"name": "Production",
 			"request": "launch",
 			"type": "dart",
 			"program": "lib/main_production.dart",
+			"args": [
+				"--flavor",
+				"production",
+				"--target",
+				"lib/main_production.dart"
+			]
+		},
+
+		//Release
+		{
+			"name": "Release",
+			"request": "launch",
+			"type": "dart",
+			"program": "lib/main_release.dart",
 			"args": [
 				"--release",
 				"--flavor",

@@ -80,13 +80,13 @@ class NamesSelector<T extends NamedModel> extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: context.textStyles.body1.copyWith(
-                          fontSize: 17.sp,
+                          fontSize: 17.spMin,
                         ),
                       ),
                       width(10),
                       Icon(
                         Icons.arrow_forward_ios_rounded,
-                        size: 20.sp,
+                        size: 20.spMin,
                       )
                     ],
                   ),

@@ -8,57 +8,57 @@ class AppFontStyles {
   final Color secondary = locator<AppColors>().secondaryText;
 
   TextStyle get h1 => TextStyle(
-        fontSize: 24.sp,
+        fontSize: 24.spMin,
         fontWeight: FontWeight.bold,
         color: primary,
         letterSpacing: 1.2,
       );
 
   TextStyle get h2 => TextStyle(
-        fontSize: 22.sp,
+        fontSize: 22.spMin,
         fontWeight: FontWeight.w700,
         color: primary,
         letterSpacing: 1.2,
       );
 
   TextStyle get h3 => TextStyle(
-        fontSize: 20.sp,
+        fontSize: 20.spMin,
         fontWeight: FontWeight.bold,
         color: primary,
         letterSpacing: 1.2,
       );
 
   TextStyle get h4 => TextStyle(
-        fontSize: 18.sp,
+        fontSize: 18.spMin,
         fontWeight: FontWeight.bold,
         color: primary,
         letterSpacing: 1.2,
       );
 
   TextStyle get h5 => TextStyle(
-        fontSize: 16.sp,
+        fontSize: 16.spMin,
         fontWeight: FontWeight.bold,
         color: primary,
         letterSpacing: 1.2,
       );
 
   TextStyle get body1 => TextStyle(
-        fontSize: 14.sp,
+        fontSize: 14.spMin,
         color: primary,
         fontWeight: FontWeight.w600,
         letterSpacing: 1.2,
       );
 
   TextStyle get body2 => TextStyle(
-        fontSize: 12.sp,
+        fontSize: 12.spMin,
         color: primary,
       );
 
   TextStyle get caption => TextStyle(
-        fontSize: 10.sp,
+        fontSize: 10.spMin,
         color: secondary,
       );
 }
-// regex to replace number XXX with 00.sp
+// regex to replace number XXX with 00.spMin
 // \b(\d{2})\b
-// $1.sp
+// $1.spMin

@@ -10,8 +10,9 @@ part 'set_domain.state.dart';
 
 class SetDomainCubit extends Cubit<SetDomainState> {
   final _userRepo = locator<UserRepo>();
+  final UserModel? _user;
 
-  SetDomainCubit() : super(SetDomainState.initial());
+  SetDomainCubit(this._user) : super(SetDomainState.initial());
 
   set domain(DomainModel? domain) =>
       emit(state.__copyWith(domain: domain));
@@ -19,7 +20,14 @@ class SetDomainCubit extends Cubit<SetDomainState> {
   set level(LevelModel? level) =>
       emit(state.__copyWith(domain: state.domain, level: level));
 
+  bool get userExist => _user != null;
+
   void checkExist() async {
+    if (_user?.domain != null) {
+      emit(state._done());
+      return;
+    }
+
     final domainid = await locator<AuthCache>().domain;
 
     if (domainid != null) emit(state._done());

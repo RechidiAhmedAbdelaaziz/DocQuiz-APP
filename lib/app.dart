@@ -1,6 +1,7 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/feature/firstpage/ui/first.screen.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +24,13 @@ class DocQuizAPP extends StatelessWidget {
         bloc: locator<ThemesCubit>(),
         builder: (context, state) {
           return MaterialApp(
+            // scrool behavior to enable mouse scrolling horizontally in web
+            scrollBehavior: const MaterialScrollBehavior().copyWith(
+              dragDevices: {
+                PointerDeviceKind.touch,
+                PointerDeviceKind.mouse,
+              },
+            ),
             theme: state.theme,
             home: const FirstScreen(),
             onGenerateRoute: _router.generateRoute,

@@ -26,26 +26,26 @@ if (flutterVersionName == null) {
 android {
     namespace = "top.fenneqcm.app"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     signingConfigs {
         debug {
-            storeFile file("../docdev.jks")
-            storePassword "ahmeddz32."
-            keyAlias "docquizzdev"
-            keyPassword "ahmeddz32."
+            storeFile file("../upload-keystore.jks")
+            storePassword "ahmeddz32"
+            keyAlias "upload"
+            keyPassword "ahmeddz32"
         }
 
         release {
-            storeFile file("../fenneqcm.jks")
-            storePassword "fenneqcm"
-            keyAlias "fenneqcm"
-            keyPassword "fenneqcm"
+            storeFile file("../upload-keystore.jks")
+            storePassword "ahmeddz32"
+            keyAlias "upload"
+            keyPassword "ahmeddz32"
         }
 
 

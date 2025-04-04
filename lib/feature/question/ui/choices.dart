@@ -107,7 +107,7 @@ class _Choice extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: prefixColor,
-              radius: 18.w,
+              radius: 18.spMin,
               child: Text(
                 prefix,
                 style: context.textStyles.h5.copyWith(
@@ -122,7 +122,7 @@ class _Choice extends StatelessWidget {
                 maxLines: 25,
                 style: context.textStyles.body2.copyWith(
                   color: textColor,
-                  fontSize: 20.sp,
+                  fontSize: 20.spMin,
                 ),
               ),
             ),

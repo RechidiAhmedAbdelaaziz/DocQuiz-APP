@@ -2,6 +2,8 @@ import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';
 
 extension Snackbar on BuildContext {
+
+  
   void showErrorSnackBar(String message) {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(

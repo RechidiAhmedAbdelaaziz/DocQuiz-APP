@@ -18,6 +18,8 @@ class SetDomainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<SetDomainCubit>();
+
     final domains =
         context.watch<NamesCubit<DomainModel, void>>().state.items;
 
@@ -25,8 +27,6 @@ class SetDomainScreen extends StatelessWidget {
         .watch<NamesCubit<LevelModel, DomainModel>>()
         .state
         .items;
-
-    final cubit = context.watch<SetDomainCubit>();
 
     return BlocListener<SetDomainCubit, SetDomainState>(
       listener: (context, state) {

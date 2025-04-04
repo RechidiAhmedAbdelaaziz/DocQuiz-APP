@@ -36,41 +36,46 @@ class _AppInputeFieldState extends State<AppInputeField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget._controller,
-      keyboardType: widget._keyboardType,
-      obscureText: widget._obscureText && !_showContent,
-      onChanged: widget._onChanged,
-      validator: widget._validator,
-      maxLines:
-          widget._keyboardType == TextInputType.multiline ? null : 1,
-      style: context.theme.textStyles.body1,
-      decoration: InputDecoration(
-        hintText: widget._hint,
-        hintStyle: context.theme.textStyles.body2,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.r),
-          borderSide: BorderSide(color: context.theme.colors.primary),
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 700, maxHeight: 170.h),
+      child: TextFormField(
+        controller: widget._controller,
+        keyboardType: widget._keyboardType,
+        obscureText: widget._obscureText && !_showContent,
+        onChanged: widget._onChanged,
+        validator: widget._validator,
+        maxLines: widget._keyboardType == TextInputType.multiline
+            ? null
+            : 1,
+        style: context.theme.textStyles.body1,
+        decoration: InputDecoration(
+          hintText: widget._hint,
+          hintStyle: context.theme.textStyles.body2,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.r),
+            borderSide:
+                BorderSide(color: context.theme.colors.primary),
+          ),
+          isDense: true,
+          isCollapsed: true,
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+          suffixIcon: widget._obscureText
+              ? IconButton(
+                  icon: Icon(
+                    _showContent
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: context.theme.colors.primaryText,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _showContent = !_showContent;
+                    });
+                  },
+                )
+              : null,
         ),
-        isDense: true,
-        isCollapsed: true,
-        contentPadding:
-            EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-        suffixIcon: widget._obscureText
-            ? IconButton(
-                icon: Icon(
-                  _showContent
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: context.theme.colors.primaryText,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _showContent = !_showContent;
-                  });
-                },
-              )
-            : null,
       ),
     );
   }

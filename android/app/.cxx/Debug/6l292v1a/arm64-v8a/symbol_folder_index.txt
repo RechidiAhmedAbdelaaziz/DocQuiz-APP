@@ -1,0 +1,1 @@
+/home/rechidi-ahmed/Documents/Projects/FenneQCM/DocQuiz-APP/build/app/intermediates/cxx/Debug/6l292v1a/obj/arm64-v8a

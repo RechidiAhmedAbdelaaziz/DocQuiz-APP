@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:app/feature/user/data/model/user.model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'tokens.model.dart';
@@ -18,17 +19,21 @@ abstract class _ApiResponseModel {
 }
 
 @JsonSerializable(createToJson: false)
-class TokensResponse extends _ApiResponseModel {
+class AuthResponse extends _ApiResponseModel {
   final AuthTokens? tokens;
 
-  TokensResponse({
+  @JsonKey(name: 'data')
+  final UserModel? user;
+
+  AuthResponse({
     super.success,
     super.statusCode,
     this.tokens,
+    this.user,
   });
 
-  factory TokensResponse.fromJson(Map<String, dynamic>? json) =>
-      _$TokensResponseFromJson(json ?? {});
+  factory AuthResponse.fromJson(Map<String, dynamic>? json) =>
+      _$AuthResponseFromJson(json ?? {});
 }
 
 @JsonSerializable(createToJson: false)

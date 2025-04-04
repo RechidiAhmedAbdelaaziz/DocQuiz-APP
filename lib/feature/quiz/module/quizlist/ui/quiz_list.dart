@@ -434,7 +434,11 @@ class _PageIndicator extends StatelessWidget {
             onPressed: context.read<QuizListCubit>().nextPage,
             icon: Icon(
               Icons.arrow_forward_ios,
-              color: context.colors.dark,
+              color:
+                  context.watch<QuizListCubit>().state.quizes.length <
+                          7
+                      ? context.colors.background
+                      : context.colors.dark,
             ),
           ),
         ],

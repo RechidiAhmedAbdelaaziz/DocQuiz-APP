@@ -26,7 +26,8 @@ class _Form extends StatelessWidget {
             controller: cubit.passwordController,
             hint: 'Mot de passe',
             obscureText: true,
-            validator: (value) => value.isStrongPassword,
+            validator: (value) =>
+                value?.isEmpty == true ? 'Champ obligatoire' : null,
           ),
         ],
       ),

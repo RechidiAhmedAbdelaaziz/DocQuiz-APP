@@ -39,10 +39,10 @@ class _Questions extends StatelessWidget {
                     width(12),
                     _buildInfo(
                         difficulty == 'easy'
-                                ? "Facile"
-                                : difficulty == 'medium'
-                                    ? "Moyenne"
-                                    : "Difficile",
+                            ? "Facile"
+                            : difficulty == 'medium'
+                                ? "Moyenne"
+                                : "Difficile",
                         difficulty == 'easy'
                             ? Colors.green
                             : difficulty == 'medium'
@@ -80,7 +80,7 @@ class _Questions extends StatelessWidget {
         value,
         style: TextStyle(
           color: isSource ? Colors.white : color,
-          fontSize: 14.sp,
+          fontSize: 14.spMin,
           fontWeight: FontWeight.bold,
         ),
       ),

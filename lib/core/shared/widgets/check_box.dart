@@ -31,7 +31,7 @@ class AppCheckBox extends StatelessWidget {
                     ? Icons.check_box
                     : Icons.check_box_outline_blank,
             color: context.colors.dark,
-            size: canSelect ? 25.sp : 20.sp,
+            size: canSelect ? 25.spMin : 20.spMin,
           ),
           width(5),
           Expanded(
@@ -39,7 +39,7 @@ class AppCheckBox extends StatelessWidget {
               title,
               maxLines: 2,
               style: context.textStyles.body1.copyWith(
-                fontSize: 17.sp,
+                fontSize: 17.spMin,
               ),
             ),
           ),

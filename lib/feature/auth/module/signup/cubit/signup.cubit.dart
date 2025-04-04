@@ -1,5 +1,6 @@
 import 'package:app/core/di/container.dart';
 import 'package:app/feature/auth/data/repo/auth.repo.dart';
+import 'package:app/feature/user/data/model/user.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -30,7 +31,7 @@ class SignupCubit extends Cubit<SignupState> {
         name: name, email: email, password: password);
 
     result.when(
-      success: (_) => emit(const SignupState.success()),
+      success: (data) => emit( SignupState.success(data.user!)),
       error: (error) => emit(SignupState.error(error.message)),
     );
   }

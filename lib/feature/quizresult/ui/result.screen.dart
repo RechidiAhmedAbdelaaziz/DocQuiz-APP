@@ -18,81 +18,84 @@ class QuizResultScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.h),
       child: SectionBox(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const LinedText('Récapitulatif'),
-            height(20),
-            Text(
-              result.title,
-              style: context.textStyles.h3,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const Divider(),
-            height(20),
-            Text(
-              'Temps consommé: ${result.time.toTimeMinuteSecond} ',
-              style: context.textStyles.h5,
-            ),
-            height(5),
-            Text(
-              'Temps correct: ${result.correctTime.toTimeMinuteSecond} ',
-              style: context.textStyles.h5,
-            ),
-            height(5),
-            // question reste
-            Text(
-              'Questions restantes: ${result.unAnswered} questions',
-              style: context.textStyles.h5,
-            ),
-            height(45),
-            Center(
-              child: MultiStageProgressBar(
-                answerd: result.totalQuestions - result.unAnswered,
-                correct: result.correctAnswers,
-                total: result.totalQuestions,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const LinedText('Récapitulatif'),
+              height(20),
+              Text(
+                result.title,
+                style: context.textStyles.h3,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
-            ),
-            height(40),
-            _buildInfo(
-              context,
-              title: 'Questions',
-              color: context.colors.dark,
-              value: result.totalQuestions,
-              percent: 100,
-            ),
-            height(10),
-            _buildInfo(
-              context,
-              title: 'Correctes',
-              color: Colors.green,
-              value: result.correctAnswers,
-              percent: (result.correctAnswers /
-                  result.totalQuestions *
-                  100),
-            ),
-            height(10),
-            _buildInfo(
-              context,
-              title: 'Incorrectes',
-              color: Colors.red,
-              value: result.wrongAnswers,
-              percent:
-                  (result.wrongAnswers / result.totalQuestions * 100),
-            ),
-            height(10),
-            _buildInfo(
-              context,
-              title: 'Non répondues',
-              color: Colors.grey,
-              value: result.unAnswered,
-              percent:
-                  (result.unAnswered / result.totalQuestions * 100),
-            ),
-            height(40),
-          ],
+              const Divider(),
+              height(20),
+              Text(
+                'Temps consommé: ${result.time.toTimeMinuteSecond} ',
+                style: context.textStyles.h5,
+              ),
+              height(5),
+              // Text(
+              //   'Temps correct: ${result.correctTime.toTimeMinuteSecond} ',
+              //   style: context.textStyles.h5,
+              // ),
+              // height(5),
+              // question reste
+              Text(
+                'Questions restantes: ${result.unAnswered} questions',
+                style: context.textStyles.h5,
+              ),
+              height(45),
+              Center(
+                child: MultiStageProgressBar(
+                  answerd: result.totalQuestions - result.unAnswered,
+                  correct: result.correctAnswers,
+                  total: result.totalQuestions,
+                ),
+              ),
+              height(40),
+              _buildInfo(
+                context,
+                title: 'Questions',
+                color: context.colors.dark,
+                value: result.totalQuestions,
+                percent: 100,
+              ),
+              height(10),
+              _buildInfo(
+                context,
+                title: 'Correctes',
+                color: Colors.green,
+                value: result.correctAnswers,
+                percent: (result.correctAnswers /
+                    result.totalQuestions *
+                    100),
+              ),
+              height(10),
+              _buildInfo(
+                context,
+                title: 'Incorrectes',
+                color: Colors.red,
+                value: result.wrongAnswers,
+                percent: (result.wrongAnswers /
+                    result.totalQuestions *
+                    100),
+              ),
+              height(10),
+              _buildInfo(
+                context,
+                title: 'Non répondues',
+                color: Colors.grey,
+                value: result.unAnswered,
+                percent:
+                    (result.unAnswered / result.totalQuestions * 100),
+              ),
+              height(40),
+            ],
+          ),
         ),
       ),
     );

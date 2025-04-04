@@ -20,7 +20,7 @@ abstract class HomeState {
   bool get isMyQuiz => this is _MyQuiz;
   bool get isCreateQuiz => this is _CreateQuiz;
   bool get isPlayList => this is _PlayList;
-  bool get isExam => this is _Exam;
+  bool get isExam => this is _Exam || this is _ExamFilter;
 }
 
 class _Dashboard extends HomeState {
@@ -39,8 +39,17 @@ class _PlayList extends HomeState {
   _PlayList() : super(PlayListRoute());
 }
 
+class _ExamFilter extends HomeState {
+  _ExamFilter(LevelModel? level, MajorModel? major, String? type)
+      : super(ExamRoute.filter(level, major, type));
+}
+
 class _Exam extends HomeState {
-  _Exam() : super(ExamRoute());
+  _Exam({
+    MajorModel? major,
+    String? type,
+    required int year,
+  }) : super(ExamRoute(major: major, type: type, year: year));
 }
 
 class _Profile extends HomeState {
@@ -51,9 +60,10 @@ class _QuizResult extends HomeState {
   _QuizResult.quiz(QuizModel quiz)
       : super(QuizResultRoute.quiz(quiz));
 
-  _QuizResult.questions(
-      String title, List<QuestionResultModel?> questions , int? totalTemps)
-      : super(QuizResultRoute.questions(title, questions, totalTemps:  totalTemps));
+  _QuizResult.questions(String title,
+      List<QuestionResultModel?> questions, int? totalTemps)
+      : super(QuizResultRoute.questions(title, questions,
+            totalTemps: totalTemps));
 }
 
 class _Loading extends HomeState {

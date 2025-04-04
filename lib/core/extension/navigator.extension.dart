@@ -9,6 +9,9 @@ extension NavigatorExtension on BuildContext {
 
     return await _tryNavigate<T>(() => Navigator.of(this)
         .pushNamed<T>(route.path, arguments: route));
+
+       
+      
   }
 
   /// Navigate to a named route and replace the current route

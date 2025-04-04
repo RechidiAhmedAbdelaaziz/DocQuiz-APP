@@ -110,7 +110,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
           },
           child: CircleAvatar(
             backgroundColor: Colors.teal[600],
-            radius: 20.w,
+            radius: 20.spMin,
             child: const Icon(
               Icons.fullscreen,
               color: Colors.white,
@@ -121,7 +121,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         InkWell(
           child: CircleAvatar(
             backgroundColor: Colors.red,
-            radius: 20.w,
+            radius: 20.spMin,
             child: const Icon(
               Icons.logout,
               color: Colors.white,
@@ -204,16 +204,16 @@ class _QuestionInfo extends StatelessWidget {
                 ],
               ),
               Positioned(
-                right: -12.w,
+                right: -10.r,
                 child: InkWell(
                   onTap: () => Scaffold.of(context).openEndDrawer(),
                   child: CircleAvatar(
                     backgroundColor: Colors.teal,
-                    radius: 15.w,
+                    radius: 15.spMin,
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: Colors.white,
-                      size: 22.sp,
+                      size: 22.spMin,
                     ),
                   ),
                 ),
@@ -281,7 +281,7 @@ class _QuestionInfo extends StatelessWidget {
         value,
         style: TextStyle(
           color: isSource ? Colors.white : color,
-          fontSize: 15.sp,
+          fontSize: 15.spMin,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -306,7 +306,7 @@ class _Text extends StatelessWidget {
               maxLines: 120,
               overflow: TextOverflow.ellipsis,
               style: context.textStyles.body2.copyWith(
-                fontSize: 20.sp,
+                fontSize: 20.spMin,
               )),
         ),
         Padding(

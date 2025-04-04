@@ -1,5 +1,6 @@
 import 'package:app/core/router/routebase.dart';
 import 'package:app/feature/dashboard/helper/dashboard.route.dart';
+import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/exam/helper/exam.route.dart';
 import 'package:app/feature/playlist/helper/playlist.route.dart';
 import 'package:app/feature/question/data/model/question.model.dart';
@@ -19,7 +20,12 @@ class HomeCubit extends Cubit<HomeState> {
   void showMyQuiz() => _goTo(() => _MyQuiz());
   void showCreateQuiz() => _goTo(() => _CreateQuiz());
   void showPlayList() => _goTo(() => _PlayList());
-  void showExam() => _goTo(() => _Exam());
+  void showExamFilter(
+          {LevelModel? level, MajorModel? major, String? type}) =>
+      _goTo(() => _ExamFilter(level, major, type));
+  void showExam(
+          {MajorModel? major, String? type, required int year}) =>
+      _goTo(() => _Exam(major: major, type: type, year: year));
   void showProfile() => _goTo(() => _Profile());
   void showQuizResult(QuizModel quiz) =>
       _goTo(() => _QuizResult.quiz(quiz));
@@ -50,11 +56,12 @@ class HomeCubit extends Cubit<HomeState> {
           emit(_PlayList());
           break;
         case const (_Exam):
-          emit(_Exam());
+          emit(last!);
           break;
         case const (_Profile):
           emit(_Profile());
           break;
+
         default:
           if (last != null) emit(last);
       }
@@ -68,6 +75,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   void _goTo<T extends HomeState>(T Function() newState,
       {bool refresh = false}) {
+    if (state.runtimeType == _ExamFilter) {
+      emit(newState());
+    }
     if (state.runtimeType == T) return;
 
     emit(newState());

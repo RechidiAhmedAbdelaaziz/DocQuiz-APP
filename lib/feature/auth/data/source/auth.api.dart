@@ -10,13 +10,13 @@ abstract class AuthApi {
   factory AuthApi(Dio dio, {String baseUrl}) = _AuthApi;
 
   @POST(ApiConstants.LOGIN)
-  Future<TokensResponse> login(@Body() Map<String, dynamic> body);
+  Future<AuthResponse> login(@Body() Map<String, dynamic> body);
 
   @POST(ApiConstants.REGISTER)
-  Future<TokensResponse> register(@Body() Map<String, dynamic> body);
+  Future<AuthResponse> register(@Body() Map<String, dynamic> body);
 
   @GET(ApiConstants.REFRESH_TOKEN)
-  Future<TokensResponse> refreshToken(
+  Future<AuthResponse> refreshToken(
       @Query('refreshToken') String refreshToken);
 
   @POST(ApiConstants.FORGOT_PASSWORD)
@@ -32,5 +32,5 @@ abstract class AuthApi {
       @Body() Map<String, dynamic> body);
 
   @GET(ApiConstants.GOOGLE_CALLBACK)
-  Future<TokensResponse> googleCallback(@Query('code') String code);
+  Future<AuthResponse> googleCallback(@Query('code') String code);
 }
