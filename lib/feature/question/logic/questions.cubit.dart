@@ -3,7 +3,7 @@
 import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/shared/dto/pagination.dto.dart';
 import 'package:app/core/shared/widgets/timer.dart';
-import 'package:app/core/theme/icons.dart';
+import 'package:app/core/themes/icons.dart';
 import 'package:app/core/types/error_state.dart';
 import 'package:app/core/types/repo_functions.type.dart';
 import 'package:app/feature/question/data/model/question.model.dart';

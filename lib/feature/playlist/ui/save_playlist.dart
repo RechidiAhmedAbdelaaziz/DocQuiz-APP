@@ -3,7 +3,7 @@ import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/auth/module/forgetpassword/ui/forget_password.screen.dart';
 import 'package:app/feature/playlist/logic/playlist_save.cubit.dart';
 import 'package:app/feature/playlist/ui/playlist.screen.dart';

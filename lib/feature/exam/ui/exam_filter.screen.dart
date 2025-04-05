@@ -1,6 +1,6 @@
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/domains/logic/names.cubit.dart';
 import 'package:app/feature/exam/logic/exam-record.cubit.dart';

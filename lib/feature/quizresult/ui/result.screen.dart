@@ -1,7 +1,7 @@
 import 'package:app/core/extension/to_time.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';
 import 'package:app/feature/quizresult/data/model/quiz_result.model.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';

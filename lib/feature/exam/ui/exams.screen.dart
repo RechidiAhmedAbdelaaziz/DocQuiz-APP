@@ -3,7 +3,7 @@ import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/extension/to_time.extension.dart';
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/exam/data/model/exam.model.dart';
 import 'package:app/feature/exam/logic/exam.cubit.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';

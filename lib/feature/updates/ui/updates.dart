@@ -1,5 +1,5 @@
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:app/feature/updates/logic/updtes.cubit.dart';
 import 'package:flutter/material.dart';

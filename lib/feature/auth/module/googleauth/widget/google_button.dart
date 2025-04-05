@@ -1,5 +1,5 @@
 import 'package:app/core/di/container.dart';
-import 'package:app/core/theme/icons.dart';
+import 'package:app/core/themes/icons.dart';
 import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:app/feature/auth/module/googleauth/cubit/google_auth_cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';

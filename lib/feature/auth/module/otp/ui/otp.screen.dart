@@ -1,7 +1,7 @@
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
 import 'package:app/feature/auth/module/otp/logic/otp_cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';

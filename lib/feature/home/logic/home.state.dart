@@ -66,6 +66,8 @@ class _QuizResult extends HomeState {
             totalTemps: totalTemps));
 }
 
+
+
 class _Loading extends HomeState {
   _Loading() : super(LoadingRoute());
 }

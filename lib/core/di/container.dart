@@ -1,7 +1,7 @@
 import 'package:app/core/helper/cache.helper.dart';
 import 'package:app/core/helper/dio.helper.dart';
-import 'package:app/core/theme/colors.dart';
-import 'package:app/core/theme/fonts.dart';
+import 'package:app/core/themes/colors.dart';
+import 'package:app/core/themes/fonts.dart';
 import 'package:app/feature/auth/helper/auth.dependency.dart';
 import 'package:app/feature/dashboard/helper/dashboard.dependency.dart';
 import 'package:app/feature/domains/helper/domain.dependency.dart';
@@ -10,6 +10,7 @@ import 'package:app/feature/notes/helper/note.di.dart';
 import 'package:app/feature/playlist/helper/playlist.dependency.dart';
 import 'package:app/feature/question/helper/question.di.dart';
 import 'package:app/feature/quiz/helper/quiz.dependency.dart';
+import 'package:app/feature/subscriptionoffers/helper/subscription_offer_dependency.dart';
 import 'package:app/feature/themes/logic/themes.cubit.dart';
 import 'package:app/feature/updates/helper/updates.di.dart';
 import 'package:app/feature/user/helper/user.dependency.dart';
@@ -42,6 +43,7 @@ Future<void> setupLocator({required String baseUrl}) async {
   await injectQuestionDependencies(locator);
   await setupNoteDependencies(locator);
   await setupUpdatesDi(locator);
+  await setupSubscriptionOfferDependency();
 
   locator.allowReassignment = true;
 }

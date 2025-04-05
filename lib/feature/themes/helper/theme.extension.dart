@@ -1,6 +1,6 @@
 import 'package:app/core/di/container.dart';
-import 'package:app/core/theme/colors.dart';
-import 'package:app/core/theme/fonts.dart';
+import 'package:app/core/themes/colors.dart';
+import 'package:app/core/themes/fonts.dart';
 import 'package:flutter/material.dart';
 
 extension AppTheme on BuildContext {

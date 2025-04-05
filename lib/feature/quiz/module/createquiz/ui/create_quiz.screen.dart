@@ -6,7 +6,7 @@ import 'package:app/core/shared/widgets/check_box.dart';
 import 'package:app/core/shared/widgets/form_field.dart';
 import 'package:app/core/shared/widgets/names_selector.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/domains/logic/names.cubit.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';

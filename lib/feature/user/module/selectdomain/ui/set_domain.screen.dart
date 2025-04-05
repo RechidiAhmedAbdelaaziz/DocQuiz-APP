@@ -3,7 +3,7 @@ import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/snackbar.extension.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/auth/data/source/auth.cache.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/domains/logic/names.cubit.dart';

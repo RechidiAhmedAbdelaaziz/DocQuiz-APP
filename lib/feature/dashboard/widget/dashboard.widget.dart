@@ -1,6 +1,6 @@
 import 'package:app/core/shared/widgets/lined_text.dart';
 import 'package:app/core/shared/widgets/section_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/dashboard/logic/dashboard.cubit.dart';
 import 'package:app/feature/home/logic/home.cubit.dart';
 import 'package:app/feature/quiz/module/quizlist/ui/quiz_list.dart';

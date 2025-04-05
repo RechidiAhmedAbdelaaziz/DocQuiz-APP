@@ -33,4 +33,18 @@ abstract class ApiConstants {
 
   // * UPDATES
   static const UPDATES = 'updates';
+
+  // * SUBSCRIPTION
+  static const subscription = 'subscription';
+  static const subscriptionWithId = 'subscription/{id}';
+
+  // * SUBSCRIPTION OFFER
+  static const subscriptionOffer = 'subscription-offer';
+  static const subscriptionOfferWithId = 'subscription-offer/{id}';
+
+  // * SUBSCRIPTION REQUEST
+  static const subscriptionRequest = 'subscription-request';
+  static const subscriptionRequestWithId =
+      'subscription-request/{id}';
+      
 }

@@ -1,6 +1,6 @@
 import 'package:app/core/extension/list.extension.dart';
 import 'package:app/core/shared/widgets/check_box.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/domains/data/model/domain.model.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';

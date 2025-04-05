@@ -1,7 +1,7 @@
 import 'package:app/core/extension/alertdialog.extenstion.dart';
 import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/shared/widgets/form_field.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/notes/logic/note.cubit.dart';
 import 'package:app/feature/themes/helper/theme.extension.dart';
 import 'package:flutter/material.dart';

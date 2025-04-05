@@ -4,7 +4,7 @@ import 'package:app/core/extension/navigator.extension.dart';
 import 'package:app/core/extension/validator.extension.dart';
 import 'package:app/core/shared/widgets/form_field.dart';
 import 'package:app/core/shared/widgets/submit_button.dart';
-import 'package:app/core/theme/spaces.dart';
+import 'package:app/core/themes/spaces.dart';
 import 'package:app/feature/auth/helper/auth.router.dart';
 import 'package:app/feature/auth/logic/auth.cubit.dart';
 import 'package:app/feature/auth/module/signup/cubit/signup.cubit.dart';
